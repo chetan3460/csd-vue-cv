@@ -1,24 +1,31 @@
+<template>
+  <div class="page-wrapper">
+    <Navbar />
+    <Home />
+    <About />
+    <Resume />
+    <Skills />
+    <Footer />
+
+  </div>
+</template>
+
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+// import { RouterLink, RouterView } from 'vue-router'
+// import 'bootstrap/dist/css/bootstrap.css';
+import '@/assets/vendor/bootstrap/css/bootstrap.css'
+import '@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'
+import '@/assets/css/style.css'
+
+import Navbar from './components/Navbar.vue';
+import Home from './components/Home.vue';
+import About from '@/components/About.vue';
+import Resume from '@/components/Resume.vue'
+import Skills from '@/components/Skills.vue'
+import Footer from '@/components/Footer.vue'
 </script>
 
-<template>
-  <header>
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
-  </header>
-
-  <RouterView />
-</template>
 
 <style scoped>
 header {
