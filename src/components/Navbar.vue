@@ -49,6 +49,17 @@
 
                     <!-- Menu Button -->
                     <div class="menu-btns">
+                        <div class="message__now d-none d-sm-inline-flex">
+                            <div class="meta-item meta-item-message">
+                                <div class="meta-item__icon">
+                                    <img src="../assets/images/illustration/hand.png" alt="image not found">
+                                </div>
+                                <div class="meta-item__text">
+                                    <p class="mb-0"><a href="#">Say Hello</a></p>
+                                </div>
+                            </div>
+                        </div>
+
                         <!-- menu sidbar -->
                         <div class="menu-sidebar">
                             <button>
