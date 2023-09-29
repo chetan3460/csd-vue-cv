@@ -5,6 +5,7 @@
     <About />
     <Resume />
     <Skills />
+    <Freelance />
     <Footer />
 
   </div>
@@ -15,6 +16,9 @@
 // import 'bootstrap/dist/css/bootstrap.css';
 import '@/assets/vendor/bootstrap/css/bootstrap.css'
 import '@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'
+import '@/assets/vendor/font-awesome/css/fontawesome-5.14.0.min.css'
+import '@/assets/vendor/font-awesome/css/flaticon.min.css'
+
 import '@/assets/css/style.css'
 
 import Navbar from './components/Navbar.vue';
@@ -22,6 +26,7 @@ import Home from './components/Home.vue';
 import About from '@/components/About.vue';
 import Resume from '@/components/Resume.vue'
 import Skills from '@/components/Skills.vue'
+import Freelance from '@/components/Freelance.vue'
 import Footer from '@/components/Footer.vue'
 </script>
 
