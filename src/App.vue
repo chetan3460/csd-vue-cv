@@ -1,17 +1,8 @@
 <template>
-
-
       <div class="page-wrapper dizme_tm_all_wrap"  data-magic-cursor="show">
         <Cursor />
-        <Navbar />
-        <Home />
-        <About />
-        <Resume />
-        <Skills />
-        <Freelance />
-        <Footer/>
+        <router-view /> 
       </div>
-
 </template>
 
 <script setup>
@@ -19,25 +10,6 @@
 import Cursor  from './components/layout/Cursor.vue'
 
 
-
-
-
-
-
-
-import Navbar from './components/Navbar.vue';
-import Home from './components/Home.vue';
-import About from '@/components/About.vue';
-import Resume from '@/components/Resume.vue'
-import Skills from '@/components/Skills.vue'
-import Freelance from '@/components/Freelance.vue'
-import Footer from '@/components/Footer.vue'
-
-
-// onMounted(()=>{
-//     customCursor();
-// })
-components: {  Cursor }
 
 
 </script>
