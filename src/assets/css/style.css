@@ -233,7 +233,7 @@ input[type=checkbox], input[type=radio] {
   width: 6px;
   height: 6px;
   z-index: 100;
-  background-color: #f75023;
+  background-color: var(--primary-color);
   -webkit-transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
   transition: width .3s ease-in-out, height .3s ease-in-out, margin .3s ease-in-out, opacity .3s ease-in-out;
 }
@@ -242,7 +242,7 @@ input[type=checkbox], input[type=radio] {
   margin-top: -40px;
   width: 80px;
   height: 80px;
-  background-color: #f75023;
+  background-color: var(--primary-color);
   opacity: .3;
 }
 .cursor-outer {
@@ -250,7 +250,7 @@ input[type=checkbox], input[type=radio] {
   margin-top: -15px;
   width: 30px;
   height: 30px;
-  border: 2px solid #f75023;
+  border: 2px solid var(--primary-color);
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   z-index: 100;

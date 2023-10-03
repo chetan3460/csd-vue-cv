@@ -6,12 +6,12 @@
 </template>
 
 <script setup>
-// import { onMounted } from 'vue'
+import { onMounted } from 'vue'
 import { customCursor } from "@/js/utilits"
 
-// onMounted(()=>{
-//     customCursor();
-// })
+onMounted(()=>{
+    customCursor();
+})
 
 
 

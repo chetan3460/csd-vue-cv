@@ -3,7 +3,6 @@
 
       <div class="page-wrapper dizme_tm_all_wrap"  data-magic-cursor="show">
         <Cursor />
-
         <Navbar />
         <Home />
         <About />
@@ -11,30 +10,20 @@
         <Skills />
         <Freelance />
         <Footer/>
-
       </div>
 
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
 
 import Cursor  from './components/layout/Cursor.vue'
-// import { RouterLink, RouterView } from 'vue-router'
-// import 'bootstrap/dist/css/bootstrap.css';
 
 
 
 
 
-import '@/assets/vendor/bootstrap/css/bootstrap.css'
-import '@/assets/vendor/bootstrap/js/bootstrap.bundle.min.js'
-import '@/assets/vendor/font-awesome/css/fontawesome-5.14.0.min.css'
-import '@/assets/vendor/font-awesome/css/flaticon.min.css'
-import '@/assets/css/animate.css'
 
 
-import '@/assets/css/style.css'
 
 import Navbar from './components/Navbar.vue';
 import Home from './components/Home.vue';
