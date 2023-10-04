@@ -51,35 +51,3 @@ export const customCursor = () => {
 };
 
 
-// Header
-
-export const stickyNav = () => {
-  let offset = window.scrollY;
-  const stickys = document.querySelectorAll(".dizme_tm_header");
-  stickys.forEach((sticky) => {
-    if (sticky) {
-      if (offset > 100) {
-        sticky.classList.add("animate");
-      } else {
-        sticky.classList.remove("animate");
-      }
-    }
-  });
-};
-
-export const scrollTop = () => {
-  var bar = document.querySelector(".progressbar");
-  var line = document.querySelector(".progressbar .line");
-  var documentHeight = document.documentElement.scrollHeight;
-  var windowHeight = window.innerHeight;
-  var winScroll = window.scrollY;
-  var value = (winScroll / (documentHeight - windowHeight)) * 100;
-  var position = value;
-  if (winScroll > 100) {
-    bar.classList.add("animate");
-    line.style.height = position + "%";
-  } else {
-    bar.classList.remove("animate");
-  }
-};
-

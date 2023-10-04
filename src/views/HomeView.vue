@@ -6,6 +6,7 @@ import About from '@/components/About.vue';
 import Resume from '@/components/Resume.vue'
 import Skills from '@/components/Skills.vue'
 import Freelance from '@/components/Freelance.vue'
+import Cta from '@/components/Cta.vue';
 import Footer from '@/components/Footer.vue'
 </script>
 
@@ -17,6 +18,7 @@ import Footer from '@/components/Footer.vue'
     <Resume />
     <Skills />
     <Freelance />
+    <Cta/>
     <Footer />
   </div>
 </template>

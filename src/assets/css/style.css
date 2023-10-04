@@ -3074,6 +3074,57 @@ h6, .h6 {
 /*******************************************************/
 /******************* ## Header style ******************/
 /*******************************************************/
+
+/* Logo */
+.mil-logo {
+  background-color: var(--primary-color);
+  width: 90px;
+  height: 90px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  font-size: 40px;
+  font-weight: 600;
+  -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+}
+.mil-logo span {
+  -webkit-transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  transition: 0.4s cubic-bezier(0, 0, 0.3642, 1);
+  display: block;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.mil-logo span.mil-dot:after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  -webkit-transform: translateY(-0.5px);
+  transform: translateY(-0.5pxx);
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: rgb(255, 255, 255);
+}
+
+
+
 .main-header {
   position: relative;
   left: 0px;

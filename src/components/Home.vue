@@ -67,22 +67,22 @@
     transform: rotate(-45deg);
 }
 
-.hero__btn .circle-btn {
+ .circle-btn {
     width: 160px;
     height: 160px;
 }
 
-.hero__btn .circle-btn .icon-box {
+.circle-btn .icon-box {
     background: var(--primary-color);
     ;
 }
 
-.hero__btn .circle-btn .icon-box i {
+.circle-btn .icon-box i {
     font-size: 34px;
     color: var(--clr-common-white);
 }
 
-.hero__btn .circle-btn {
+ .circle-btn {
     /* height: 180px;
     width: 180px; */
     position: relative;

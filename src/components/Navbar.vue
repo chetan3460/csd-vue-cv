@@ -1,14 +1,20 @@
 <template>
     <!-- main header -->
-    <header class="main-header menu-absolute">
+    <header ref="navbar" class="main-header menu-absolute">
         <!--Header-Upper-->
         <div class="header-upper">
             <div class="container container-1620 clearfix">
 
                 <div class="header-inner rel d-flex align-items-center">
                     <div class="logo-outer">
-                        <div class="logo"><a href="index.html"><img src="../assets/images/logos/logo.png" alt="Logo"
-                                    title="Logo"></a></div>
+                        <!-- <div class="logo">
+                            <a href="index.html"><img src="../assets/images/logos/logo.png" alt="Logo"
+                                    title="Logo">
+                                
+                                </a>
+                            </div> -->
+                        <a href="home-1.html" class="mil-logo"><span class="mil-dot">C</span></a>
+
                     </div>
 
                     <div class="nav-outer clearfix mx-auto">
@@ -17,10 +23,11 @@
                             <div class="navbar-header">
                                 <div class="mobile-logo my-15">
                                     <a href="index.html">
-                                        <!-- <img src="assets/images/logos/logo.png" alt="Logo" title="Logo"> -->
+                                        <a href="home-1.html" class="mil-logo"><span class="mil-dot">C</span></a>
                                     </a>
                                 </div>
 
+           
                                 <!-- Toggle Button -->
                                 <button type="button" class="navbar-toggle me-4" data-bs-toggle="collapse"
                                     data-bs-target=".navbar-collapse">
@@ -46,10 +53,7 @@
                         </nav>
                         <!-- Main Menu End-->
                     </div>
-
-                    <!-- Menu Button -->
-                    <div class="menu-btns">
-                        <div class="message__now d-none d-sm-inline-flex">
+                    <div class="message__now d-none d-sm-inline-flex">
                             <div class="meta-item meta-item-message">
                                 <div class="meta-item__icon">
                                     <img src="../assets/images/illustration/hand.png" alt="image not found">
@@ -59,6 +63,9 @@
                                 </div>
                             </div>
                         </div>
+                    <!-- Menu Button -->
+                    <div class="menu-btns">
+                       
 
                         <!-- menu sidbar -->
                         <div class="menu-sidebar">
@@ -66,6 +73,7 @@
                                 <img src="../assets/images/shape/sidebar-tottler.svg" alt="Toggler">
                             </button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -79,15 +87,39 @@
 import { onMounted, ref } from "vue";
 
 const navbar = ref('')
-const showMenu = ref(false)
+// const showMenu = ref(false)
 
 onMounted(() => {
     window.onscroll = () => {
-        if (window.scrollY === 0) {
-            navbar.value.classList.remove('bg-primary-200')
+        if (window.scrollY > 100) {
+            navbar.value.classList.add('fixed-header')
         } else {
-            navbar.value.classList.add('bg-primary-200')
+            navbar.value.classList.remove('fixed-header')
         }
     }
+
 })
+
+const headerStyle = () => {
+    let siteHeader = document.getElementById("")
+}
+
+
+// ## Header Style and Scroll to Top
+// function headerStyle() {
+//     if ($('.main-header').length) {
+//         var windowpos = $(window).scrollTop();
+//         var siteHeader = $('.main-header');
+//         var scrollLink = $('.scroll-top');
+//         if (windowpos >= 250) {
+//             siteHeader.addClass('fixed-header');
+//             scrollLink.fadeIn(300);
+//         } else {
+//             siteHeader.removeClass('fixed-header');
+//             scrollLink.fadeOut(300);
+//         }
+//     }
+// }
+// headerStyle();
+
 </script>
