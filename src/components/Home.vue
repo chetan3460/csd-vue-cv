@@ -10,7 +10,6 @@
                         <p>We denounce with righteous indignation dislike demoralized by the charms of pleasure</p>
                         <div class="hero-btns">
                             <a href="contact.html" class="theme-btn">Hire Me <i class="far fa-angle-right"></i></a>
-                            <a href="contact.html" class="read-more">Download Resume <i class="far fa-angle-right"></i></a>
                         </div>
                     </div>
                 </div>
@@ -29,12 +28,13 @@
                             <span class="counter-title">Client Satisfactions</span>
                         </div>
                     </div> -->
-                    <div class="hero__btn">
-                        <a href="about.html" class="circle-btn">
-                            <span class="icon-box"><i class="far fa-arrow-right"></i></span>
-                            <img src="../assets/images/illustration/about-btn-text-white.png" alt="image not found"
-                                class="image-text">
-                        </a>
+                    <div class="download-cv-wrap">
+                        <div class="about__download-wrap text-xs-center">
+                            <img class="image-text" src="../assets/images/illustration/download-circel-white.png"
+                                alt="image not found"> <a href="#"><span class="download-icon"><img
+                                        src="../assets/images/illustration/download-icon-.png"
+                                        alt="image not found"></span></a>
+                        </div>
                     </div>
                 </div>
                 <div class="col-lg-5">
@@ -60,6 +60,55 @@
 </template>
 
 <style>
+.download-cv-wrap {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+
+.about__download-wrap {
+    position: relative;
+}
+
+.about__download-wrap .image-text {
+    animation: rotate 20s linear infinite;
+}
+
+.about__download-wrap .download-icon {
+    position: absolute;
+    left: 90px;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    width: 108px;
+    height: 108px;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 44px rgba(0, 0, 0, 0.05);
+    border-radius: 50%;
+    line-height: 108px;
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+    .about__download-wrap .download-icon {
+        left: 80px;
+    }
+}
+
+@media (max-width: 575px) {
+    .about__download-wrap .download-icon {
+        left: 50%;
+    }
+}
+
+@media only screen and (min-width: 576px) and (max-width: 767px) {
+    .about__download-wrap .download-icon {
+        left: 17%;
+    }
+}
+
+
+
 .hero__btn {
     position: absolute;
     right: 0;
@@ -67,7 +116,7 @@
     transform: rotate(-45deg);
 }
 
- .circle-btn {
+.circle-btn {
     width: 160px;
     height: 160px;
 }
@@ -82,7 +131,7 @@
     color: var(--clr-common-white);
 }
 
- .circle-btn {
+.circle-btn {
     /* height: 180px;
     width: 180px; */
     position: relative;

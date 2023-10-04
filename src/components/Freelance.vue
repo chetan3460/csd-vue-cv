@@ -72,12 +72,12 @@
     z-index: -1;
 }
 
-.shape-illustration {
+/* .shape-illustration {
     position: absolute;
     left: 0;
     max-width: 25%;
     bottom: -15%;
-}
+} */
 
 .dark-layout .work-available h2 strong::after {
     background: var(--color-primary);

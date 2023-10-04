@@ -1,7 +1,7 @@
 <template>
     <!-- footer area start -->
     <footer class="main-footer rel z-1">
-        <div class="footer-top-wrap bgc-black pt-100 pb-75">
+        <!-- <div class="footer-top-wrap bgc-black pt-100 pb-75">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-2 col-md-12">
@@ -43,7 +43,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
         <div class="footer-bottom pt-20 pb-5 rpt-25">
             <div class="container">
                 <div class="row">

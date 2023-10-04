@@ -100,9 +100,9 @@ onMounted(() => {
 
 })
 
-const headerStyle = () => {
-    let siteHeader = document.getElementById("")
-}
+// const headerStyle = () => {
+//     let siteHeader = document.getElementById("")
+// }
 
 
 // ## Header Style and Scroll to Top

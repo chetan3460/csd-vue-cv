@@ -6,22 +6,29 @@
                 <p class="section__subtitle-text">
                     any project in mind?
                 </p>
-                <div class="section__subtitle-number">
-                    <span>09</span>
-                </div>
+
             </div>
             <div class="title-intro-wrapper section-spacing">
 
                 <div class="intro__title-wrapper">
                     <h2 ref="folksText" class="intro__title-inner folks-text">Let’s talk.</h2>
                 </div>
-                <div class="intro-brn">
+
+                <div class="hire-btn">
+                    <a class="theme-btn" href="#contact">Hire me now</a>
+
+                </div>
+
+                <!-- <div class="intro-brn">
                     <a href="contact.html" class="circle-btn is-green">
                         <span class="icon-box"><i class="far fa-arrow-right"></i></span>
                         <img src="../assets/images/illustration/contact-btn-text.png" alt="image not found"
                             class="image-text">
                     </a>
-                </div>
+                </div> -->
+            </div>
+            <div class="shape-illustration">
+                <img src="../assets/images/illustration/2.png" alt="illustration">
             </div>
         </div>
     </section>
@@ -117,7 +124,15 @@ onMounted(() => {
 <style>
 .title-intro-area {
     padding-top: 120px;
+    padding-bottom: 120px;
+    margin-bottom: 140px;
     background-color: var(--black-color);
+    position: relative;
+
+    background: var(--lighter-color);
+    max-width: 1620px;
+    margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -126,6 +141,13 @@ onMounted(() => {
     align-items: flex-start;
     gap: 27px;
     margin-bottom: 30px;
+}
+
+.shape-illustration {
+    position: absolute;
+    right: 0;
+    max-width: 25%;
+    bottom: -15%;
 }
 
 .section__subtitle-text {
@@ -149,13 +171,16 @@ onMounted(() => {
 }
 
 .title-intro-wrapper {
-    display: flex;
+    /* display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 50px 50px;
-    border-bottom: 1px solid #414141;
-    padding-bottom: 120px;
+    flex-wrap: wrap; */
+
+}
+
+.hire-btn {
+    position: relative;
+    top: 65px;
 }
 
 .intro__title-inner {
