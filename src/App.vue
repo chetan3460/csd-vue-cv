@@ -1,13 +1,13 @@
 <template>
-      <div class="page-wrapper dizme_tm_all_wrap"  data-magic-cursor="show">
-        <Cursor />
-        <router-view /> 
-      </div>
+  <div class="page-wrapper" data-magic-cursor="show">
+    <Cursor />
+    <router-view />
+  </div>
 </template>
 
 <script setup>
 
-import Cursor  from './components/layout/Cursor.vue'
+import Cursor from './components/layout/Cursor.vue'
 
 
 
