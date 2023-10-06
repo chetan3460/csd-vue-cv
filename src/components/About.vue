@@ -58,13 +58,6 @@
                 </div>
             </div>
         </div>
-        <div class="bg-lines">
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-            <span></span><span></span>
-        </div>
     </section>
     <!-- About Area end -->
 </template>

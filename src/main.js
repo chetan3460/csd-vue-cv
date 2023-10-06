@@ -6,16 +6,31 @@ import '@/assets/css/animate.css'
 
 
 import '@/assets/css/style.css'
-import { createApp } from 'vue'
+import {
+    createApp
+} from 'vue'
 import App from './App.vue'
 import router from '@/router'
 
+import {
+    OhVueIcon,
+    addIcons
+} from 'oh-vue-icons'
+import {
+    FaFlag,
+    RiZhihuFill
+} from 'oh-vue-icons/icons'
+
+addIcons(FaFlag, RiZhihuFill)
 
 
-// const app = createApp(App)    
+
+
+// const app = createApp(App)
 // .use(router)
 // app.mount('#app')
 
 createApp(App)
     .use(router)
+    .component('v-icon', OhVueIcon)
     .mount('#app')
