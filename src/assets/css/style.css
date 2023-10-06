@@ -6065,16 +6065,19 @@ h6,
   -o-transition: 0.5s;
   transition: 0.5s;
   margin-right: 20px;
-  width: 40px;
-  height: 40px;
+  width: 50px;
+  height: 50px;
   background: #131313;
   line-height: 40px;
   border-radius: 50%;
   text-align: center;
-  -webkit-transform: rotate(-45deg);
+  /* -webkit-transform: rotate(-45deg);
   -ms-transform: rotate(-45deg);
-  transform: rotate(-45deg);
+  transform: rotate(-45deg); */
   color: rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .resume-item .content .years {

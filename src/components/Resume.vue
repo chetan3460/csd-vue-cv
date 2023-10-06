@@ -10,9 +10,12 @@
                     <div class="download-cv-wrap">
                         <div class="about__download-wrap text-xs-center">
                             <img class="image-text" src="../assets/images/illustration/download-circel-white.png"
-                                alt="image not found"> <a href="#"><span class="download-icon"><img
-                                        src="../assets/images/illustration/download-icon-.png"
-                                        alt="image not found"></span></a>
+                                alt="image not found">
+                            <a href="#">
+                                <span class="download-icon">
+                                    <v-icon name="bi-cloud-download" scale="3" fill="#14cf93"></v-icon>
+                                </span>
+                            </a>
                         </div>
                     </div>
 
@@ -32,7 +35,7 @@
                             <div class="col-xl-5 col-md-6">
                                 <div class="resume-item wow fadeInUp delay-0-3s">
                                     <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
+                                        <v-icon name="fa-user-tie" scale="1.3"></v-icon>
                                     </div>
                                     <div class="content">
                                         <span class="years">2021 - Present</span>
@@ -42,7 +45,7 @@
                                 </div>
                                 <div class="resume-item wow fadeInUp delay-0-4s">
                                     <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
+                                        <v-icon name="fa-user-tie" scale="1.3"></v-icon>
                                     </div>
                                     <div class="content">
                                         <span class="years">2016 - 2018</span>
@@ -55,8 +58,7 @@
                             <div class="col-xl-5 col-md-6">
                                 <div class="resume-item wow fadeInUp delay-0-2s">
                                     <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
-                                        <v-icon name="fa-user-graduate"></v-icon>
+                                        <v-icon name="fa-user-graduate" scale="1.3"></v-icon>
 
                                     </div>
                                     <div class="content">
@@ -67,7 +69,7 @@
                                 </div>
                                 <div class="resume-item wow fadeInUp delay-0-4s">
                                     <div class="icon">
-                                        <i class="far fa-arrow-right"></i>
+                                        <v-icon name="fa-user-graduate" scale="1.3"></v-icon>
                                     </div>
                                     <div class="content">
                                         <span class="years">2014 - 2016</span>
@@ -94,10 +96,12 @@ import {
 } from 'oh-vue-icons'
 import {
     FaUserGraduate,
+    FaUserTie,
+    BiCloudDownload
 
 
 } from 'oh-vue-icons/icons'
-addIcons(FaUserGraduate)
+addIcons(FaUserGraduate, FaUserTie, BiCloudDownload)
 
 </script>
 
