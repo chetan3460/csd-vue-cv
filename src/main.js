@@ -11,17 +11,11 @@ import {
 } from 'vue'
 import App from './App.vue'
 import router from '@/router'
-
 import {
     OhVueIcon,
     addIcons
-} from 'oh-vue-icons'
-import {
-    FaFlag,
-    RiZhihuFill
-} from 'oh-vue-icons/icons'
+} from "oh-vue-icons";
 
-addIcons(FaFlag, RiZhihuFill)
 
 
 
