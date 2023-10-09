@@ -6,9 +6,12 @@
 </template>
 
 <script setup>
-
+import { onMounted } from 'vue';
 import Cursor from './components/layout/Cursor.vue'
-
+import { scroll_ } from './js/utilits'
+onMounted(() => {
+  window.addEventListener('scroll', scroll_)
+})
 
 
 

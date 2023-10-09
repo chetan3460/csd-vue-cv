@@ -1,6 +1,6 @@
 <template>
     <!-- title intro area -->
-    <section class="title-intro-area fix primary-bg">
+    <section class="title-intro-area fix primary-bg scroll_section">
         <div class="container">
             <div class="section__subtitle-3">
                 <p class="section__subtitle-text">

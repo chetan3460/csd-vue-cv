@@ -1,85 +1,76 @@
 
 <template>
     <!-- START HEADER -->
-    <header>
-        <!--Navigation-->
-        <nav class="navbar navbar-top-default navbar-expand-lg navbar-standard">
-            <div class="container-fluid">
-                <a href="#page1" title="Logo" class="link logo scroll">
-                    <!--Logo Default-->
-                    <img src="../assets/images/logos/logo.png" class="logo-dark" alt="logo">
-                </a>
+    <header ref="navbar" class="main-header menu-absolute">
+        <div class="header-upper">
+            <!--Navigation-->
+            <nav class="navbar navbar-top-default navbar-expand-lg navbar-standard">
+                <div class="container-fluid">
+                    <a href="#page1" title="Logo" class="link logo scroll">
+                        <!--Logo Default-->
+                        <img src="../assets/images/logos/logo.png" class="logo-dark" alt="logo">
+                    </a>
 
-                <!--Side Menu Button-->
-                <div class="side-nav-btn animated-wrap" id="sidemenu_toggle" @click="toggleSideMenu"
-                    :class="{ active: isSideMenuActive }">
-                    <div class="animated-element">
-                        <span></span>
-                        <span></span>
-                        <span></span>
+                    <!--Side Menu Button-->
+                    <div class="side-nav-btn animated-wrap" id="sidemenu_toggle" @click="toggleSideMenu"
+                        :class="{ active: isSideMenuActive }">
+                        <div class="animated-element">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- side menu -->
+            <div class="side-menu" :class="{ 'side-menu-active': isSideMenuActive }">
+                <div class="inner-wrapper">
+                    <span class="btn-close link" id="btn_sideNavClose" @click="closeSideMenu"><i></i><i></i></span>
+                    <nav class="side-nav">
+                        <ul class="navbar-nav" id="side-menu">
+                            <li class="nav-item current">
+                                <a class="nav-link link" href="#home">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link" href="#about" @click="closeSideMenu">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link" href="#Resume">Resume</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link link" href="#Skills">Skills</a>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <a class="nav-link link" href="#page5">Portfolio</a>
+                            </li> -->
+                            <li class="nav-item">
+                                <a class="nav-link link" href="#Contact">Contact</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <div class="side-footer text-white w-100">
+                        <ul class="social-icons-simple">
+                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
+                                        class="fab fa-facebook-f" aria-hidden="true"></i></a> </li>
+                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
+                                        class="fab fa-twitter" aria-hidden="true"></i></a> </li>
+                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
+                                        class="fab fa-linkedin-in" aria-hidden="true"></i></a> </li>
+                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
+                                        class="fab fa-instagram" aria-hidden="true"></i></a> </li>
+                        </ul>
+                        <p class="whitecolor">&copy; 2018 MegaOne. Made With Love by <a class="web-link text-white"
+                                href="http://www.themesindustry.com/" target="_blank">Themesindustry</a></p>
                     </div>
                 </div>
             </div>
-        </nav>
-
-        <!-- side menu -->
-        <div class="side-menu" :class="{ 'side-menu-active': isSideMenuActive }">
-            <div class="inner-wrapper">
-                <span class="btn-close link" id="btn_sideNavClose" @click="closeSideMenu"><i></i><i></i></span>
-                <nav class="side-nav">
-                    <ul class="navbar-nav" id="side-menu">
-                        <li class="nav-item">
-                            <a class="nav-link link" href="#page1">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link" href="#page2">Services</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link" href="#page3">Team</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link" href="#page4">About Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link" href="#page5">Portfolio</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link link" href="#page6">Contact</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <div class="side-footer text-white w-100">
-                    <ul class="social-icons-simple">
-                        <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                    class="fab fa-facebook-f" aria-hidden="true"></i></a> </li>
-                        <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                    class="fab fa-twitter" aria-hidden="true"></i></a> </li>
-                        <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                    class="fab fa-linkedin-in" aria-hidden="true"></i></a> </li>
-                        <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                    class="fab fa-instagram" aria-hidden="true"></i></a> </li>
-                    </ul>
-                    <p class="whitecolor">&copy; 2018 MegaOne. Made With Love by <a class="web-link text-white"
-                            href="http://www.themesindustry.com/" target="_blank">Themesindustry</a></p>
-                </div>
-            </div>
+            <!-- End side menu -->
         </div>
-        <!-- End side menu -->
 
-        <!--slider social-->
-        <!-- <div class="slider-social d-md-block d-none">
-            <ul class="list-unstyled">
-                <li class="animated-wrap"><a class="animated-element" href="javascript:void(0);"><i
-                            class="fab fa-facebook-f" aria-hidden="true"></i></a></li>
-                <li class="animated-wrap"><a class="animated-element" href="javascript:void(0);"><i class="fab fa-twitter"
-                            aria-hidden="true"></i></a></li>
-                <li class="animated-wrap"><a class="animated-element" href="javascript:void(0);"><i
-                            class="fab fa-linkedin-in" aria-hidden="true"></i></a></li>
-                <li class="animated-wrap"><a class="animated-element" href="javascript:void(0);"><i class="fab fa-instagram"
-                            aria-hidden="true"></i></a></li>
-            </ul>
-        </div> -->
+
+
 
     </header>
     <!-- END HEADER -->
@@ -87,32 +78,47 @@
 
 
 <script setup>
-// import { onMounted, ref } from "vue";
+import { onMounted, ref } from "vue";
 
-// const navbar = ref('')
+const navbar = ref('')
+const isSideMenuActive = ref(false);
+
 // const showMenu = ref(false)
 
-// onMounted(() => {
-//     window.onscroll = () => {
-//         if (window.scrollY > 100) {
-//             navbar.value.classList.add('fixed-header')
-//         } else {
-//             navbar.value.classList.remove('fixed-header')
-//         }
-//     }
+onMounted(() => {
+    window.onscroll = () => {
+        if (window.scrollY > 100) {
+            navbar.value.classList.add('fixed-header')
+        } else {
+            navbar.value.classList.remove('fixed-header')
+        }
+    }
 
-// })
-import { ref } from "vue";
 
-const isSideMenuActive = ref(false);
+
+
+
+})
+
 
 const toggleSideMenu = () => {
     isSideMenuActive.value = !isSideMenuActive.value;
-};
+    if (isSideMenuActive.value) {
+        document.body.style.overflow = 'hidden';
+    } else {
+        document.body.style.overflow = 'auto';
+    }
+}
 
 const closeSideMenu = () => {
     isSideMenuActive.value = false;
+    // Disable scroll lock when the menu is closed
+    document.body.style.overflow = "auto";
+
 };
+
+
+
 
 
 </script>

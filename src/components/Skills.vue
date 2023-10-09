@@ -1,6 +1,6 @@
 <template>
     <!-- Skill Area start -->
-    <section id="skills" class="skill-area rel z-1">
+    <section id="skills" class="skill-area rel z-1 scroll_section">
         <div class="for-bgc-black pt-130 rpt-100 pb-100 rpb-70">
             <div class="container">
                 <div class="row gap-100">

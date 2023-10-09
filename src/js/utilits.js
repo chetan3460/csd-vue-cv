@@ -1,5 +1,3 @@
-
-
 export const customCursor = () => {
   var myCursor = document.querySelectorAll(".mouse-cursor"),
     hamburger = document.querySelector(".hamburger"),
@@ -27,7 +25,7 @@ export const customCursor = () => {
           (e.style.transform =
             "translate(" + s.clientX + "px, " + s.clientY + "px)");
       }),
-        document.body.addEventListener(
+      document.body.addEventListener(
           "mouseenter",
           // "a,.kura_tm_topbar .trigger, .cursor-pointer",
           function () {
@@ -50,4 +48,22 @@ export const customCursor = () => {
   }
 };
 
+export const scroll_ = () => {
+  const sections = document.querySelectorAll(".scroll_section");
+  const navLi = document.querySelectorAll(".navbar-nav li");
+  let current = "";
+  sections.forEach((section) => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+      current = section.getAttribute("id");
+    }
+  });
 
+  navLi.forEach((li) => {
+    li.classList.remove("current");
+    if (li.getElementsByTagName("a")[0].getAttribute("href") == `#${current}`) {
+      li.classList.add("current");
+    }
+  });
+};
