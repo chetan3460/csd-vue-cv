@@ -50,20 +50,7 @@
                         </ul>
                     </nav>
 
-                    <div class="side-footer text-white w-100">
-                        <ul class="social-icons-simple">
-                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                        class="fab fa-facebook-f" aria-hidden="true"></i></a> </li>
-                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                        class="fab fa-twitter" aria-hidden="true"></i></a> </li>
-                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                        class="fab fa-linkedin-in" aria-hidden="true"></i></a> </li>
-                            <li class="animated-wrap"><a href="javascript:void(0);" class="animated-element"><i
-                                        class="fab fa-instagram" aria-hidden="true"></i></a> </li>
-                        </ul>
-                        <p class="whitecolor">&copy; 2018 MegaOne. Made With Love by <a class="web-link text-white"
-                                href="http://www.themesindustry.com/" target="_blank">Themesindustry</a></p>
-                    </div>
+
                 </div>
             </div>
             <!-- End side menu -->

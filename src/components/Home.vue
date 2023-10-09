@@ -4,7 +4,7 @@
         <div class="container container-1620">
             <div class="row align-items-center rel">
                 <div class="col-lg-6 col-sm-7">
-                    <div class="hero-content rmb-55 wow fadeInUp delay-0-2s">
+                    <div ref="animationChar" class="hero-content rmb-55 wow fadeInUp delay-0-2s animation__char_come">
                         <span class="h2">Hello, i’m </span>
                         <h1><b>Chetan S. Dhargalkar,</b> <span class="bord">Front-end Developer <i></i></span>
                             <span class="d-block">From Goa</span>
@@ -31,5 +31,27 @@
     </section>
     <!-- Hero Section End -->
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+import gsap from 'gsap/all'
+import SplitType from 'split-type'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
+
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+/*======================================
+30. Charchater Come Animation 
+========================================*/
+onMounted(() => {
+
+    let char_come = document.querySelectorAll(".animation__char_come")
+
+    char_come.forEach((char_come) => {
+        let split_char = new SplitType(char_come, { type: "chars, words," })
+        gsap.from(split_char.chars, { duration: 1, x: 70, autoAlpha: 0, stagger: 0.06 });
+    })
+})
+</script>
 
 <style></style>

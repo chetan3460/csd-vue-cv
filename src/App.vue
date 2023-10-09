@@ -6,11 +6,26 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue'
 import Cursor from './components/layout/Cursor.vue'
 import { scroll_ } from './js/utilits'
+
+
 onMounted(() => {
+
+
   window.addEventListener('scroll', scroll_)
+
+  //Clear URL On Page Refresh
+  const loc = window.location.href,
+    index = loc.indexOf('#');
+
+  if (index > 0) {
+    window.location = loc.substring(0, index);
+  }
+
+
+
 })
 
 

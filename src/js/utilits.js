@@ -67,3 +67,89 @@ export const scroll_ = () => {
     }
   });
 };
+
+// GSAP 
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount
+} from 'vue'
+import gsap from 'gsap/all'
+import SplitType from 'split-type'
+import ScrollTrigger from 'gsap/ScrollTrigger'
+import ScrollToPlugin from 'gsap/ScrollToPlugin'
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+
+/*======================================
+29. Title Animation
+========================================*/
+
+const windowOn = window;
+let larger = 1600;
+let xxl = 1400;
+let xl = 1200;
+let lg = 992;
+let md = 768;
+let sm = 576;
+let device_width = window.innerWidth;
+
+
+// const handleResize = () => {
+//   deviceWidth = window.innerWidth;
+// };
+
+// onMounted(() => {
+//   windowOn.addEventListener('resize', handleResize);
+// });
+
+// onBeforeUnmount(() => {
+//   windowOn.removeEventListener('resize', handleResize);
+// });
+
+export const useScrollAnimation = () => {
+  const splitTitleLines = ref([]);
+
+  onMounted(() => {
+    // Your setup code here, similar to what was in the previous example
+    // ...
+    if (device_width > 576) {
+      splitTitleLines.value = document.querySelectorAll(".split-title-line");
+
+      splitTitleLines.value.forEach((splitTextLine) => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: splitTextLine,
+            start: "top 90%",
+            end: "bottom 60%",
+            scrub: false,
+            markers: true,
+            toggleActions: "play none none none",
+          },
+        });
+
+        const itemSplitted = new SplitType(splitTextLine, {
+          type: "words, lines",
+        });
+        gsap.set(splitTextLine, {
+          perspective: 400
+        });
+        itemSplitted.split({
+          type: "lines"
+        });
+
+        tl.from(itemSplitted.lines, {
+          duration: 1,
+          delay: 0.3,
+          opacity: 0,
+          rotationX: -80,
+          force3D: true,
+          transformOrigin: "top center -50",
+          stagger: 0.3,
+        });
+      });
+    }
+
+
+  });
+}

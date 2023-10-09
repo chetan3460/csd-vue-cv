@@ -8,7 +8,9 @@
                         <div class="about-content-part rel z-2 rmb-55">
                             <div class="section-title mb-35 wow fadeInUp delay-0-2s">
                                 <span class="sub-title mb-15">About Me</span>
-                                <h2>Professional <span>Problem Solutions</span> For Digital Products</h2>
+                                <h2 class="title-anim split-title-line">Professional <span>Problem
+                                        Solutions</span> For
+                                    Digital Products</h2>
                                 <p>At vero eos et accusamus etodio dignissimos ducimus praesentium voluptatum corrupti quos
                                     dolores quas molestias excepturi sint occaecati cupiditate provident qui officia
                                     deserunt mollitia animi, id est laborum et dolorum</p>
@@ -61,3 +63,19 @@
     </section>
     <!-- About Area end -->
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue'
+import { useScrollAnimation } from '@/js/utilits'
+
+useScrollAnimation();
+
+// splitTitleLines.value = document.querySelectorAll(".split-title-line");
+
+// onMounted(() => {
+//     useScrollAnimation();
+// })
+
+
+
+</script>

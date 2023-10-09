@@ -8,7 +8,7 @@
                         <div class="skill-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
                             <div class="section-title mb-40">
                                 <span class="sub-title mb-15">My Skills</span>
-                                <h2>I'm great in what I do and <span>I'm loving it</span></h2>
+                                <h2 class="split-title-line">I'm great in what I do and <span>I'm loving it</span></h2>
                                 <p>Front-end developer with 4+ years of experience building and maintaining responsive and
                                     user-friendly websites and web applications using HTML, CSS, JavaScript, Vue,
                                     Wordpress, Scss, and a variety of front-end frameworks and libraries.
@@ -110,5 +110,6 @@ import {
 
 } from 'oh-vue-icons/icons'
 addIcons(FaWordpressSimple, ViFileTypeScss2, CoJquery, CoJavascript, ViFileTypeHtml, ViFileTypeCss, FaBootstrap, ViFileTypeVue, FaFacebookSquare)
-
+import { useScrollAnimation } from '@/js/utilits'
+useScrollAnimation()
 </script>
