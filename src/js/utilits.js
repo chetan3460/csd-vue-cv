@@ -50,7 +50,7 @@ export const customCursor = () => {
 
 export const scroll_ = () => {
   const sections = document.querySelectorAll(".scroll_section");
-  const navLi = document.querySelectorAll(".navbar-nav li");
+  const navLi = document.querySelectorAll(".navbar-nav li ");
   let current = "";
   sections.forEach((section) => {
     const sectionTop = section.offsetTop;
@@ -61,9 +61,9 @@ export const scroll_ = () => {
   });
 
   navLi.forEach((li) => {
-    li.classList.remove("current");
+    li.classList.remove("active");
     if (li.getElementsByTagName("a")[0].getAttribute("href") == `#${current}`) {
-      li.classList.add("current");
+      li.classList.add("active");
     }
   });
 };
