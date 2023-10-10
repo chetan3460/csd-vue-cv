@@ -1,44 +1,48 @@
 <template>
     <!-- title intro area -->
-    <section class="title-intro-area fix primary-bg scroll_section">
-        <div class="container">
-            <div class="section__subtitle-3">
-                <p class="section__subtitle-text">
-                    any project in mind?
-                </p>
-
-            </div>
-            <div class="title-intro-wrapper section-spacing">
-
-                <div class="intro__title-wrapper">
-                    <h2 ref="folksText" class="intro__title-inner folks-text">Let’s talk.</h2>
-                </div>
-
-                <div class="hire-btn">
-                    <a class="theme-btn" href="#contact">Hire me now</a>
+    <section class="title-intro-area fix primary-bg scroll_section prl-15">
+        <div class="for-bgc-black py-130 rpy-100">
+            <div class="container">
+                <div class="section__subtitle-3">
+                    <p class="section__subtitle-text">
+                        any project in mind?
+                    </p>
 
                 </div>
+                <div class="title-intro-wrapper section-spacing">
 
-                <!-- <div class="intro-brn">
+                    <div class="intro__title-wrapper">
+                        <h2 ref="folksText" class="intro__title-inner folks-text">Let’s talk.</h2>
+                    </div>
+
+                    <div class="hire-btn">
+                        <a class="theme-btn" href="#contact">Hire me now</a>
+
+                    </div>
+
+                    <!-- <div class="intro-brn">
                     <a href="contact.html" class="circle-btn is-green">
                         <span class="icon-box"><i class="far fa-arrow-right"></i></span>
                         <img src="../assets/images/illustration/contact-btn-text.png" alt="image not found"
                             class="image-text">
                     </a>
                 </div> -->
-            </div>
-            <div class="shape-illustration">
-                <img src="../assets/images/illustration/2.png" alt="illustration">
+                </div>
+                <div class="shape-illustration">
+                    <img src="../assets/images/illustration/2.png" alt="illustration">
+                </div>
             </div>
         </div>
+
     </section>
     <!-- title intro end -->
 </template>
 <script setup>
 import { ref, onMounted } from 'vue';
 import chroma from "chroma-js"
-import gsap from 'gsap/all'
 import SplitType from 'split-type'
+
+import gsap from 'gsap/all'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 
@@ -52,7 +56,6 @@ const folksText = ref(null);
 onMounted(() => {
     // let device_width = window.innerWidth;
     const element = folksText.value;
-
     if (element) {
         let folksBD = gsap.timeline({
             repeat: -1,
@@ -146,8 +149,8 @@ onMounted(() => {
 .shape-illustration {
     position: absolute;
     right: 0;
-    max-width: 25%;
-    bottom: -15%;
+    /* max-width: 25%; */
+    bottom: 37px;
 }
 
 .section__subtitle-text {

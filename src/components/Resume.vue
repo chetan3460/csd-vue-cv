@@ -3,28 +3,11 @@
     <section id="resume" class="resume-area pt-130 rpt-100 rel z-1 pb-130 scroll_section">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <!-- <div class="big-icon mt-85 rmt-0 rmb-55 wow fadeInUp delay-0-2s">
-                        <i class="flaticon-asterisk-1"></i>
-                    </div> -->
-                    <div class="download-cv-wrap">
-                        <div class="about__download-wrap text-xs-center">
-                            <img class="image-text" src="../assets/images/illustration/download-circel-white.png"
-                                alt="image not found">
-                            <a href="#">
-                                <span class="download-icon">
-                                    <v-icon name="bi-cloud-download" scale="3" fill="#14cf93"></v-icon>
-                                </span>
-                            </a>
-                        </div>
-                    </div>
 
-
-                </div>
                 <div class="col-lg-9">
                     <div class="row">
                         <div class="col-xl-8 col-lg-9">
-                            <div class="section-title mb-60 wow fadeInUp delay-0-2s">
+                            <div class="section-title mb-60">
                                 <span class="sub-title mb-15">My Resume</span>
                                 <h2 class="split-title-line">Real <span>Problem Solutions</span> Experience</h2>
                             </div>
@@ -32,15 +15,15 @@
                     </div>
                     <div class=" resume-items-wrap">
                         <div class="row justify-content-between">
-                            <div class="col-xl-5 col-md-6">
-                                <div class="resume-item wow fadeInUp delay-0-3s">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="resume-item">
                                     <div class="icon">
                                         <v-icon name="fa-user-tie" scale="1.3"></v-icon>
                                     </div>
                                     <div class="content">
-                                        <span class="years">2021 - Present</span>
-                                        <h4>Lead Product Designer</h4>
-                                        <span class="company">Google</span>
+                                        <span class="years">July 2022 - September 2023</span>
+                                        <h4>Frontend Developer</h4>
+                                        <span class="company">Prototyze</span>
                                     </div>
                                 </div>
                                 <div class="resume-item wow fadeInUp delay-0-4s">
@@ -48,23 +31,23 @@
                                         <v-icon name="fa-user-tie" scale="1.3"></v-icon>
                                     </div>
                                     <div class="content">
-                                        <span class="years">2016 - 2018</span>
-                                        <h4>Junior UX/UI Designer</h4>
-                                        <span class="company">LinkedIn</span>
+                                        <span class="years">May 2019 - June 2022</span>
+                                        <h4>Senior UI developer</h4>
+                                        <span class="company">webware.io</span>
                                     </div>
                                 </div>
                             </div>
 
-                            <div class="col-xl-5 col-md-6">
-                                <div class="resume-item wow fadeInUp delay-0-2s">
+                            <div class="col-xl-6 col-md-6">
+                                <div class="resume-item">
                                     <div class="icon">
                                         <v-icon name="fa-user-graduate" scale="1.3"></v-icon>
 
                                     </div>
                                     <div class="content">
-                                        <span class="years">2018 - 2021</span>
-                                        <h4>Senior Product Designer</h4>
-                                        <span class="company">Webflow</span>
+                                        <span class="years">2017 - 2019</span>
+                                        <h4>Master of Computer Applications</h4>
+                                        <span class="company">Assam Don Bosco University</span>
                                     </div>
                                 </div>
                                 <div class="resume-item wow fadeInUp delay-0-4s">
@@ -72,15 +55,36 @@
                                         <v-icon name="fa-user-graduate" scale="1.3"></v-icon>
                                     </div>
                                     <div class="content">
-                                        <span class="years">2014 - 2016</span>
-                                        <h4>Graphics Designer</h4>
-                                        <span class="company">Apple</span>
+                                        <span class="years">2012 - 2015</span>
+                                        <h4>Bachelor of Computer Application</h4>
+                                        <span class="company">Dnyanprassarak Mandal’s College</span>
                                     </div>
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                </div>
+                <div class="col-lg-3 bd-position-sticky">
+                    <!-- <div class="big-icon mt-85 rmt-0 rmb-55">
+                        <i class="flaticon-asterisk-1"></i>
+                    </div> -->
+                    <div class="column two">
+                        <div class="download-cv-wrap about__download-wrap text-xs-center rmb-55 rpt-50">
+
+                            <a href="#" class="resume-btn">
+                                <div class="inner-circle">
+                                    <img class="image-text" src="../assets/images/illustration/download-circel-white.png"
+                                        alt="image not found">
+                                    <span class="download-icon">
+                                        <v-icon name="bi-cloud-download" scale="3" fill="#14cf93"></v-icon>
+                                    </span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
@@ -91,7 +95,8 @@
 
 <script setup>
 
-import { useScrollAnimation } from '@/js/utilits'
+import { useScrollAnimation, btnStickyScroll } from '@/js/utilits'
+// import { btnStickyScroll } from '@/js/utilits';
 
 import {
     OhVueIcon,
@@ -101,20 +106,33 @@ import {
     FaUserGraduate,
     FaUserTie,
     BiCloudDownload
-
-
 } from 'oh-vue-icons/icons'
+
 addIcons(FaUserGraduate, FaUserTie, BiCloudDownload)
 
 useScrollAnimation();
+btnStickyScroll();
+
+
+
+
+
+
 
 
 </script>
 
 
 <style>
+.download-cv-wrap {
+    /* position: relative;
+    max-width: 178px; */
+}
+
 .about__download-wrap {
     position: relative;
+    text-align: center;
+
 }
 
 .about__download-wrap .image-text {
@@ -123,9 +141,11 @@ useScrollAnimation();
 
 .about__download-wrap .download-icon {
     position: absolute;
-    left: 90px;
-    top: 50%;
-    transform: translate(-50%, -50%);
+    left: 0;
+    right: 0;
+    top: 21px;
+    margin: 0 auto;
+    /* transform: translate(-50%, -50%); */
     text-align: center;
     width: 130px;
     height: 130px;
@@ -137,23 +157,30 @@ useScrollAnimation();
     justify-content: center;
 }
 
-@media only screen and (min-width: 1200px) and (max-width: 1399px) {
+.resume-btn {
+    position: relative;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* @media only screen and (min-width: 1200px) and (max-width: 1399px) {
     .about__download-wrap .download-icon {
         left: 80px;
     }
-}
+} */
 
-@media (max-width: 575px) {
+/* @media (max-width: 575px) {
     .about__download-wrap .download-icon {
         left: 50%;
     }
-}
+} */
 
-@media only screen and (min-width: 576px) and (max-width: 767px) {
+/* @media only screen and (min-width: 576px) and (max-width: 767px) {
     .about__download-wrap .download-icon {
         left: 17%;
     }
-}
+} */
 
 
 

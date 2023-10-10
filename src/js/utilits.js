@@ -6,11 +6,11 @@ export const customCursor = () => {
     e = document.querySelector(".cursor-inner"),
     t = document.querySelector(".cursor-outer");
 
-  function mouseEvent(element) {
-    element.addEventListener("mouseenter", function () {
+  function mouseEvent(folksText) {
+    folksText.addEventListener("mouseenter", function () {
       e.classList.add("cursor-hover"), t.classList.add("cursor-hover");
     });
-    element.addEventListener("mouseleave", function () {
+    folksText.addEventListener("mouseleave", function () {
       e.classList.remove("cursor-hover"), t.classList.remove("cursor-hover");
     });
   }
@@ -33,8 +33,8 @@ export const customCursor = () => {
             e.classList.add("cursor-inner"), t.classList.add("cursor-outer");
 
             for (let i = 0; i < a.length; i++) {
-              const element = a[i];
-              mouseEvent(element);
+              const folksText = a[i];
+              mouseEvent(folksText);
             }
 
             hamburger && mouseEvent(hamburger);
@@ -62,7 +62,7 @@ export const scroll_ = () => {
 
   navLi.forEach((li) => {
     li.classList.remove("active");
-    if (li.getElementsByTagName("a")[0].getAttribute("href") == `#${current}`) {
+    if (li.getfolksTextsByTagName("a")[0].getAttribute("href") == `#${current}`) {
       li.classList.add("active");
     }
   });
@@ -74,6 +74,8 @@ import {
   onMounted,
   onBeforeUnmount
 } from 'vue'
+import chroma from "chroma-js"
+
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
@@ -108,6 +110,7 @@ let device_width = window.innerWidth;
 // });
 
 export const useScrollAnimation = () => {
+
   const splitTitleLines = ref([]);
 
   onMounted(() => {
@@ -123,7 +126,7 @@ export const useScrollAnimation = () => {
             start: "top 90%",
             end: "bottom 60%",
             scrub: false,
-            markers: true,
+            markers: false,
             toggleActions: "play none none none",
           },
         });
@@ -149,7 +152,125 @@ export const useScrollAnimation = () => {
         });
       });
     }
-
-
   });
+
+
+
 }
+
+
+export const btnStickyScroll = () => {
+  let testInner = window.innerWidth;
+
+  // Function to initialize ScrollTrigger
+  const initScrollTrigger = () => {
+    if (window.innerWidth <= 991) {
+      ScrollTrigger.create({
+        trigger: '.bd-position-sticky',
+        start: '-100 top',
+        end: '10% +20px center',
+        pin: '.column.two',
+        pinSpacing: false,
+        // markers: true,
+
+      });
+    } else {
+      ScrollTrigger.create({
+        trigger: '.bd-position-sticky',
+        start: '-180 top',
+        end: '90% +190px center',
+        pin: '.column.two',
+        pinSpacing: false,
+        // markers: true,
+
+      });
+    }
+  };
+
+  // Call initScrollTrigger when the component is mounted
+  onMounted(() => {
+    initScrollTrigger();
+  });
+
+}
+
+// export const splitTextAnimation = () => {
+//   gsap.config({
+//     nullTargetWarn: false,
+//   });
+//   const folksText = ref(null);
+
+//   onMounted(() => {
+//     // let device_width = window.innerWidth;
+//     // const folksText = folksText.value;
+//     folksText.value = document.querySelectorAll(".folks-text");
+
+//     if (folksText) {
+//       let folksBD = gsap.timeline({
+//         repeat: -1,
+//         delay: 0.5,
+//         scrollTrigger: {
+//           trigger: folksText,
+//           start: 'bottom 100%-=50px'
+//         }
+//       });
+//       gsap.set(folksText, {
+//         opacity: 0
+//       });
+//       gsap.to(folksText, {
+//         opacity: 1,
+//         duration: 1,
+//         ease: 'power2.out',
+//         scrollTrigger: {
+//           trigger: folksText,
+//           start: 'bottom 100%-=50px',
+//           once: true
+//         }
+//       });
+//       let mySplitText = new SplitType(folksText, {
+//         type: "words,chars,capitalize"
+//       });
+//       let chars = mySplitText.chars;
+//       let folksGradient = chroma.scale(['#14CF93', '#F8EC3A']);
+//       folksBD.to(chars, {
+//         duration: 0.5,
+//         scaleY: 0.6,
+//         ease: "power3.out",
+//         stagger: 0.04,
+//         transformOrigin: 'center bottom'
+//       });
+//       folksBD.to(chars, {
+//         yPercent: -20,
+//         ease: "elastic",
+//         stagger: 0.03,
+//         duration: 0.8
+//       }, 0.5);
+//       folksBD.to(chars, {
+//         scaleY: 1,
+//         ease: "elastic.out(2.5, 0.2)",
+//         stagger: 0.03,
+//         duration: 1.5
+//       }, 0.5);
+//       folksBD.to(chars, {
+//         color: (i, el, arr) => {
+//           return folksGradient(i / arr.length).hex();
+//         },
+//         ease: "power2.out",
+//         stagger: 0.03,
+//         duration: 0.3
+//       }, 0.5);
+//       folksBD.to(chars, {
+//         yPercent: 0,
+//         ease: "back",
+//         stagger: 0.03,
+//         duration: 0.8
+//       }, 0.7);
+//       folksBD.to(chars, {
+//         color: '#14CF93',
+//         duration: 1.4,
+//         stagger: 0.05
+//       });
+//     }
+//   })
+
+// }

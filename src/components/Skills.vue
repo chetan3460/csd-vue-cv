@@ -9,11 +9,11 @@
                             <div class="section-title mb-40">
                                 <span class="sub-title mb-15">My Skills</span>
                                 <h2 class="split-title-line">I'm great in what I do and <span>I'm loving it</span></h2>
-                                <p>Front-end developer with 4+ years of experience building and maintaining responsive and
+                                <!-- <p>Front-end developer with 4+ years of experience building and maintaining responsive and
                                     user-friendly websites and web applications using HTML, CSS, JavaScript, Vue,
                                     Wordpress, Scss, and a variety of front-end frameworks and libraries.
 
-                                </p>
+                                </p> -->
                             </div>
                             <!-- <a href="about.html" class="theme-btn">Learn More <i class="far fa-angle-right"></i></a> -->
                         </div>
@@ -24,6 +24,9 @@
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-2s">
                                         <v-icon hover animation="float" scale="4" name="vi-file-type-html" />
+                                        <!-- <img src="../assets/images/skills/html.png" alt="Shape"> -->
+
+
                                         <h5>html5</h5>
                                         <span class="percent">95%</span>
                                     </div>
@@ -31,6 +34,7 @@
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-3s">
                                         <v-icon hover animation="float" scale="4" name="vi-file-type-css" />
+                                        <!-- <img src="../assets/images/skills/css.png" alt="Shape"> -->
 
                                         <h5>css3</h5>
                                         <span class="percent">83</span>
@@ -38,13 +42,17 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-4s">
-                                        <v-icon hover animation="float" scale="4" name="vi-file-type-scss2"></v-icon>
+                                        <!-- <img src="../assets/images/skills/sass.png" alt="Shape"> -->
+                                        <v-icon hover animation="float" scale="4" name="vi-file-type-scss2" />
+
                                         <h5>scss</h5>
                                         <span class="percent">93%</span>
                                     </div>
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-5s">
+                                        <!-- <img src="../assets/images/skills/jquery.png" alt="Shape"> -->
+
                                         <v-icon hover animation="float" scale="4" fill="#1169ae" name="co-jquery" />
                                         <h5>jquery</h5>
                                         <span class="percent">84%</span>
@@ -62,6 +70,8 @@
                                     <div class="skill-item wow fadeInUp delay-0-3s">
                                         <v-icon hover animation="float" scale="4" fill="#FFDF00"
                                             name="co-javascript"></v-icon>
+                                        <!-- <img src="../assets/images/skills/javascript.png" alt="Shape"> -->
+
                                         <h5>javascript</h5>
                                         <span class="percent">86%</span>
                                     </div>
@@ -77,6 +87,8 @@
                                 </div>
                                 <div class="col-xl-3 col-lg-4 col-md-3 col-sm-4 col-6">
                                     <div class="skill-item wow fadeInUp delay-0-5s">
+                                        <!-- <img src="../assets/images/skills/vue.png" alt="Shape"> -->
+
                                         <v-icon hover animation="float" scale="4" name="vi-file-type-vue" />
                                         <h5>Vue</h5>
                                         <span class="percent">94%</span>
@@ -107,9 +119,10 @@ import {
     FaBootstrap,
     ViFileTypeVue,
     FaFacebookSquare,
+    MdSpeedSharp
 
 } from 'oh-vue-icons/icons'
-addIcons(FaWordpressSimple, ViFileTypeScss2, CoJquery, CoJavascript, ViFileTypeHtml, ViFileTypeCss, FaBootstrap, ViFileTypeVue, FaFacebookSquare)
+addIcons(MdSpeedSharp, FaWordpressSimple, ViFileTypeScss2, CoJquery, CoJavascript, ViFileTypeHtml, ViFileTypeCss, FaBootstrap, ViFileTypeVue, FaFacebookSquare)
 import { useScrollAnimation } from '@/js/utilits'
 useScrollAnimation()
 </script>

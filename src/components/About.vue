@@ -1,39 +1,44 @@
 <template>
     <!-- About Area start -->
-    <section id="about" class="about-area rel z-1 scroll_section">
+    <section id="about" class="about-area rel z-1 scroll_section prl-15">
         <div class="for-bgc-black py-130 rpy-100">
             <div class="container">
                 <div class="row gap-100 align-items-center">
                     <div class="col-lg-7">
                         <div class="about-content-part rel z-2 rmb-55">
-                            <div class="section-title mb-35 wow fadeInUp delay-0-2s">
+                            <div class="section-title mb-35">
                                 <span class="sub-title mb-15">About Me</span>
-                                <h2 class="title-anim split-title-line">Professional <span>Problem
-                                        Solutions</span> For
-                                    Digital Products</h2>
-                                <p>At vero eos et accusamus etodio dignissimos ducimus praesentium voluptatum corrupti quos
-                                    dolores quas molestias excepturi sint occaecati cupiditate provident qui officia
-                                    deserunt mollitia animi, id est laborum et dolorum</p>
+                                <h2 class="title-anim split-title-line">I can develop
+                                    that <span>help people</span>
+                                </h2>
+
+                                <p>Front-end developer with a strong focus on creating exceptional user experiences. Thrive
+                                    on transforming complex ideas into intuitive and visually appealing designs. Keen eye
+                                    for detail and a user-centered approach to deliver impactful solutions that engage and
+                                    delight users. Collaborate to bring your digital products to life.
+
+                                </p>
                             </div>
-                            <ul class="list-style-one two-column wow fadeInUp delay-0-2s">
-                                <li>Branding & Design</li>
-                                <li>Digital Marketing</li>
-                                <li>Web Development</li>
-                                <li>Product Design</li>
+                            <ul class="list-style-one two-column">
+                                <li>
+                                    Fast</li>
+                                <li>Responsive</li>
+                                <li>Intuitive</li>
+                                <li>Dynamic</li>
                             </ul>
-                            <div class="about-info-box mt-25 wow fadeInUp delay-0-2s">
+                            <div class="about-info-box mt-25">
                                 <div class="info-box-item">
                                     <i class="far fa-envelope"></i>
                                     <div class="content">
                                         <span>Email Us</span><br>
-                                        <a href="mailto:support@gmail.com">support@gmail.com</a>
+                                        <a href="mailto:chetan.dmc@gmail.com">chetan.dmc@gmail.com</a>
                                     </div>
                                 </div>
                                 <div class="info-box-item">
                                     <i class="far fa-phone"></i>
                                     <div class="content">
                                         <span>Make A Call</span><br>
-                                        <a href="callto:+000(123)45688">+880 (123) 456 88</a>
+                                        <a href="callto:+000(123)45688">+91 82752-60580</a>
                                     </div>
                                 </div>
                             </div>
@@ -41,15 +46,15 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="about-image-part wow fadeInUp delay-0-3s">
-                            <img src="../assets/images/about/about.jpg" alt="About Me">
+                            <img src="../assets/images/about/me.jpeg" alt="About Me">
                             <div class="about-btn btn-one wow fadeInRight delay-0-4s">
                                 <img src="../assets/images/about/btn-image1.png" alt="Image">
-                                <h6>Experience Designer</h6>
+                                <h6>Frontend Developer</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="about-btn btn-two wow fadeInRight delay-0-5s">
                                 <img src="../assets/images/about/btn-image2.png" alt="Image">
-                                <h6>Mark J. Collins</h6>
+                                <h6>Chetan S. Dhargalkar</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
                             <div class="dot-shape">
@@ -65,17 +70,21 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { useScrollAnimation } from '@/js/utilits'
 
-useScrollAnimation();
+import {
+    OhVueIcon,
+    addIcons
+} from 'oh-vue-icons'
+import {
+    MdSpeedSharp,
+    MdComputer,
+    IoBulbOutline,
+    IoRocketOutline
 
-// splitTitleLines.value = document.querySelectorAll(".split-title-line");
-
-// onMounted(() => {
-//     useScrollAnimation();
-// })
-
-
-
+} from 'oh-vue-icons/icons'
+addIcons(MdSpeedSharp, MdComputer, IoBulbOutline, IoRocketOutline)
+useScrollAnimation()
 </script>
+
+
