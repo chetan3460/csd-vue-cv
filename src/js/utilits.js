@@ -62,7 +62,7 @@ export const scroll_ = () => {
 
   navLi.forEach((li) => {
     li.classList.remove("active");
-    if (li.getfolksTextsByTagName("a")[0].getAttribute("href") == `#${current}`) {
+    if (li.getElementsByTagName("a")[0].getAttribute("href") == `#${current}`) {
       li.classList.add("active");
     }
   });
