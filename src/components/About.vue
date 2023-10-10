@@ -7,7 +7,7 @@
                     <div class="col-lg-7">
                         <div class="about-content-part rel z-2 rmb-55">
                             <div class="section-title mb-35">
-                                <span class="sub-title mb-15">About Me</span>
+                                <span class="sub-title mb-15"><v-icon name="la-user-solid"></v-icon> About Me</span>
                                 <h2 class="title-anim split-title-line">I can develop
                                     that <span>help people</span>
                                 </h2>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-lg-5">
                         <div class="about-image-part wow fadeInUp delay-0-3s">
-                            <img src="../assets/images/about/me.jpeg" alt="About Me">
+                            <img src="../assets/images/about/curly-hair-man.png" alt="About Me">
                             <div class="about-btn btn-one wow fadeInRight delay-0-4s">
                                 <img src="../assets/images/about/btn-image1.png" alt="Image">
                                 <h6>Frontend Developer</h6>
@@ -57,9 +57,7 @@
                                 <h6>Chetan S. Dhargalkar</h6>
                                 <i class="fas fa-arrow-right"></i>
                             </div>
-                            <div class="dot-shape">
-                                <img src="../assets/images/shape/about-dot.png" alt="Shape">
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -77,13 +75,14 @@ import {
     addIcons
 } from 'oh-vue-icons'
 import {
+    LaUserSolid,
     MdSpeedSharp,
     MdComputer,
     IoBulbOutline,
     IoRocketOutline
 
 } from 'oh-vue-icons/icons'
-addIcons(MdSpeedSharp, MdComputer, IoBulbOutline, IoRocketOutline)
+addIcons(LaUserSolid, MdSpeedSharp, MdComputer, IoBulbOutline, IoRocketOutline)
 useScrollAnimation()
 </script>
 

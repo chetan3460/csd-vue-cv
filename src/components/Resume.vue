@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-xl-8 col-lg-9">
                             <div class="section-title mb-60">
-                                <span class="sub-title mb-15">My Resume</span>
+                                <span class="sub-title mb-15"><v-icon name="bi-briefcase"></v-icon> My Resume</span>
                                 <h2 class="split-title-line">Real <span>Problem Solutions</span> Experience</h2>
                             </div>
                         </div>
@@ -103,12 +103,13 @@ import {
     addIcons
 } from 'oh-vue-icons'
 import {
+    BiBriefcase,
     FaUserGraduate,
     FaUserTie,
     BiCloudDownload
 } from 'oh-vue-icons/icons'
 
-addIcons(FaUserGraduate, FaUserTie, BiCloudDownload)
+addIcons(BiBriefcase, FaUserGraduate, FaUserTie, BiCloudDownload)
 
 useScrollAnimation();
 btnStickyScroll();

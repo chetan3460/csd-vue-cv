@@ -194,83 +194,108 @@ export const btnStickyScroll = () => {
 
 }
 
-// export const splitTextAnimation = () => {
-//   gsap.config({
-//     nullTargetWarn: false,
-//   });
-//   const folksText = ref(null);
+export const splitTextAnimation = () => {
+  const element = ref(null);
 
-//   onMounted(() => {
-//     // let device_width = window.innerWidth;
-//     // const folksText = folksText.value;
-//     folksText.value = document.querySelectorAll(".folks-text");
+  onMounted(() => {
+    if (device_width > 576) {
 
-//     if (folksText) {
-//       let folksBD = gsap.timeline({
-//         repeat: -1,
-//         delay: 0.5,
-//         scrollTrigger: {
-//           trigger: folksText,
-//           start: 'bottom 100%-=50px'
-//         }
-//       });
-//       gsap.set(folksText, {
-//         opacity: 0
-//       });
-//       gsap.to(folksText, {
-//         opacity: 1,
-//         duration: 1,
-//         ease: 'power2.out',
-//         scrollTrigger: {
-//           trigger: folksText,
-//           start: 'bottom 100%-=50px',
-//           once: true
-//         }
-//       });
-//       let mySplitText = new SplitType(folksText, {
-//         type: "words,chars,capitalize"
-//       });
-//       let chars = mySplitText.chars;
-//       let folksGradient = chroma.scale(['#14CF93', '#F8EC3A']);
-//       folksBD.to(chars, {
-//         duration: 0.5,
-//         scaleY: 0.6,
-//         ease: "power3.out",
-//         stagger: 0.04,
-//         transformOrigin: 'center bottom'
-//       });
-//       folksBD.to(chars, {
-//         yPercent: -20,
-//         ease: "elastic",
-//         stagger: 0.03,
-//         duration: 0.8
-//       }, 0.5);
-//       folksBD.to(chars, {
-//         scaleY: 1,
-//         ease: "elastic.out(2.5, 0.2)",
-//         stagger: 0.03,
-//         duration: 1.5
-//       }, 0.5);
-//       folksBD.to(chars, {
-//         color: (i, el, arr) => {
-//           return folksGradient(i / arr.length).hex();
-//         },
-//         ease: "power2.out",
-//         stagger: 0.03,
-//         duration: 0.3
-//       }, 0.5);
-//       folksBD.to(chars, {
-//         yPercent: 0,
-//         ease: "back",
-//         stagger: 0.03,
-//         duration: 0.8
-//       }, 0.7);
-//       folksBD.to(chars, {
-//         color: '#14CF93',
-//         duration: 1.4,
-//         stagger: 0.05
-//       });
-//     }
-//   })
+      element.value = document.querySelectorAll(".folks-text")
 
-// }
+      element.value.forEach((element) => {
+        let folksBD = gsap.timeline({
+          repeat: -1,
+          delay: 0.5,
+          scrollTrigger: {
+            trigger: element,
+            start: 'bottom 100%-=50px'
+          }
+        });
+        gsap.set(element, {
+          opacity: 0
+        });
+        gsap.to(element, {
+          opacity: 1,
+          duration: 1,
+          ease: 'power2.out',
+          scrollTrigger: {
+            trigger: element,
+            start: 'bottom 100%-=50px',
+            once: true
+          }
+        });
+        let mySplitText = new SplitType(element, {
+          type: "words,chars,capitalize"
+        });
+        let chars = mySplitText.chars;
+        let folksGradient = chroma.scale(['#14CF93', '#F8EC3A']);
+        folksBD.to(chars, {
+          duration: 0.5,
+          scaleY: 0.6,
+          ease: "power3.out",
+          stagger: 0.04,
+          transformOrigin: 'center bottom'
+        });
+        folksBD.to(chars, {
+          yPercent: -20,
+          ease: "elastic",
+          stagger: 0.03,
+          duration: 0.8
+        }, 0.5);
+        folksBD.to(chars, {
+          scaleY: 1,
+          ease: "elastic.out(2.5, 0.2)",
+          stagger: 0.03,
+          duration: 1.5
+        }, 0.5);
+        folksBD.to(chars, {
+          color: (i, el, arr) => {
+            return folksGradient(i / arr.length).hex();
+          },
+          ease: "power2.out",
+          stagger: 0.03,
+          duration: 0.3
+        }, 0.5);
+        folksBD.to(chars, {
+          yPercent: 0,
+          ease: "back",
+          stagger: 0.03,
+          duration: 0.8
+        }, 0.7);
+        folksBD.to(chars, {
+          color: '#14CF93',
+          duration: 1.4,
+          stagger: 0.05
+        });
+      })
+
+
+
+
+    }
+  })
+}
+
+export const listAnimation = () => {
+  onMounted(() => {
+    // Media list Gsap
+    let media_list = gsap.timeline({
+      scrollTrigger: {
+        trigger: ".skill-area",
+        start: "top 70%",
+        end: "bottom 70%",
+        scrub: false,
+        // markers: true,
+        pin: false,
+        // toggleActions: "play none reverse none",
+
+      }
+    });
+
+    media_list.from(".skill-item", {
+      y: 50,
+      stagger: 0.05,
+      opacity: 0
+    })
+  })
+};
