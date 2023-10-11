@@ -3,34 +3,32 @@
     <section class="title-intro-area fix primary-bg scroll_section prl-15">
         <div class="for-bgc-black py-130 rpy-100">
             <div class="container">
-                <div class="section__subtitle-3">
-                    <p class="section__subtitle-text">
-                        any project in mind?
-                    </p>
-
-                </div>
-                <div class="title-intro-wrapper section-spacing">
-
-                    <div class="intro__title-wrapper">
-                        <h2 class="intro__title-inner folks-text">Let’s talk.</h2>
-                    </div>
-
-                    <div class="hire-btn">
-                        <a class="theme-btn" href="#contact">Hire me now</a>
+                <div class="col-lg-8">
+                    <div class="section__subtitle-3">
+                        <p class="section__subtitle-text">
+                            any project in mind?
+                        </p>
 
                     </div>
+                    <div class="title-intro-wrapper section-spacing">
 
-                    <!-- <div class="intro-brn">
-                    <a href="contact.html" class="circle-btn is-green">
-                        <span class="icon-box"><i class="far fa-arrow-right"></i></span>
-                        <img src="../assets/images/illustration/contact-btn-text.png" alt="image not found"
-                            class="image-text">
-                    </a>
-                </div> -->
+                        <div class="intro__title-wrapper">
+                            <h2 class="intro__title-inner folks-text">Let’s talk.</h2>
+                        </div>
+
+                        <div class="hire-btn">
+                            <a class="theme-btn" href="#contact">Hire me now</a>
+                        </div>
+
+                    </div>
                 </div>
-                <div class="shape-illustration">
-                    <img src="../assets/images/illustration/2.png" alt="illustration">
+
+                <div class="col-lg-3">
+                    <div class="shape-illustration">
+                        <img src="../assets/images/illustration/2.png" alt="illustration">
+                    </div>
                 </div>
+
             </div>
         </div>
 
@@ -38,29 +36,8 @@
     <!-- title intro end -->
 </template>
 <script setup>
-import { ref, onMounted } from 'vue';
-import chroma from "chroma-js"
-import SplitType from 'split-type'
-
-import gsap from 'gsap/all'
-import ScrollTrigger from 'gsap/ScrollTrigger'
-import ScrollToPlugin from 'gsap/ScrollToPlugin'
-
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
-
-gsap.config({
-    nullTargetWarn: false,
-});
-
-const windowOn = window;
-let larger = 1600;
-let xxl = 1400;
-let xl = 1200;
-let lg = 992;
-let md = 768;
-let sm = 576;
-let device_width = window.innerWidth;
-
+import { splitTextAnimation } from '@/js/utilits'
+splitTextAnimation()
 
 
 
@@ -135,5 +112,43 @@ let device_width = window.innerWidth;
     line-height: 1;
     margin-bottom: 0;
     color: #14cf93;
+}
+
+@media only screen and (max-width: 991px) {
+    .intro__title-inner {
+        font-size: 90px;
+
+    }
+}
+
+@media only screen and (max-width: 479px) {
+    .title-intro-area {
+        padding-top: 0;
+        padding-bottom: 0;
+        text-align: center;
+
+    }
+
+    .section__subtitle-3 {
+
+        justify-content: center;
+    }
+
+    .title-intro-wrapper {
+        text-align: center;
+        display: inline-block;
+    }
+
+    .intro__title-inner {
+        font-size: 70px;
+    }
+
+    .shape-illustration {
+        position: relative;
+
+        bottom: -166px;
+    }
+
+
 }
 </style>

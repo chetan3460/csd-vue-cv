@@ -2,6 +2,7 @@
   <div class="page-wrapper" data-magic-cursor="show">
     <Cursor />
     <router-view />
+    <div class="bg_dots"></div>
   </div>
 </template>
 

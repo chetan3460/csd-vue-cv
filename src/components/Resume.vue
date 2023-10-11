@@ -72,7 +72,7 @@
                     <div class="column two">
                         <div class="download-cv-wrap about__download-wrap text-xs-center rmb-55 rpt-50">
 
-                            <a href="#" class="resume-btn">
+                            <a href="cv/chetan-dhargalkar-cv.png" class="resume-btn" download>
                                 <div class="inner-circle">
                                     <img class="image-text" src="../assets/images/illustration/download-circel-white.png"
                                         alt="image not found">

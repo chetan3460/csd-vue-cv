@@ -14,7 +14,7 @@
                     <!--Side Menu Button-->
                     <div class="side-nav-btn animated-wrap" id="sidemenu_toggle" @click="toggleSideMenu"
                         :class="{ active: isSideMenuActive }">
-                        <div class="animated-element">
+                        <div class="animated-element hamburger">
                             <span></span>
                             <span></span>
                             <span></span>
