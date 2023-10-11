@@ -278,24 +278,42 @@ export const splitTextAnimation = () => {
 
 export const listAnimation = () => {
   onMounted(() => {
-    // Media list Gsap
-    let media_list = gsap.timeline({
-      scrollTrigger: {
-        trigger: ".skill-area",
-        start: "top 70%",
-        end: "bottom 70%",
-        scrub: false,
-        // markers: true,
-        pin: false,
-        // toggleActions: "play none reverse none",
 
-      }
+
+    gsap.set(".skill-item", {
+      opacity: 0,
+      y: 24
     });
 
-    media_list.from(".skill-item", {
-      y: 50,
-      stagger: 0.05,
-      opacity: 0
-    })
-  })
-};
+    ScrollTrigger.batch(".skill-item", {
+      onEnter: batch => gsap.to(batch, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15
+      }),
+      onLeave: batch => gsap.to(batch, {
+        opacity: 0,
+        y: 24
+      }),
+      onEnterBack: batch => gsap.to(batch, {
+        opacity: 1,
+        y: 0,
+        stagger: 0.15
+      }),
+      onLeaveBack: batch => gsap.to(batch, {
+        opacity: 0,
+        y: 24
+      }),
+
+      start: "top 80%",
+      end: "bottom 20%",
+      markers: true,
+    });
+
+
+
+
+
+
+  });
+}

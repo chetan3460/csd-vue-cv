@@ -18,11 +18,11 @@
 
                 <div class="col-lg-6">
                     <div class="author-image-part wow fadeIn delay-0-3s">
-                        <div class="bg-circle"></div>
+                        <!-- <div class="bg-circle"></div> -->
                         <img src="../assets/images/hero/hero.png" alt="Author">
-                        <div class="progress-shape">
+                        <!-- <div class="progress-shape">
                             <img src="../assets/images/hero/progress-shape.png" alt="Progress">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
