@@ -3,8 +3,8 @@
     <section id="skills" class="skill-area rel z-1 scroll_section">
         <div class=" pt-130 rpt-100 pb-100 rpb-70">
             <div class="container">
-                <div class="row gap-100">
-                    <div class="col-lg-5">
+                <div class="row">
+                    <div class="col-lg-12">
                         <div class="skill-content-part rel z-2 rmb-55 wow fadeInUp delay-0-2s">
                             <div class="section-title mb-40">
                                 <span class="sub-title mb-15"><v-icon name="la-shapes-solid"></v-icon> My Skills</span>
@@ -18,7 +18,7 @@
                             <!-- <a href="about.html" class="theme-btn">Learn More <i class="far fa-angle-right"></i></a> -->
                         </div>
                     </div>
-                    <div class="col-lg-7">
+                    <div class="col-lg-12">
                         <div class="skill-items-wrap">
                             <div class="skill-item">
                                 <div class="skill-inner">
@@ -29,7 +29,7 @@
 
                                 <h5>html5</h5>
                             </div>
-                            <div class="skill-item">
+                            <!-- <div class="skill-item">
                                 <div class="skill-inner">
                                     <v-icon hover animation="float" scale="4" name="vi-file-type-css" />
                                     <span class="percent">83</span>
@@ -38,8 +38,8 @@
 
 
                                 <h5>css3</h5>
-                            </div>
-                            <div class="skill-item">
+                            </div> -->
+                            <!-- <div class="skill-item">
                                 <div class="skill-inner">
                                     <v-icon hover animation="float" scale="4" name="vi-file-type-scss2" />
                                     <span class="percent">93%</span>
@@ -48,7 +48,7 @@
 
 
                                 <h5>scss</h5>
-                            </div>
+                            </div> -->
                             <div class="skill-item">
                                 <div class="skill-inner">
                                     <v-icon hover animation="float" scale="4" fill="#1169ae" name="co-jquery" />

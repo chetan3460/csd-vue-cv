@@ -306,7 +306,7 @@ export const listAnimation = () => {
       onEnter: batch => gsap.to(batch, {
         opacity: 1,
         y: 0,
-        stagger: 0.15
+        stagger: 0.10
       }),
       onLeave: batch => gsap.to(batch, {
         opacity: 0,
@@ -315,7 +315,7 @@ export const listAnimation = () => {
       onEnterBack: batch => gsap.to(batch, {
         opacity: 1,
         y: 0,
-        stagger: 0.15
+        stagger: 0.10
       }),
       onLeaveBack: batch => gsap.to(batch, {
         opacity: 0,
@@ -326,6 +326,7 @@ export const listAnimation = () => {
       end: "bottom 20%",
       // markers: true,
     });
+
 
 
 

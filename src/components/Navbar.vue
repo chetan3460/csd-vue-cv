@@ -8,7 +8,7 @@
                 <div class="container-fluid">
                     <a href="#page1" title="Logo" class="link logo scroll">
                         <!--Logo Default-->
-                        <img src="../assets/images/logos/logo.png" class="logo-dark" alt="logo">
+                        <img src="../assets/images/logos/c.svg" class="logo-dark" alt="logo">
                     </a>
 
                     <!--Side Menu Button-->

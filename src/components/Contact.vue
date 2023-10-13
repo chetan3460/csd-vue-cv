@@ -1,9 +1,7 @@
 <template>
     <!-- Contact area start -->
     <div class="contact-area fix p-relative section-spacing adjust-header-space">
-        <div class="contact-shapes">
-            <img class="shape-1" src="assets/img/shapes/spira-2.png" alt="image not found">
-        </div>
+
         <div class="container">
             <div class="row gy-50 align-items-center">
                 <div class="col-xxl-6 col-xl-6 col-lg-6">
