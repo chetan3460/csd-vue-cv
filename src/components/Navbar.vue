@@ -17,14 +17,15 @@
                 </div>
 
 
-                <div class="col">
+                <div class="col flex align-items-center justify-content-end">
 
                     <!-- side menu -->
-                    <div class="">
+                    <div class="collapse navbar-collapse navbar-visible-ontoggle flex-col items-stretch module-navbar"
+                        id="main-header-collapse" role="navigation">
                         <div class="side-menu" :class="{ 'side-menu-active': isSideMenuActive }">
                             <div class="inner-wrapper">
-                                <span class="btn-close link" id="btn_sideNavClose"
-                                    @click="closeSideMenu"><i></i><i></i></span>
+                                <!-- <span class="btn-close link" id="btn_sideNavClose"
+                                    @click="closeSideMenu"><i></i><i></i></span> -->
                                 <nav class="side-nav">
                                     <ul class="navbar-nav" id="side-menu">
                                         <li class="nav-item active">
@@ -54,16 +55,42 @@
                     </div>
                     <!-- End side menu -->
 
+                    <div class="header-module flex-col py-10 ml-25">
+                        <button
+                            class="nav-trigger main-nav-trigger collapsed style-2 solid circle txt-left flex items-center justify-center text-black"
+                            type="button" data-ld-toggle="true" data-bs-toggle="collapse"
+                            data-bs-target="#main-header-collapse" aria-expanded="false"
+                            aria-controls="main-header-collapse" @click="toggleSideMenu">
+                            <span class="bars">
+                                <span class="bars-inner ">
+                                    <span class="bar relative"></span>
+                                    <span class="bar relative"></span>
+                                    <span class="bar relative"></span>
+                                </span>
+                            </span>
+                            <span class="txt">Menu</span>
+                        </button>
+                    </div>
+
+
+
+
+
+
+
+
                     <!--Side Menu Button-->
-                    <div class="side-nav-btn animated-wrap" id="sidemenu_toggle" @click="toggleSideMenu"
+                    <!-- <div class="side-nav-btn animated-wrap" id="sidemenu_toggle" @click="toggleSideMenu"
                         :class="{ active: isSideMenuActive }">
+                        <span class="txt">Menu</span>
+
                         <div class="animated-element hamburger">
                             <span></span>
                             <span></span>
                             <span></span>
                         </div>
-                        <span class="txt">Menu</span>
-                    </div>
+
+                    </div> -->
 
                 </div>
 
