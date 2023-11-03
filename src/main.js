@@ -6,6 +6,8 @@ import '@/assets/css/animate.css'
 
 
 import '@/assets/css/style.css'
+import '@/assets/css/theme-styles.css'
+
 import {
     createApp
 } from 'vue'

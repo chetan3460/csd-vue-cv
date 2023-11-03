@@ -1,0 +1,80 @@
+/* ==========================================================================
+  COMMON VARIABLES
+  ========================================================================== */
+
+// Color variable map
+$colors: (
+  // non-nested values
+  background: #ffffff,
+  border: #c5c5c5,
+  failure: rgba(199, 28, 28, 0.73),
+  success: #00ac57,
+  warning: #ea9f12,
+  white: #ffffff,
+  // nested map inception
+  primary:
+    (
+      red: #f25f3a,
+      blue: #242d52,
+      base: #1d1e25,
+      black: #000000,
+      grey: #999999,
+      lighten: lighten(#9095a7, 15%),
+      green-trans: transparentize(#31b44b, 0.4)
+    ),
+  secondary: (
+    dark-gray: #9095a7,
+    dark-grayish-blue: #9095a7,
+    dark-blue: #1d1e25,
+    pale-red: #ffefeb,
+    light-gray: #ffefeb
+  )
+);
+
+// Usage
+// .header{
+//   color: color(primary,base); //Nested
+//   color: color(footer);//Direct
+// }
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+// ==========================================================================
+//  COMPONENT SPECIFIC VARIABLES
+//  ==========================================================================
+
+// TYPOGRAPHY
+//   ==========================================================================
+$htmlFontSize: 16px;
+$baseFontSize: 16px;
+$baseFontFamily: "Be Vietnam Pro", sans-serif;
+// $baseFontFamily: $avenirLight;
+// $baseHeadingFont: $avenirMedium;
+// $subHeadingFont: $avenirMedium;
+$work_sans: $baseFontFamily;
+
+//$font-awesome: 'FontAwesome';
+$font-awesome: "Font Awesome 5 Free";
+$baseLineHeight: 22px;
+$baseTextColor: #9095a7;
+
+$primaryColor: #9095a7;
+$secondaryColor: #d8bb41;
+
+// ==========================================================================
+//  MIN HEIGHT FOR CONTAINER
+//  ==========================================================================
+$min-height-desktop: 85vh;
+$min-height-mobile: 80vh;
+
+// $primary: #015E30;
+// $secondary: #22523A;
+// $lato: 'Lato', sans-serif;
+
+$themeDefault: #f25f3a;

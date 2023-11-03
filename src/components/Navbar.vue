@@ -2,14 +2,57 @@
 <template>
     <!-- START HEADER -->
     <header ref="navbar" class="main-header menu-absolute">
-        <div class="header-upper">
-            <!--Navigation-->
-            <nav class="navbar navbar-top-default navbar-expand-lg navbar-standard">
-                <div class="container-fluid">
-                    <a href="#page1" title="Logo" class="link logo scroll">
+        <div class="header-upper container-fluid">
+            <div class="row">
+
+                <!--Navigation-->
+                <div class="col">
+                    <nav class="navbar navbar-top-default navbar-expand-lg navbar-standard">
                         <!--Logo Default-->
-                        <img src="../assets/images/logos/c.svg" class="logo-dark" alt="logo">
-                    </a>
+                        <a href="#page1" title="Logo" class="link logo scroll">
+                            <img src="../assets/images/logos/c.svg" class="logo-dark" alt="logo">
+                        </a>
+
+                    </nav>
+                </div>
+
+
+                <div class="col">
+
+                    <!-- side menu -->
+                    <div class="">
+                        <div class="side-menu" :class="{ 'side-menu-active': isSideMenuActive }">
+                            <div class="inner-wrapper">
+                                <span class="btn-close link" id="btn_sideNavClose"
+                                    @click="closeSideMenu"><i></i><i></i></span>
+                                <nav class="side-nav">
+                                    <ul class="navbar-nav" id="side-menu">
+                                        <li class="nav-item active">
+                                            <a class="nav-link link" href="#home" @click="closeSideMenu">Home</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link link" href="#about" @click="closeSideMenu">About</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link link" href="#resume" @click="closeSideMenu">Resume</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link link" href="#skills" @click="closeSideMenu">Skills</a>
+                                        </li>
+                                        <!-- <li class="nav-item">
+                                <a class="nav-link link" href="#page5">Portfolio</a>
+                            </li> -->
+                                        <li class="nav-item">
+                                            <a class="nav-link link" href="#contact" @click="closeSideMenu">Contact</a>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End side menu -->
 
                     <!--Side Menu Button-->
                     <div class="side-nav-btn animated-wrap" id="sidemenu_toggle" @click="toggleSideMenu"
@@ -19,41 +62,15 @@
                             <span></span>
                             <span></span>
                         </div>
+                        <span class="txt">Menu</span>
                     </div>
-                </div>
-            </nav>
-
-            <!-- side menu -->
-            <div class="side-menu" :class="{ 'side-menu-active': isSideMenuActive }">
-                <div class="inner-wrapper">
-                    <span class="btn-close link" id="btn_sideNavClose" @click="closeSideMenu"><i></i><i></i></span>
-                    <nav class="side-nav">
-                        <ul class="navbar-nav" id="side-menu">
-                            <li class="nav-item active">
-                                <a class="nav-link link" href="#home" @click="closeSideMenu">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link" href="#about" @click="closeSideMenu">About</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link" href="#resume" @click="closeSideMenu">Resume</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link link" href="#skills" @click="closeSideMenu">Skills</a>
-                            </li>
-                            <!-- <li class="nav-item">
-                                <a class="nav-link link" href="#page5">Portfolio</a>
-                            </li> -->
-                            <li class="nav-item">
-                                <a class="nav-link link" href="#contact" @click="closeSideMenu">Contact</a>
-                            </li>
-                        </ul>
-                    </nav>
-
 
                 </div>
+
+
+
+
             </div>
-            <!-- End side menu -->
         </div>
 
 
