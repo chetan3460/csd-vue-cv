@@ -1,6 +1,6 @@
 <template>
     <!-- About Area start -->
-    <section id="about" class="about-area rel z-1 scroll_section prl-15">
+    <section id="about" class="about-area rel z-1 scroll_section prl-15" data-bgcolor="#eacbd1">
         <div class="for-bgc-black py-130 rpy-100">
             <div class="container">
                 <div class="row gap-100 align-items-center">

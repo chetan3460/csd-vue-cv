@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper" data-magic-cursor="show">
+  <div class="page-wrapper" ref="age-wrapper">
     <Cursor />
     <router-view />
     <div class="bg_dots"></div>
@@ -7,10 +7,10 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted } from 'vue'
 import Cursor from './components/layout/Cursor.vue'
 import { scroll_ } from './js/utilits'
-
+import { bgColor } from './js/utilits';
 
 onMounted(() => {
 
@@ -25,9 +25,14 @@ onMounted(() => {
     window.location = loc.substring(0, index);
   }
 
-
+  bgColor();
 
 })
+
+
+
+
+
 
 
 

@@ -1,6 +1,6 @@
 <template>
     <!-- Hero Section Start -->
-    <section id="home" class="main-hero-area pt-150 pb-80 rel z-1 scroll_section">
+    <section id="home" class="main-hero-area pt-150 pb-80 rel z-1 scroll_section" data-bgcolor="#bcb8ad">
         <div class="container container-1620">
             <div class="row align-items-center rel">
                 <div class="col-lg-6">
