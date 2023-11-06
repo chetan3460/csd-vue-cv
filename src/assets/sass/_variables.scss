@@ -3,8 +3,7 @@
   ========================================================================== */
 
 // Color variable map
-$colors: (
-  // non-nested values
+$colors: ( // non-nested values
   background: #ffffff,
   border: #c5c5c5,
   failure: rgba(199, 28, 28, 0.73),
@@ -12,24 +11,18 @@ $colors: (
   warning: #ea9f12,
   white: #ffffff,
   // nested map inception
-  primary:
-    (
-      red: #f25f3a,
-      blue: #242d52,
-      base: #1d1e25,
-      black: #000000,
-      grey: #999999,
-      lighten: lighten(#9095a7, 15%),
-      green-trans: transparentize(#31b44b, 0.4)
-    ),
-  secondary: (
-    dark-gray: #9095a7,
+  primary: (red: #f25f3a,
+    blue: #242d52,
+    base: #1d1e25,
+    black: #000000,
+    grey: #999999,
+    lighten: lighten(#9095a7, 15%),
+    green-trans: transparentize(#31b44b, 0.4)),
+  secondary: (dark-gray: #9095a7,
     dark-grayish-blue: #9095a7,
     dark-blue: #1d1e25,
     pale-red: #ffefeb,
-    light-gray: #ffefeb
-  )
-);
+    light-gray: #ffefeb));
 
 // Usage
 // .header{
@@ -37,13 +30,11 @@ $colors: (
 //   color: color(footer);//Direct
 // }
 
-$grid-breakpoints: (
-  xs: 0,
+$grid-breakpoints: (xs: 0,
   sm: 576px,
   md: 768px,
   lg: 992px,
-  xl: 1200px
-) !default;
+  xl: 1200px) !default;
 
 // ==========================================================================
 //  COMPONENT SPECIFIC VARIABLES
@@ -53,7 +44,8 @@ $grid-breakpoints: (
 //   ==========================================================================
 $htmlFontSize: 16px;
 $baseFontSize: 16px;
-$baseFontFamily: "Be Vietnam Pro", sans-serif;
+$baseFontFamily: "Be Vietnam Pro",
+sans-serif;
 // $baseFontFamily: $avenirLight;
 // $baseHeadingFont: $avenirMedium;
 // $subHeadingFont: $avenirMedium;
@@ -78,3 +70,23 @@ $min-height-mobile: 80vh;
 // $lato: 'Lato', sans-serif;
 
 $themeDefault: #f25f3a;
+
+.page-wrapper {
+  z-index: 2;
+  width: 100%;
+  position: relative;
+}
+
+.bg_dots {
+  z-index: -2;
+  width: 100%;
+  height: 100%;
+  // opacity: .45;  // background-image: url('../images/bg-dots.svg');
+  background-size: 43px 43px;
+  position: absolute;
+  top: 0%;
+  bottom: 0%;
+  left: 0%;
+  right: 0%;
+  pointer-events: none;
+}

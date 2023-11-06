@@ -4,65 +4,76 @@
   </div>
 </template>
 
-<script>
-import { onMounted, ref } from 'vue';
+<template>
+  <!-- Your template code here -->
+</template>
 
-export default {
-  setup() {
-    const containerRef = ref(null);
-    const bodyRef = ref(document.body);
+<template>
+  <!-- Your template code here -->
+</template>
 
-    onMounted(() => {
-      const scroller = new LocomotiveScroll({
-        el: containerRef.value,
-        smooth: true,
-      });
+<script setup>
+import { onMounted } from 'vue';
 
-      scroller.on('scroll', ScrollTrigger.update);
+const bgColor = () => {
+  onMounted(() => {
+    /* SMOOTH SCROLL */
+    const scroller = new LocomotiveScroll({
+      el: document.querySelector('.dizme_tm_all_wrap'),
+      smooth: true
+    });
 
-      ScrollTrigger.scrollerProxy(containerRef.value, {
-        scrollTop(value) {
-          return arguments.length
-            ? scroller.scrollTo(value, 0, 0)
-            : scroller.scroll.instance.scroll.y;
-        },
-        getBoundingClientRect() {
-          return {
-            left: 0,
-            top: 0,
-            width: window.innerWidth,
-            height: window.innerHeight,
-          };
-        },
-      });
+    scroller.on('scroll', ScrollTrigger.update);
 
-      ScrollTrigger.addEventListener('refresh', () => scroller.update());
-      ScrollTrigger.refresh();
+    ScrollTrigger.scrollerProxy('.dizme_tm_all_wrap', {
+      scrollTop(value) {
+        return arguments.length
+          ? scroller.scrollTo(value, 0, 0)
+          : scroller.scroll.instance.scroll.y;
+      },
+      getBoundingClientRect() {
+        return {
+          left: 0,
+          top: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        };
+      }
+    });
 
-      window.addEventListener('load', () => {
-        const scrollColorElems = document.querySelectorAll('[data-bgcolor]');
-        scrollColorElems.forEach((colorSection, i) => {
-          const prevBg = i === 0 ? '' : scrollColorElems[i - 1].dataset.bgcolor;
-          const prevText = i === 0 ? '' : scrollColorElems[i - 1].dataset.textcolor;
+    ScrollTrigger.addEventListener('refresh', () => scroller.update());
 
-          ScrollTrigger.create({
-            trigger: colorSection,
-            scroller: 'section',
-            start: 'top 50%',
-            onEnter: () => {
-              bodyRef.value.style.backgroundColor = colorSection.dataset.bgcolor;
-              bodyRef.value.style.color = colorSection.dataset.textcolor;
-            },
-            onLeaveBack: () => {
-              bodyRef.value.style.backgroundColor = prevBg;
-              bodyRef.value.style.color = prevText;
-            },
-          });
+    ScrollTrigger.refresh();
+
+    /* COLOR CHANGER */
+    window.addEventListener('load', function () {
+      const scrollColorElems = document.querySelectorAll('[data-bgcolor]');
+      scrollColorElems.forEach((colorSection, i) => {
+        const prevBg = i === 0 ? '' : scrollColorElems[i - 1].dataset.bgcolor;
+        const prevText = i === 0 ? '' : scrollColorElems[i - 1].dataset.textcolor;
+
+        ScrollTrigger.create({
+          trigger: colorSection,
+          scroller: '.container',
+          start: 'top 50%',
+          onEnter: () =>
+            gsap.to('body', {
+              backgroundColor: colorSection.dataset.bgcolor,
+              color: colorSection.dataset.textcolor,
+              overwrite: 'auto'
+            }),
+          onLeaveBack: () =>
+            gsap.to('body', {
+              backgroundColor: prevBg,
+              color: prevText,
+              overwrite: 'auto'
+            })
         });
       });
     });
-
-    return { containerRef };
-  },
+  });
 };
+
+bgColor(); // Call the function to initialize onMounted behavior
 </script>
+

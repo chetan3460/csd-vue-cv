@@ -2,19 +2,130 @@
 import {
   ref,
   onMounted,
-  onUnmounted,
-  computed,
   onBeforeUnmount
 } from 'vue'
-import chroma from "chroma-js"
 
+
+import chroma from "chroma-js"
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
+import LocomotiveScroll from 'locomotive-scroll';
 
+export const bgColor = () => {
+
+
+  onMounted(() => {
+    // const scroll = new LocomotiveScroll({
+    //   el: document.querySelector('[data-scroll-container]'),
+    //   smooth: true
+    // });
+    // if (typeof LocomotiveScroll !== 'undefined') {
+    //   window.scrollTo(0, 0);
+
+
+
+    //   const anchorLinks = document.querySelectorAll('[data-hash]');
+
+    //   anchorLinks.forEach((link) => {
+    //     link.addEventListener('click', (e) => {
+    //       e.preventDefault();
+    //       e.stopPropagation();
+    //       const anchor = document.querySelector(link.getAttribute('href'));
+
+    //       if (anchor) {
+    //         scroller.scrollTo(anchor);
+    //       }
+    //     });
+    //   });
+
+    //   onBeforeUnmount(() => {
+    //     window.scrollTo(0, 0);
+    //   });
+    // }
+  })
+  // const scroller = new LocomotiveScroll({
+  //   el: document.querySelector("[data-scroll-container]"),
+  //   smooth: true,
+  //   // mobile: {
+  //   //   breakpoint: 0,
+  //   //   smooth: true,
+  //   // },
+  //   // tablet: {
+  //   //   breakpoint: 0,
+  //   //   smooth: true,
+  //   // },
+  // });
+}
+
+// export const bgColor = () => {
+//   onMounted(() => {
+//     /* SMOOTH SCROLL */
+//     const scroller = new LocomotiveScroll({
+//       el: document.querySelector('.page-wrapper'),
+//       // el: document.querySelector('[data-scroll-container]'),
+//       smooth: true
+//     });
+//     // console.log('LocomotiveScroll instance:', scroller); // Add this line to log the instance
+
+
+//     scroller.on('scroll', ScrollTrigger.update);
+
+//     ScrollTrigger.scrollerProxy('.page-wrapper', {
+//       scrollTop(value) {
+//         return arguments.length
+//           ? scroller.scrollTo(value, 0, 0)
+//           : scroller.scroll.instance.scroll.y;
+//       },
+//       getBoundingClientRect() {
+//         return {
+//           left: 0,
+//           top: 0,
+//           width: window.innerWidth,
+//           height: window.innerHeight
+//         };
+//       }
+//     });
+
+//     ScrollTrigger.addEventListener('refresh', () => scroller.update());
+
+//     ScrollTrigger.refresh();
+
+//     /* COLOR CHANGER */
+//     window.addEventListener('load', function () {
+//       const scrollColorElems = document.querySelectorAll('[data-bgcolor]');
+//       scrollColorElems.forEach((colorSection, i) => {
+//         const prevBg = i === 0 ? '' : scrollColorElems[i - 1].dataset.bgcolor;
+//         // const prevText = i === 0 ? '' : scrollColorElems[i - 1].dataset.textcolor;
+
+//         ScrollTrigger.create({
+//           trigger: colorSection,
+//           scroller: '.page-wrapper',
+//           start: 'top 50%',
+//           onEnter: () =>
+//             gsap.to('body', {
+//               backgroundColor: colorSection.dataset.bgcolor,
+//               // color: colorSection.dataset.textcolor,
+//               overwrite: 'auto'
+//             }),
+//           onLeaveBack: () =>
+//             gsap.to('body', {
+//               backgroundColor: prevBg,
+//               // color: prevText,
+//               overwrite: 'auto'
+//             })
+//         });
+//       });
+//     });
+
+
+//   });
+
+// };
 
 
 
@@ -328,11 +439,6 @@ export const listAnimation = () => {
     });
 
 
-
-
-
-
-
   });
 }
 
@@ -354,65 +460,6 @@ export const scrollTop = () => {
 };
 
 
-export const bgColor = () => {
-
-  const containerRef = ref(null);
-  const bodyRef = ref(document.body);
-
-  onMounted(() => {
-    const scroller = new LocomotiveScroll({
-      el: containerRef.value,
-      smooth: true,
-    });
-
-    scroller.on('scroll', ScrollTrigger.update);
-
-    ScrollTrigger.scrollerProxy(containerRef.value, {
-      scrollTop(value) {
-        return arguments.length
-          ? scroller.scrollTo(value, 0, 0)
-          : scroller.scroll.instance.scroll.y;
-      },
-      getBoundingClientRect() {
-        return {
-          left: 0,
-          top: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-    });
-
-    ScrollTrigger.addEventListener('refresh', () => scroller.update());
-    ScrollTrigger.refresh();
-
-    window.addEventListener('load', () => {
-      const scrollColorElems = document.querySelectorAll('[data-bgcolor]');
-      scrollColorElems.forEach((colorSection, i) => {
-        const prevBg = i === 0 ? '' : scrollColorElems[i - 1].dataset.bgcolor;
-        const prevText = i === 0 ? '' : scrollColorElems[i - 1].dataset.textcolor;
-
-        ScrollTrigger.create({
-          trigger: colorSection,
-          scroller: 'section',
-          start: 'top 50%',
-          onEnter: () => {
-            bodyRef.value.style.backgroundColor = colorSection.dataset.bgcolor;
-            bodyRef.value.style.color = colorSection.dataset.textcolor;
-          },
-          onLeaveBack: () => {
-            bodyRef.value.style.backgroundColor = prevBg;
-            bodyRef.value.style.color = prevText;
-          },
-        });
-      });
-
-    });
-  });
-
-
-
-};
 
 
 

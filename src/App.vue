@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper" ref="age-wrapper">
+  <div class="page-wrapper" data-scroll-container>
     <Cursor />
     <router-view />
     <div class="bg_dots"></div>
@@ -7,16 +7,15 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, onBeforeUnmount } from 'vue'
 import Cursor from './components/layout/Cursor.vue'
 import { scroll_ } from './js/utilits'
-import { bgColor } from './js/utilits';
+// import LocomotiveScroll from 'locomotive-scroll'
+
+import { bgColor } from './js/utilits'
 
 onMounted(() => {
-
-
   window.addEventListener('scroll', scroll_)
-
   //Clear URL On Page Refresh
   const loc = window.location.href,
     index = loc.indexOf('#');
@@ -24,13 +23,8 @@ onMounted(() => {
   if (index > 0) {
     window.location = loc.substring(0, index);
   }
-
-  bgColor();
-
 })
-
-
-
+bgColor();
 
 
 
