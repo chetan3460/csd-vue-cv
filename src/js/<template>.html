@@ -77,3 +77,48 @@ const bgColor = () => {
 bgColor(); // Call the function to initialize onMounted behavior
 </script>
 
+
+<script setup>
+  import { onBeforeUnmount } from 'vue';
+  
+  if (typeof LocomotiveScroll !== 'undefined') {
+    window.scrollTo(0, 0);
+  
+    const scroller = new LocomotiveScroll({
+      el: document.querySelector("[data-scroll-container]"),
+      smooth: true,
+      mobile: {
+        breakpoint: 0,
+        smooth: true,
+      },
+      tablet: {
+        breakpoint: 0,
+        smooth: true,
+      },
+    });
+  
+    const anchorLinks = document.querySelectorAll('[data-hash]');
+  
+    anchorLinks.forEach((link) => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        const anchor = document.querySelector(link.getAttribute('href'));
+  
+        if (anchor) {
+          scroller.scrollTo(anchor);
+        }
+      });
+    });
+  
+    onBeforeUnmount(() => {
+      window.scrollTo(0, 0);
+    });
+  } else {
+    theme.fn.showErrorMessage(
+      'Failed to Load File',
+      'Failed to load: Locomotive Scroll - Include the following file(s): (vendor/locomotive-scroll/locomotive-scroll.min.js)'
+    );
+  }
+  </script>
+  

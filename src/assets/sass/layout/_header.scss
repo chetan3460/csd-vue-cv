@@ -1,3 +1,20 @@
+.main-header {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    z-index: 999;
+    width: 100%;
+    -webkit-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    transition: all 500ms ease;
+
+    @include bp(sm) {
+        position: fixed;
+        background: #000;
+
+    }
+}
+
 .navbar-standard {
     .navbar-collapse {
         @include bp(sm) {
@@ -29,6 +46,11 @@
 
 .side-nav {
     .navbar-nav {
+        @include bp(sm) {
+            padding: 20px 0;
+
+        }
+
         .nav-item {
             display: block;
             // margin: 0 auto;
@@ -107,6 +129,15 @@
                 -webkit-border-radius: 0;
                 border-radius: 0;
 
+                @include bp(sm) {
+                    padding: 0;
+                    margin-bottom: 20px;
+
+                }
+
+
+
+
                 &::after {
                     content: "";
                     position: absolute;
@@ -129,6 +160,13 @@
                 &:hover {
                     color: var(--primary-color);
                 }
+            }
+
+            &:last-child {
+                .nav-link {
+                    margin-bottom: 0;
+                }
+
             }
 
             &.active {
@@ -258,6 +296,13 @@
             border-radius: inherit;
             margin-inline-start: 10px;
             margin-inline-end: 0;
+
+            @include bp(sm) {
+                width: 40px;
+                height: 40px;
+                flex: 1 0 40px;
+
+            }
 
             &:before {
                 content: "";

@@ -32,9 +32,7 @@
                                             <li class="nav-item">
                                                 <a class="nav-link link" href="#skills" @click="closeSideMenu">Skills</a>
                                             </li>
-                                            <!-- <li class="nav-item">
-                                <a class="nav-link link" href="#page5">Portfolio</a>
-                            </li> -->
+
                                             <li class="nav-item">
                                                 <a class="nav-link link" href="#contact" @click="closeSideMenu">Contact</a>
                                             </li>
