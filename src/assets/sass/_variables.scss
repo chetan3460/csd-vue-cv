@@ -13,7 +13,7 @@ $colors: ( // non-nested values
   // nested map inception
   primary: (red: #f25f3a,
     blue: #242d52,
-    base: #1d1e25,
+    base: #fff,
     black: #000000,
     grey: #999999,
     lighten: lighten(#9095a7, 15%),
@@ -69,7 +69,11 @@ $min-height-mobile: 80vh;
 // $secondary: #22523A;
 // $lato: 'Lato', sans-serif;
 
-$themeDefault: #f25f3a;
+$themeDefault: #23f7dd;
+
+.txt-color {
+  color: $themeDefault;
+}
 
 .page-wrapper {
   z-index: 2;

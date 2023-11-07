@@ -7,7 +7,7 @@
     <Resume />
     <Skills />
     <Cta />
-    <Contact />
+    <!-- <Contact /> -->
     <Footer />
     <ScrollTopVue />
   </div>

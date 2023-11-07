@@ -40,9 +40,11 @@ body {
 
   p {
     margin-bottom: 20px;
+
     &:last-of-type {
       margin-bottom: 0;
     }
+
     @include font-rem(16px, 25px);
     font-family: $baseFontFamily;
 
@@ -79,6 +81,7 @@ h6,
   font-family: $baseFontFamily;
   margin-bottom: 0px;
   // @extend %baseSpacing;
+  color: color(primary, base)
 }
 
 h1,
@@ -88,6 +91,7 @@ h1,
   letter-spacing: -0.5px;
   font-weight: 700;
   color: color(primary, base);
+
   @include bp(tablet-sm) {
     @include font-rem(38px, 50px);
   }
@@ -98,6 +102,7 @@ h2,
   @include font-rem(36px, 46px);
   font-weight: 700;
   color: color(primary, base);
+
   @include bp(mobile) {
     @include font-rem(31px, 45px);
   }
@@ -124,6 +129,7 @@ h5,
 .h5 {
   @include font-rem(16px, 20.8px);
   font-weight: 600;
+
   @include bp(mobile) {
     @include font-rem(18px, 21.6px);
   }
@@ -153,6 +159,7 @@ a {
   color: inherit;
   transition: 0.3s;
   text-decoration: inherit;
+
   &:hover {
     color: inherit;
     text-decoration: inherit;

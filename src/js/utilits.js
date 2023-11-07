@@ -2,7 +2,7 @@
 import {
   ref,
   onMounted,
-  onBeforeUnmount
+  nextTick
 } from 'vue'
 
 
@@ -14,119 +14,56 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-import LocomotiveScroll from 'locomotive-scroll';
+// import LocomotiveScroll from 'locomotive-scroll';
 
-export const bgColor = () => {
-
-
-  onMounted(() => {
-    // const scroll = new LocomotiveScroll({
-    //   el: document.querySelector('[data-scroll-container]'),
-    //   smooth: true
-    // });
-    // if (typeof LocomotiveScroll !== 'undefined') {
-    //   window.scrollTo(0, 0);
+// export const smoothScroll = () => {
 
 
-
-    //   const anchorLinks = document.querySelectorAll('[data-hash]');
-
-    //   anchorLinks.forEach((link) => {
-    //     link.addEventListener('click', (e) => {
-    //       e.preventDefault();
-    //       e.stopPropagation();
-    //       const anchor = document.querySelector(link.getAttribute('href'));
-
-    //       if (anchor) {
-    //         scroller.scrollTo(anchor);
-    //       }
-    //     });
-    //   });
-
-    //   onBeforeUnmount(() => {
-    //     window.scrollTo(0, 0);
-    //   });
-    // }
-  })
-  // const scroller = new LocomotiveScroll({
-  //   el: document.querySelector("[data-scroll-container]"),
-  //   smooth: true,
-  //   // mobile: {
-  //   //   breakpoint: 0,
-  //   //   smooth: true,
-  //   // },
-  //   // tablet: {
-  //   //   breakpoint: 0,
-  //   //   smooth: true,
-  //   // },
-  // });
-}
-
-// export const bgColor = () => {
 //   onMounted(() => {
-//     /* SMOOTH SCROLL */
-//     const scroller = new LocomotiveScroll({
-//       el: document.querySelector('.page-wrapper'),
-//       // el: document.querySelector('[data-scroll-container]'),
-//       smooth: true
-//     });
-//     // console.log('LocomotiveScroll instance:', scroller); // Add this line to log the instance
-
-
-//     scroller.on('scroll', ScrollTrigger.update);
-
-//     ScrollTrigger.scrollerProxy('.page-wrapper', {
-//       scrollTop(value) {
-//         return arguments.length
-//           ? scroller.scrollTo(value, 0, 0)
-//           : scroller.scroll.instance.scroll.y;
-//       },
-//       getBoundingClientRect() {
-//         return {
-//           left: 0,
-//           top: 0,
-//           width: window.innerWidth,
-//           height: window.innerHeight
-//         };
-//       }
-//     });
-
-//     ScrollTrigger.addEventListener('refresh', () => scroller.update());
-
-//     ScrollTrigger.refresh();
-
-//     /* COLOR CHANGER */
-//     window.addEventListener('load', function () {
-//       const scrollColorElems = document.querySelectorAll('[data-bgcolor]');
-//       scrollColorElems.forEach((colorSection, i) => {
-//         const prevBg = i === 0 ? '' : scrollColorElems[i - 1].dataset.bgcolor;
-//         // const prevText = i === 0 ? '' : scrollColorElems[i - 1].dataset.textcolor;
-
-//         ScrollTrigger.create({
-//           trigger: colorSection,
-//           scroller: '.page-wrapper',
-//           start: 'top 50%',
-//           onEnter: () =>
-//             gsap.to('body', {
-//               backgroundColor: colorSection.dataset.bgcolor,
-//               // color: colorSection.dataset.textcolor,
-//               overwrite: 'auto'
-//             }),
-//           onLeaveBack: () =>
-//             gsap.to('body', {
-//               backgroundColor: prevBg,
-//               // color: prevText,
-//               overwrite: 'auto'
-//             })
-//         });
-//       });
-//     });
-
 
 //   });
+//   // Scroll to the top of the page
+//   window.scrollTo(0, 0);
 
-// };
+//   // Initialize LocomotiveScroll after a delay
+//   setTimeout(() => {
+//     const scroller = new LocomotiveScroll({
+//       el: document.querySelector("[data-scroll-container]"),
+//       smooth: true,
+//       mobile: {
+//         breakpoint: 0,
+//         smooth: true,
+//       },
+//       tablet: {
+//         breakpoint: 0,
+//         smooth: true,
+//       },
+//     });
 
+
+//     // Attach the click event handler to elements with a "data-hash" attribute
+//     const onClick = (e) => {
+//       e.preventDefault();
+//       e.stopPropagation();
+//       const anchor = document.querySelector(e.target.getAttribute('href'));
+//       if (anchor) {
+//         scroller.scrollTo(anchor);
+//       }
+//     };
+//     const elements = document.querySelectorAll('[data-hash]');
+//     elements.forEach((element) => {
+//       element.addEventListener('click', onClick);
+//     });
+
+
+//   }, 100);
+
+//   // Handle the window onbeforeunload event
+//   window.onbeforeunload = () => {
+//     window.scrollTo(0, 0);
+//   };
+
+// }
 
 
 /*======================================
@@ -241,42 +178,42 @@ export const useScrollAnimation = () => {
   onMounted(() => {
     // Your setup code here, similar to what was in the previous example
     // ...
-    if (device_width > 576) {
-      splitTitleLines.value = document.querySelectorAll(".split-title-line");
 
-      splitTitleLines.value.forEach((splitTextLine) => {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: splitTextLine,
-            start: "top 90%",
-            end: "bottom 60%",
-            scrub: false,
-            markers: false,
-            toggleActions: "play none none none",
-          },
-        });
+    splitTitleLines.value = document.querySelectorAll(".split-title-line");
 
-        const itemSplitted = new SplitType(splitTextLine, {
-          type: "words, lines",
-        });
-        gsap.set(splitTextLine, {
-          perspective: 400
-        });
-        itemSplitted.split({
-          type: "lines"
-        });
-
-        tl.from(itemSplitted.lines, {
-          duration: 1,
-          delay: 0.3,
-          opacity: 0,
-          rotationX: -80,
-          force3D: true,
-          transformOrigin: "top center -50",
-          stagger: 0.3,
-        });
+    splitTitleLines.value.forEach((splitTextLine) => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: splitTextLine,
+          start: "top 90%",
+          end: "bottom 60%",
+          scrub: false,
+          markers: false,
+          toggleActions: "play none none none",
+        },
       });
-    }
+
+      const itemSplitted = new SplitType(splitTextLine, {
+        type: "words, lines",
+      });
+      gsap.set(splitTextLine, {
+        perspective: 400
+      });
+      itemSplitted.split({
+        type: "lines"
+      });
+
+      tl.from(itemSplitted.lines, {
+        duration: 1,
+        delay: 0.3,
+        opacity: 0,
+        rotationX: -80,
+        force3D: true,
+        transformOrigin: "top center -50",
+        stagger: 0.3,
+      });
+    });
+
   });
 
 

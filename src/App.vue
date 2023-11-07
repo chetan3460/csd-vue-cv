@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper" data-scroll-container>
+  <div class="page-wrapper" data-scroll-container ref="container">
     <Cursor />
     <router-view />
     <div class="bg_dots"></div>
@@ -7,12 +7,11 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from 'vue'
+import { onMounted } from 'vue'
 import Cursor from './components/layout/Cursor.vue'
 import { scroll_ } from './js/utilits'
-// import LocomotiveScroll from 'locomotive-scroll'
+// import { smoothScroll } from './js/utilits';
 
-import { bgColor } from './js/utilits'
 
 onMounted(() => {
   window.addEventListener('scroll', scroll_)
@@ -23,8 +22,8 @@ onMounted(() => {
   if (index > 0) {
     window.location = loc.substring(0, index);
   }
+  // smoothScroll()
 })
-bgColor();
 
 
 

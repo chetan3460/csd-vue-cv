@@ -1,0 +1,79 @@
+.title-intro-area {
+    padding-top: 120px;
+    padding-bottom: 120px;
+
+    @include bp(sm) {
+        padding: 50px 0;
+    }
+
+    .section-subtitle {
+        margin-bottom: 30px;
+
+        p {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            margin-bottom: 0;
+            line-height: 25px;
+            display: inline-block;
+            position: relative;
+        }
+    }
+
+    .intro__title-inner {
+        font-weight: 400;
+        font-size: 100px;
+        text-transform: unset;
+        line-height: 1;
+        margin-bottom: 0;
+        color: #14cf93;
+
+        @include bp(sm) {
+            font-size: 78px;
+        }
+    }
+
+
+}
+
+
+
+.shape-illustration {
+    position: absolute;
+    right: 0;
+    /* max-width: 25%; */
+    bottom: 37px;
+}
+
+.hire-btn {
+    position: relative;
+    top: 65px;
+}
+
+
+@media only screen and (max-width: 991px) {
+    .intro__title-inner {
+        font-size: 90px;
+
+    }
+}
+
+@media only screen and (max-width: 479px) {
+
+
+    .section__subtitle-3 {
+
+        justify-content: center;
+    }
+
+
+
+    .intro__title-inner {}
+
+    .shape-illustration {
+        position: relative;
+
+        bottom: -166px;
+    }
+}
