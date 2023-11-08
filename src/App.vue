@@ -1,8 +1,16 @@
 <template>
-  <div class="page-wrapper" data-scroll-container ref="container">
-    <Cursor />
-    <router-view />
-    <div class="bg_dots"></div>
+  <div>
+    <div class="page-wrapper">
+      <Cursor />
+
+      <div id="smooth-wrapper">
+        <div id="smooth-content">
+          <router-view />
+          <div class="bg_dots"></div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -10,6 +18,7 @@
 import { onMounted } from 'vue'
 import Cursor from './components/layout/Cursor.vue'
 import { scroll_ } from './js/utilits'
+import { test } from './js/utilits';
 // import { smoothScroll } from './js/utilits';
 
 
@@ -22,11 +31,12 @@ onMounted(() => {
   if (index > 0) {
     window.location = loc.substring(0, index);
   }
-  // smoothScroll()
+  test()
 })
 
 
 
+// smoothScroll()
 
 
 </script>

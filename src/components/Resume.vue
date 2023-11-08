@@ -66,9 +66,6 @@
                     </div>
                 </div>
                 <div class="col-lg-3 bd-position-sticky">
-                    <!-- <div class="big-icon mt-85 rmt-0 rmb-55">
-                        <i class="flaticon-asterisk-1"></i>
-                    </div> -->
                     <div class="column two">
                         <div class="download-cv-wrap about__download-wrap text-xs-center rmb-55 rpt-50">
 
@@ -94,7 +91,6 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
 import { btnStickyScroll } from '@/js/utilits'
 import { useScrollAnimation } from '@/js/utilits';
 
@@ -123,4 +119,3 @@ useScrollAnimation();
 </script>
 
 
-<style></style>

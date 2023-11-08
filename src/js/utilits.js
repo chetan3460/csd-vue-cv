@@ -2,66 +2,154 @@
 import {
   ref,
   onMounted,
-  nextTick
+  onBeforeMount
 } from 'vue'
 
+import LocomotiveScroll from 'locomotive-scroll';
+// import '@/assets/ScrollSmoother.min.js'
 
 import chroma from "chroma-js"
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
+import ScrollSmoother from 'gsap/src/ScrollSmoother.min.js'
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother);
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+export const test = () => {
 
-// import LocomotiveScroll from 'locomotive-scroll';
+
+  /*======================================
+  27. Smooth Scroll
+  ========================================*/
+  let progress = ref(0);
+
+  onBeforeMount(() => {
+    const smoothWrapper = document.querySelector('#smooth-wrapper');
+    if (smoothWrapper) {
+      const smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        ignoreMobileResize: true,
+        // preventDefault: true,
+        smooth: 3,
+        ease: "Power3.easeOut",
+        effects: true,
+        onUpdate: (self) => {
+          progress.value = self.progress;
+        }
+      });
+    }
+  });
+
+
+}
 
 // export const smoothScroll = () => {
 
 
 //   onMounted(() => {
+//     // Scroll to the top of the page
+//     window.scrollTo(0, 0);
+
+//     // Initialize LocomotiveScroll after a delay
+//     setTimeout(() => {
+//       const scroller = new LocomotiveScroll({
+//         el: document.querySelector("[data-scroll-container]"),
+//         smooth: true,
+//         smartphone: {
+//           smooth: true,
+//         },
+//         tablet: {
+//           smooth: true,
+//         },
+//       });
+//       scroller.on("scroll", ScrollTrigger.update);
+
+
+//       // Attach the click event handler to elements with a "data-hash" attribute
+//       const onClick = (e) => {
+//         e.preventDefault();
+//         e.stopPropagation();
+//         const anchor = document.querySelector(e.target.getAttribute('href'));
+//         if (anchor) {
+//           scroller.scrollTo(anchor);
+//         }
+//       };
+//       const elements = document.querySelectorAll('[data-hash]');
+//       elements.forEach((element) => {
+//         element.addEventListener('click', onClick);
+//       });
+
+
+//     }, 100);
+
+//     // Handle the window onbeforeunload event
+//     window.onbeforeunload = () => {
+//       window.scrollTo(0, 0);
+//     };
+
+
+//     const scroller = new LocomotiveScroll({
+//       el: document.querySelector(".page-wrapper"),
+//       smooth: true
+//     });
+
+//     scroller.on("scroll", ScrollTrigger.update);
+
+//     ScrollTrigger.scrollerProxy(".page-wrapper", {
+//       scrollTop(value) {
+//         return arguments.length
+//           ? scroller.scrollTo(value, 0, 0)
+//           : scroller.scroll.instance.scroll.y;
+//       },
+//       getBoundingClientRect() {
+//         return {
+//           left: 0,
+//           top: 0,
+//           width: window.innerWidth,
+//           height: window.innerHeight
+//         };
+//       }
+//     });
+
+//     ScrollTrigger.addEventListener("refresh", () => scroller.update());
+
+//     ScrollTrigger.refresh();
+
+//     /* COLOR CHANGER */
+//     window.addEventListener("load", function () {
+//       const scrollColorElems = document.querySelectorAll("[data-bgcolor]");
+//       scrollColorElems.forEach((colorSection, i) => {
+//         const prevBg = i === 0 ? "" : scrollColorElems[i - 1].dataset.bgcolor;
+//         const prevText = i === 0 ? "" : scrollColorElems[i - 1].dataset.textcolor;
+
+//         ScrollTrigger.create({
+//           trigger: colorSection,
+//           scroller: ".page-wrapper",
+//           start: "top 50%",
+//           onEnter: () =>
+//             gsap.to("body", {
+//               backgroundColor: colorSection.dataset.bgcolor,
+//               color: colorSection.dataset.textcolor,
+//               overwrite: "auto"
+//             }),
+//           onLeaveBack: () =>
+//             gsap.to("body", {
+//               backgroundColor: prevBg,
+//               color: prevText,
+//               overwrite: "auto"
+//             })
+//         });
+//       });
+//     });
+
+
+
+
 
 //   });
-//   // Scroll to the top of the page
-//   window.scrollTo(0, 0);
 
-//   // Initialize LocomotiveScroll after a delay
-//   setTimeout(() => {
-//     const scroller = new LocomotiveScroll({
-//       el: document.querySelector("[data-scroll-container]"),
-//       smooth: true,
-//       mobile: {
-//         breakpoint: 0,
-//         smooth: true,
-//       },
-//       tablet: {
-//         breakpoint: 0,
-//         smooth: true,
-//       },
-//     });
-
-
-//     // Attach the click event handler to elements with a "data-hash" attribute
-//     const onClick = (e) => {
-//       e.preventDefault();
-//       e.stopPropagation();
-//       const anchor = document.querySelector(e.target.getAttribute('href'));
-//       if (anchor) {
-//         scroller.scrollTo(anchor);
-//       }
-//     };
-//     const elements = document.querySelectorAll('[data-hash]');
-//     elements.forEach((element) => {
-//       element.addEventListener('click', onClick);
-//     });
-
-
-//   }, 100);
-
-//   // Handle the window onbeforeunload event
-//   window.onbeforeunload = () => {
-//     window.scrollTo(0, 0);
-//   };
 
 // }
 
@@ -266,10 +354,6 @@ export const splitTextAnimation = () => {
   // let testInner = window.innerWidth;
 
   onMounted(() => {
-    if (device_width > 576) {
-
-
-    }
     element.value = document.querySelectorAll(".folks-text")
     element.value.forEach((element) => {
       let folksBD = gsap.timeline({

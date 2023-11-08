@@ -6,6 +6,8 @@ import '@/assets/css/animate.css'
 import '@/assets/css/locomotive-scroll.css'
 
 
+
+
 import '@/assets/css/style.css'
 import '@/assets/css/theme-styles.css'
 
@@ -15,8 +17,7 @@ import {
 import App from './App.vue'
 import router from '@/router'
 import {
-    OhVueIcon,
-    addIcons
+    OhVueIcon
 } from "oh-vue-icons";
 
 
