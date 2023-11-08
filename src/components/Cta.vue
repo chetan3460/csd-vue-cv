@@ -1,6 +1,6 @@
 <template>
     <!-- title intro area -->
-    <section class="title-intro-area fix primary-bg scroll_section for-bgc-black" data-scroll-section>
+    <section class="title-intro-area fix primary-bg scroll_section for-bgc-black">
 
         <div class="container">
             <div class="col-lg-8">
@@ -15,7 +15,6 @@
 
                     <div class="intro__title-wrapper">
                         <h2 class="intro__title-inner folks-text">Let’s talk.</h2>
-
                     </div>
 
                     <div class="hire-btn">

@@ -11,8 +11,6 @@ import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
-import ScrollSmoother from 'gsap/src/ScrollSmoother.min.js'
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother);
 
 export const test = () => {
   onBeforeMount(() => {
@@ -233,6 +231,10 @@ export const splitTextAnimation = () => {
   // let testInner = window.innerWidth;
 
   onMounted(() => {
+    if (device_width > 576) {
+
+
+    }
     element.value = document.querySelectorAll(".folks-text")
     element.value.forEach((element) => {
       let folksBD = gsap.timeline({

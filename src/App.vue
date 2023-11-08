@@ -39,7 +39,6 @@ onMounted(() => {
 
 
 
-// smoothScroll()
 
 
 </script>

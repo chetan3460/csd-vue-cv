@@ -18,8 +18,11 @@
 
                 <div class="col-lg-6">
                     <div class="author-image-part wow fadeIn delay-0-3s">
+                        <!-- <div class="bg-circle"></div> -->
                         <img src="../assets/images/hero/hero.png" alt="Author">
-
+                        <!-- <div class="progress-shape">
+                            <img src="../assets/images/hero/progress-shape.png" alt="Progress">
+                        </div> -->
                     </div>
                 </div>
             </div>
@@ -27,9 +30,9 @@
 
     </section>
     <!-- Hero Section End -->
-    <!-- <section id="home" class="">
+    <section id="home" class="custom-perspective bg-secondary border-0 p-0 m-0 text-center p-relative">
         <div class="container-fluid">
-            <div class="row  align-items-center">
+            <div class="row min-vh-100 align-items-center">
                 <div class="col">
                     <div class="row py-3 py-lg-0 custom-border-bottom-1">
                         <div class="col">
@@ -71,7 +74,7 @@
             Out More <img width="25" height="25" class="rotate-r-90" src="../assets/images/hero/arrow-dark.svg"
                 alt="" /></a>
 
-    </section> -->
+    </section>
 </template>
 
 <script setup>
