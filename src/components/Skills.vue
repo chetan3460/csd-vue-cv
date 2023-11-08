@@ -14,8 +14,10 @@
                     </div>
                 </div>
                 <div class="col-lg-12">
+
+
                     <div class="skill-items-wrap">
-                        <div class="skill-item " data-speed="1" data-lag="0.1">
+                        <div class="skill-item " data-speed="1" data-lag="1.1">
                             <div class="skill-inner">
                                 <v-icon hover animation="float" scale="4" name="vi-file-type-html" />
                                 <span class="percent">95%</span>
@@ -108,14 +110,8 @@ import {
 
 } from 'oh-vue-icons/icons'
 addIcons(LaShapesSolid, MdSpeedSharp, FaWordpressSimple, ViFileTypeScss2, CoJquery, CoJavascript, ViFileTypeHtml, ViFileTypeCss, FaBootstrap, ViFileTypeVue, FaFacebookSquare)
-import { useScrollAnimation } from '@/js/utilits'
+import { useScrollAnimation, } from '@/js/utilits'
+
 useScrollAnimation()
 
-// import { onMounted } from 'vue';
-import { test } from '@/js/utilits';
-test();
-
-// onMounted(() => {
-//     test();
-// }),
 </script>

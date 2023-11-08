@@ -89,24 +89,39 @@
 
 
 <script setup>
-import { onMounted, ref } from "vue";
+import { ref, onMounted, onUnmounted } from 'vue';
 
 const navbar = ref('')
 const isSideMenuActive = ref(false);
 
 // const showMenu = ref(false)
 
-onMounted(() => {
-    window.onscroll = () => {
-        if (window.scrollY > 100) {
-            navbar.value.classList.add('fixed-header')
-        } else {
-            navbar.value.classList.remove('fixed-header')
+
+const scrollHandler = () => {
+    if (window.scrollY > 100) {
+        if (navbar.value) {
+            navbar.value.classList.add('fixed-header');
+        }
+    } else {
+        if (navbar.value) {
+            navbar.value.classList.remove('fixed-header');
         }
     }
+};
 
 
-})
+onMounted(() => {
+    window.addEventListener('scroll', scrollHandler);
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', scrollHandler);
+});
+
+
+
+
+
 
 
 const toggleSideMenu = () => {
