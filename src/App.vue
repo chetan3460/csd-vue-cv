@@ -1,5 +1,5 @@
 <template>
-  <div class="page-wrapper">
+  <div class="page-wrapper" ref="containerRef">
     <ScrollTopVue />
 
     <Cursor />
@@ -25,6 +25,10 @@ import { scroll_ } from './js/utilits'
 import { scrollSmooth } from './js/utilits'
 
 
+// test
+import { bgColor } from './js/utilits'
+
+
 
 onMounted(() => {
   window.addEventListener('scroll', scroll_)
@@ -35,7 +39,7 @@ onMounted(() => {
   if (index > 0) {
     window.location = loc.substring(0, index);
   }
-
+  bgColor();
 
 })
 scrollSmooth();

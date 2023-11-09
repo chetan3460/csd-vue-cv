@@ -2,7 +2,7 @@
 import {
   ref,
   onMounted,
-  onUnmounted
+  onBeforeUnmount
 } from 'vue'
 
 
@@ -13,6 +13,9 @@ import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import { ScrollSmoother } from 'gsap/src/ScrollSmoother.min.js'
+
+import LocomotiveScroll from 'locomotive-scroll';
+
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother)
 
 export const scrollSmooth = () => {
@@ -36,6 +39,60 @@ export const scrollSmooth = () => {
     }
   });
 };
+
+
+
+export const bgColor = () => {
+
+  /* SMOOTH SCROLL */
+  gsap.to(window, {
+    scrollTo: {
+      y: ".page-wrapper",
+      offsetY: 100, // Adjust this value based on your layout
+    },
+    duration: 1, // Adjust the duration as needed
+    ease: 'power2.inOut',
+    scrollTrigger: {
+      trigger: ".page-wrapper",
+      start: "top top",
+      end: "bottom bottom",
+      scrub: true,
+    },
+  });
+
+  /* COLOR CHANGER */
+  document.addEventListener("DOMContentLoaded", function () {
+    const scrollColorElems = document.querySelectorAll("[data-bgcolor]");
+    scrollColorElems.forEach((colorSection, i) => {
+      const prevBg = i === 0 ? "" : scrollColorElems[i - 1].dataset.bgcolor;
+      const prevText = i === 0 ? "" : scrollColorElems[i - 1].dataset.textcolor;
+
+      ScrollTrigger.create({
+        trigger: colorSection,
+        start: "top 50%",
+        onEnter: () =>
+          gsap.to("body", {
+            backgroundColor: colorSection.dataset.bgcolor,
+            color: colorSection.dataset.textcolor,
+            overwrite: "auto"
+          }),
+        onLeaveBack: () =>
+          gsap.to("body", {
+            backgroundColor: prevBg,
+            color: prevText,
+            overwrite: "auto"
+          })
+      });
+    });
+  });
+
+};
+
+
+
+
+
+
 
 export const test = () => {
 
@@ -413,13 +470,8 @@ export const scrollTop = () => {
   } else {
     bar.classList.remove("animate");
   }
-  console.log('scrollTop function called'); // Add this line
 
-  // ... existing code ...
 
-  console.log('winScroll:', winScroll);
-  console.log('value:', value);
-  console.log('position:', position);
 };
 
 

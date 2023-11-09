@@ -1,6 +1,6 @@
 <template>
     <footer>
-        <section class="title-intro-area scroll_section">
+        <section class="title-intro-area scroll_section" data-bgcolor="#e8fcff">
 
             <div class="container">
                 <div class="row align-items-center">
