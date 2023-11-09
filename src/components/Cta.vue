@@ -4,7 +4,7 @@
 
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
+                <div class="col-md-8 col-lg-8">
                     <div class="section-subtitle">
 
                         <p>
@@ -20,7 +20,7 @@
                         </div>
 
                         <div class="contact-details">
-                            <div class="flex gap-5 flex-wrap">
+                            <div class="flex column-gap-5 gap-4  flex-wrap">
                                 <div class="flex flex-column">
                                     <p class="mb-5">Project Offers</p>
                                     <p class="mb-0 fs-5 fw-bold txt-color">chetan.dmc@gmail.com</p>
@@ -35,7 +35,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6">
+                <div class="col-md-4 col-lg-4">
                     <div class="shape-illustration">
                         <img src="../assets/images/illustration/2.png" alt="illustration">
                     </div>

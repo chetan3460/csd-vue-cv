@@ -2,7 +2,7 @@
 import {
   ref,
   onMounted,
-  onBeforeMount
+  onUnmounted
 } from 'vue'
 
 
@@ -15,7 +15,7 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import { ScrollSmoother } from 'gsap/src/ScrollSmoother.min.js'
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother)
 
-export const test = () => {
+export const scrollSmooth = () => {
 
   // onBeforeMount(() => {
   //   const smoother = ScrollSmoother.create({
@@ -32,7 +32,7 @@ export const test = () => {
 
   // });
 
-  const progress = ref(0);
+  // const progress = ref(0);
 
   onMounted(() => {
     if (document.getElementById('smooth-wrapper')) {
@@ -44,9 +44,9 @@ export const test = () => {
         smooth: 0.8,
         ease: "Power3.easeOut",
         effects: true,
-        onUpdate: (self) => {
-          progress.value = self.progress;
-        }
+        // onUpdate: (self) => {
+        //   progress.value = self.progress;
+        // }
       });
     }
   });
@@ -382,6 +382,13 @@ export const scrollTop = () => {
   } else {
     bar.classList.remove("animate");
   }
+  console.log('scrollTop function called'); // Add this line
+
+  // ... existing code ...
+
+  console.log('winScroll:', winScroll);
+  console.log('value:', value);
+  console.log('position:', position);
 };
 
 

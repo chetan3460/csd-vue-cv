@@ -9,9 +9,12 @@
     .section-subtitle {
         margin-bottom: 50px;
 
-        p {
+        @include bp(tablet-sm) {
+            margin-bottom: 30px;
+        }
 
-            color: var(--primary-color);
+        p {
+            color: $themeDefault;
             text-transform: unset;
             margin-bottom: 0;
             line-height: 25px;
@@ -28,6 +31,10 @@
         margin-bottom: 0;
         color: #14cf93;
 
+        @include bp(tablet-sm) {
+            font-size: 80px;
+        }
+
         @include bp(sm) {
             font-size: 78px;
         }
@@ -35,6 +42,10 @@
 
     .contact-details {
         margin-top: 50px;
+
+        @include bp(tablet-sm) {
+            margin-top: 30px;
+        }
     }
 
     .shape-illustration {
@@ -54,24 +65,5 @@
     .intro__title-inner {
         font-size: 90px;
 
-    }
-}
-
-@media only screen and (max-width: 479px) {
-
-
-    .section__subtitle-3 {
-
-        justify-content: center;
-    }
-
-
-
-    .intro__title-inner {}
-
-    .shape-illustration {
-        position: relative;
-
-        bottom: -166px;
     }
 }

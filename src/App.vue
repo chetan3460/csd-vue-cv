@@ -1,11 +1,13 @@
 <template>
   <div class="page-wrapper">
+    <ScrollTopVue />
+
     <Cursor />
     <Navbar />
-
     <div id="smooth-wrapper">
       <div id="smooth-content">
         <router-view />
+
       </div>
     </div>
 
@@ -16,10 +18,11 @@
 import { onMounted } from 'vue'
 import Navbar from '@/components/Navbar.vue'
 import Cursor from './components/layout/Cursor.vue'
+import ScrollTopVue from "@/components/layout/ScrollTop.vue";
+
 import { scroll_ } from './js/utilits'
 
-import { test } from './js/utilits'
-
+import { scrollSmooth } from './js/utilits'
 
 
 
@@ -33,8 +36,9 @@ onMounted(() => {
     window.location = loc.substring(0, index);
   }
 
+
 })
-test();
+scrollSmooth();
 
 
 </script>
