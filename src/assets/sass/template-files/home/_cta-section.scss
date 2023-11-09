@@ -1,60 +1,63 @@
-.title-intro-area {
-    padding: 100px 0;
-    background: #222222;
+footer {
 
-    @include bp(sm) {
-        padding: 50px 0;
-    }
 
-    .section-subtitle {
-        margin-bottom: 50px;
+    .title-intro-area {
 
-        @include bp(tablet-sm) {
-            margin-bottom: 30px;
-        }
-
-        p {
-            color: $themeDefault;
-            text-transform: unset;
-            margin-bottom: 0;
-            line-height: 25px;
-            display: inline-block;
-            position: relative;
-        }
-    }
-
-    .intro__title-inner {
-        font-weight: 400;
-        font-size: 100px;
-        text-transform: unset;
-        line-height: 1;
-        margin-bottom: 0;
-        color: #14cf93;
-
-        @include bp(tablet-sm) {
-            font-size: 80px;
-        }
+        padding: 100px 0;
+        background: #222222;
 
         @include bp(sm) {
-            font-size: 78px;
+            padding: 50px 0;
         }
-    }
 
-    .contact-details {
-        margin-top: 50px;
+        .section-subtitle {
+            margin-bottom: 50px;
 
-        @include bp(tablet-sm) {
-            margin-top: 30px;
+            @include bp(tablet-sm) {
+                margin-bottom: 30px;
+            }
+
+            p {
+                color: $themeDefault;
+                text-transform: unset;
+                margin-bottom: 0;
+                line-height: 25px;
+                display: inline-block;
+                position: relative;
+            }
         }
-    }
 
-    .shape-illustration {
-        text-align: right;
-    }
+        .intro__title-inner {
+            font-weight: 400;
+            font-size: 100px;
+            text-transform: unset;
+            line-height: 1;
+            margin-bottom: 0;
+            color: #14cf93;
 
+            @include bp(tablet-sm) {
+                font-size: 80px;
+            }
+
+            @include bp(sm) {
+                font-size: 78px;
+            }
+        }
+
+        .contact-details {
+            margin-top: 50px;
+
+            @include bp(tablet-sm) {
+                margin-top: 30px;
+            }
+        }
+
+        .shape-illustration {
+            text-align: right;
+        }
+
+    }
 }
-
-
 
 
 

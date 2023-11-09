@@ -17,22 +17,7 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother)
 
 export const scrollSmooth = () => {
 
-  // onBeforeMount(() => {
-  //   const smoother = ScrollSmoother.create({
-  //     content: "#scrollsmoother-container",
-  //     smooth: 3,
-  //     normalizeScroll: true,
-  //     ignoreMobileResize: true,
-  //     effects: true,
-  //     //preventDefault: true,
-  //     //ease: 'power4.out',
-  //     //smoothTouch: 0.1, 
-  //   });
-  //   ScrollTrigger.refresh();
 
-  // });
-
-  // const progress = ref(0);
 
   onMounted(() => {
     if (document.getElementById('smooth-wrapper')) {
@@ -51,6 +36,25 @@ export const scrollSmooth = () => {
     }
   });
 };
+
+export const test = () => {
+
+  // onMounted(() => {
+  //   if (document.getElementById('smooth-wrapper2')) {
+
+  //     let smoother = ScrollSmoother.create({
+  //       wrapper: "#smooth-wrapper2",
+  //       smooth: 3,
+  //       ease: "Power3.easeOut",
+  //       ignoreMobileResize: true,
+
+  //       // seconds it takes to "catch up" to native scroll position
+  //       effects: true // look for data-speed and data-lag attributes on elements and animate accordingly
+  //     });
+  //   }
+  // })
+
+}
 
 
 
@@ -366,6 +370,33 @@ export const listAnimation = () => {
 
   });
 }
+
+
+// export const listAnimation = () => {
+//   onMounted(() => {
+//     const items = document.querySelectorAll('.skill-item');
+
+//     items.forEach((item) => {
+//       const speed = parseFloat(item.getAttribute('data-speed')) || 1;
+//       const lag = parseFloat(item.getAttribute('data-lag')) || 0;
+
+//       const timeline = gsap.timeline({
+//         scrollTrigger: {
+//           trigger: item,
+//           start: 'top 80%',
+//           end: 'bottom 20%',
+//           scrub: true,
+//         },
+//       });
+
+//       timeline.to(item, {
+//         y: 0,
+//         duration: speed,
+//         delay: lag,
+//       });
+//     });
+//   });
+// };
 
 // ScrollTop 
 export const scrollTop = () => {
