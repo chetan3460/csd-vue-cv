@@ -7,25 +7,49 @@ import {
 
 
 import chroma from "chroma-js"
+
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
+import { ScrollSmoother } from 'gsap/src/ScrollSmoother.min.js'
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother)
 
 export const test = () => {
-  onBeforeMount(() => {
-    const smoother = ScrollSmoother.create({
-      content: "#scrollsmoother-container",
-      smooth: 3,
-      normalizeScroll: true,
-      ignoreMobileResize: true,
-      effects: true,
-      // preventDefault: true,
-      // ease: 'power4.out',
-      // smoothTouch: 0.1,
-    });
-  });
 
+  // onBeforeMount(() => {
+  //   const smoother = ScrollSmoother.create({
+  //     content: "#scrollsmoother-container",
+  //     smooth: 3,
+  //     normalizeScroll: true,
+  //     ignoreMobileResize: true,
+  //     effects: true,
+  //     //preventDefault: true,
+  //     //ease: 'power4.out',
+  //     //smoothTouch: 0.1, 
+  //   });
+  //   ScrollTrigger.refresh();
+
+  // });
+
+  const progress = ref(0);
+
+  onMounted(() => {
+    if (document.getElementById('smooth-wrapper')) {
+      const smoother = ScrollSmoother.create({
+        wrapper: "#smooth-wrapper",
+        content: "#smooth-content",
+        ignoreMobileResize: true,
+        // preventDefault: true,
+        smooth: 0.8,
+        ease: "Power3.easeOut",
+        effects: true,
+        onUpdate: (self) => {
+          progress.value = self.progress;
+        }
+      });
+    }
+  });
 };
 
 
@@ -141,8 +165,7 @@ export const useScrollAnimation = () => {
   const splitTitleLines = ref([]);
 
   onMounted(() => {
-    // Your setup code here, similar to what was in the previous example
-    // ...
+
 
     splitTitleLines.value = document.querySelectorAll(".split-title-line");
 

@@ -7,7 +7,7 @@
     <Skills />
     <Cta />
     <!-- <Contact /> -->
-    <Footer />
+    <!-- <Footer /> -->
     <ScrollTopVue />
   </div>
 </template>

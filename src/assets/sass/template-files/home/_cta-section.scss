@@ -1,19 +1,18 @@
 .title-intro-area {
-    padding-top: 120px;
-    padding-bottom: 120px;
+    padding: 100px 0;
+    background: #222222;
 
     @include bp(sm) {
         padding: 50px 0;
     }
 
     .section-subtitle {
-        margin-bottom: 30px;
+        margin-bottom: 50px;
 
         p {
-            font-size: 16px;
-            font-weight: 600;
+
             color: var(--primary-color);
-            text-transform: uppercase;
+            text-transform: unset;
             margin-bottom: 0;
             line-height: 25px;
             display: inline-block;
@@ -34,22 +33,21 @@
         }
     }
 
+    .contact-details {
+        margin-top: 50px;
+    }
+
+    .shape-illustration {
+        text-align: right;
+    }
 
 }
 
 
 
-.shape-illustration {
-    position: absolute;
-    right: 0;
-    /* max-width: 25%; */
-    bottom: 37px;
-}
 
-.hire-btn {
-    position: relative;
-    top: 65px;
-}
+
+
 
 
 @media only screen and (max-width: 991px) {

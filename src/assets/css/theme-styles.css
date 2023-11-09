@@ -1101,8 +1101,8 @@ li {
 }
 
 .title-intro-area {
-  padding-top: 120px;
-  padding-bottom: 120px;
+  padding: 100px 0;
+  background: #222222;
 }
 @media (max-width: 568px) {
   .title-intro-area {
@@ -1110,13 +1110,11 @@ li {
   }
 }
 .title-intro-area .section-subtitle {
-  margin-bottom: 30px;
+  margin-bottom: 50px;
 }
 .title-intro-area .section-subtitle p {
-  font-size: 16px;
-  font-weight: 600;
   color: var(--primary-color);
-  text-transform: uppercase;
+  text-transform: unset;
   margin-bottom: 0;
   line-height: 25px;
   display: inline-block;
@@ -1135,17 +1133,11 @@ li {
     font-size: 78px;
   }
 }
-
-.shape-illustration {
-  position: absolute;
-  right: 0;
-  /* max-width: 25%; */
-  bottom: 37px;
+.title-intro-area .contact-details {
+  margin-top: 50px;
 }
-
-.hire-btn {
-  position: relative;
-  top: 65px;
+.title-intro-area .shape-illustration {
+  text-align: right;
 }
 
 @media only screen and (max-width: 991px) {
