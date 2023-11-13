@@ -1,6 +1,7 @@
 <template>
     <!-- Resume Area start -->
-    <section id="resume" class="resume-area pt-130 rpt-100 rel z-1 pb-130 scroll_section" data-bgcolor="#d7c9f6">
+    <section id="resume" class="resume-area pt-130 rpt-100 rel z-1 pb-130 scroll_section" data-bgcolor="#d7c9f6"
+        data-scroll-section>
         <div class="container">
             <div class="row">
 

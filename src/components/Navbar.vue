@@ -140,14 +140,9 @@ const closeSideMenu = () => {
 
 };
 
+// import { headerBg } from '../js/utilits';
 
 
-
-
+// headerBg();
 </script>
 
-<style>
-/* ===================================
-    Header
-====================================== */
-</style>

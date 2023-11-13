@@ -1,64 +1,85 @@
 // GSAP 
 import {
   ref,
-  onMounted,
-  onBeforeUnmount
+  onMounted
 } from 'vue'
 
 
 import chroma from "chroma-js"
-
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
-import { ScrollSmoother } from 'gsap/src/ScrollSmoother.min.js'
+import ScrollSmoother from 'gsap/src/ScrollSmoother.min.js'
+// import tinycolor from "tinycolor2";
 
 import LocomotiveScroll from 'locomotive-scroll';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother)
 
+// Create a ref for the scroll instance
+// Create a ref for the scroll instance
+export const scrollInstance = ref(null);
+
 export const scrollSmooth = () => {
-
-
-
   onMounted(() => {
-    if (document.getElementById('smooth-wrapper')) {
-      const smoother = ScrollSmoother.create({
-        wrapper: "#smooth-wrapper",
-        content: "#smooth-content",
-        ignoreMobileResize: true,
-        // preventDefault: true,
-        smooth: 0.8,
-        ease: "Power3.easeOut",
-        effects: true,
-        // onUpdate: (self) => {
-        //   progress.value = self.progress;
-        // }
-      });
-    }
+    // Create a new LocomotiveScroll instance
+    const scroll = new LocomotiveScroll({
+      el: document.querySelector("[data-scroll-container]"),
+      smooth: true,
+      tablet: { smooth: true },
+      smartphone: { smooth: true }
+    });
+
+    // Update the ref value with the scroll instance
+    scrollInstance.value = scroll;
+
+    // Attach a scroll event listener to update ScrollTrigger
+    scroll.on("scroll", ScrollTrigger.update);
+
+    // Set up ScrollTrigger scrollerProxy
+    ScrollTrigger.scrollerProxy("[data-scroll-container]", {
+      scrollTop(value) {
+        return arguments.length
+          ? scroll.scrollTo(value, 0, 0)
+          : scroll.scroll.instance.scroll.y;
+      },
+      getBoundingClientRect() {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight
+        };
+      }
+    });
+
+    ScrollTrigger.addEventListener("refresh", () => scroll.update());
+    ScrollTrigger.refresh();
   });
 };
+
+
 
 
 
 export const bgColor = () => {
 
   /* SMOOTH SCROLL */
-  gsap.to(window, {
-    scrollTo: {
-      y: ".page-wrapper",
-      offsetY: 100, // Adjust this value based on your layout
-    },
-    duration: 1, // Adjust the duration as needed
-    ease: 'power2.inOut',
-    scrollTrigger: {
-      trigger: ".page-wrapper",
-      start: "top top",
-      end: "bottom bottom",
-      scrub: true,
-    },
-  });
+  // gsap.to(window, {
+  //   scrollTo: {
+  //     y: ".page-wrapper",
+  //     offsetY: 100, // Adjust this value based on your layout
+  //   },
+  //   duration: 1, // Adjust the duration as needed
+  //   ease: 'power2.inOut',
+  //   scrollTrigger: {
+  //     trigger: ".page-wrapper",
+  //     start: "top top",
+  //     end: "bottom bottom",
+  //     scrub: true,
+  //   },
+  // });
 
   /* COLOR CHANGER */
   document.addEventListener("DOMContentLoaded", function () {
@@ -86,32 +107,32 @@ export const bgColor = () => {
     });
   });
 
-};
-
-
-
-
-
-
-
-export const test = () => {
-
-  // onMounted(() => {
-  //   if (document.getElementById('smooth-wrapper2')) {
-
-  //     let smoother = ScrollSmoother.create({
-  //       wrapper: "#smooth-wrapper2",
-  //       smooth: 3,
-  //       ease: "Power3.easeOut",
-  //       ignoreMobileResize: true,
-
-  //       // seconds it takes to "catch up" to native scroll position
-  //       effects: true // look for data-speed and data-lag attributes on elements and animate accordingly
-  //     });
-  //   }
-  // })
-
 }
+
+
+
+
+
+
+
+// export const test = () => {
+
+//   // onMounted(() => {
+//   //   if (document.getElementById('smooth-wrapper2')) {
+
+//   //     let smoother = ScrollSmoother.create({
+//   //       wrapper: "#smooth-wrapper2",
+//   //       smooth: 3,
+//   //       ease: "Power3.easeOut",
+//   //       ignoreMobileResize: true,
+
+//   //       // seconds it takes to "catch up" to native scroll position
+//   //       effects: true // look for data-speed and data-lag attributes on elements and animate accordingly
+//   //     });
+//   //   }
+//   // })
+
+// }
 
 
 
@@ -489,3 +510,112 @@ export const scrollTop = () => {
 
 
 
+
+
+
+// export const headerBg = () => {
+
+//   const liquidElements = () => {
+//     const liquidWindow = ref(null);
+//     const liquidHtml = ref(null);
+//     const liquidBody = ref(null);
+//     const liquidSiteWrap = ref(null);
+//     const liquidContents = ref(null);
+//     const liquidContentsWrap = ref(null);
+//     const liquidMainHeader = ref(null);
+//     const liquidMainFooter = ref(null);
+//     const liquidSectionsWrapper = ref(null);
+
+//     const elementorSectionsSelector = `
+//       > .elementor-section-wrap > .elementor-section,
+//       > .elementor-section,
+//       > .e-con,
+//       > .e-con > .e-con,
+//       > .e-con > .e-con-inner > .e-con,
+//       > .e-container,
+//       > .e-container > .e-container,
+//       > .elementor-section-wrap > .elementor-top-section > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-inner-section,
+//       > .elementor-top-section > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-inner-section`;
+
+//     const elementorFooterSections = liquidMainFooter.value.querySelectorAll('> .elementor', elementorSectionsSelector);
+//     const liquidSections = liquidIsElementor ? liquidSectionsWrapper.value.querySelectorAll(elementorSectionsSelector).concat(Array.from(elementorFooterSections)) : liquidSectionsWrapper.value.concat(Array.from(liquidMainFooter.value.querySelectorAll('.lqd-section, > .vc_row, > .vc_section, > .vc_section > .vc_row, > .lqd-section-scroll-sections > .vc_row, > .vc_element')));
+
+//     const liquidBodyBg = liquidBody.value.style.backgroundColor;
+//     const liquidContentsBg = liquidContents.value.style.backgroundColor;
+//     const liquidMainFooterBg = liquidMainFooter.value.style.backgroundColor;
+
+//     return {
+//       liquidWindow,
+//       liquidHtml,
+//       liquidBody,
+//       liquidSiteWrap,
+//       liquidContents,
+//       liquidContentsWrap,
+//       liquidMainHeader,
+//       liquidMainFooter,
+//       liquidSectionsWrapper,
+//       elementorSectionsSelector,
+//       elementorFooterSections,
+//       liquidSections,
+//       liquidBodyBg,
+//       liquidContentsBg,
+//       liquidMainFooterBg,
+//     };
+//   };
+
+//   class LiquidSectionsDetails {
+//     constructor() {
+//       this.sections = [];
+//       this.footerBg = tinycolor(this.liquidMainFooterBg).getAlpha() === 0 ? this.liquidBodyBg : this.liquidMainFooterBg;
+//     }
+
+//     // checkpoint
+//     getLuminosity(obj, instance) {
+//       let { backgroundColor } = obj;
+//       if (obj.isInnerSection && obj.parentSection && tinycolor(backgroundColor).getAlpha() === 0) {
+//         backgroundColor = obj.parentSection.backgroundColor;
+//       }
+//       if (tinycolor(backgroundColor).getAlpha() === 0) {
+//         if (obj.isInFooter) {
+//           backgroundColor = instance.footerBg;
+//         } else {
+//           backgroundColor = instance.liquidContentsBg;
+//         }
+//       }
+//       return tinycolor(backgroundColor).isDark() ? 'dark' : 'light';
+//     }
+
+//     async addLuminosity(instance) {
+//       await nextTick();
+//       instance.sections.forEach(async sec => {
+//         sec.isBgTransparent = tinycolor(sec.backgroundColor).getAlpha() === 0;
+//         sec.luminosity = sec.predefinedLuminosity ? sec.predefinedLuminosity : instance.getLuminosity(sec, instance);
+//         sec.el.setAttribute('data-section-luminosity', sec.luminosity);
+//       });
+//     }
+//   }
+
+//   onMounted(() => {
+//     const liquidBgEls = document.querySelectorAll('[data-liquid-bg]');
+//     // liquidBgEls.liquidBgColor();
+
+//     if (liquidIsElementor) {
+//       liquidBgEls.forEach(el => {
+//         const $el = el;
+//         if ($el.is(liquidContents) && liquidMainHeader.length && !liquidMainHeader.getAttribute('data-liquid-bg')) {
+//           liquidMainHeader.liquidBgColor({
+//             setBgTo: `
+//               > .elementor > .elementor-section-wrap > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_header_image .navbar-brand-solid .navbar-brand-inner,
+//               > .elementor > .elementor-section-wrap > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-solid,
+//               > .elementor > .elementor-section-wrap > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-icon-solid .btn-icon,
+//               > .elementor > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_header_image .navbar-brand-solid .navbar-brand-inner,
+//               > .elementor > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-solid,
+//               > .elementor > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-icon-solid .btn-icon`,
+//             manipulateColor: [{ 'darken': 30 }, { 'brighten': 15 }, { 'saturate': 20 }],
+//           });
+//         }
+//       });
+//     }
+//   });
+
+// }

@@ -1,15 +1,15 @@
 <template>
-  <div class="page-wrapper" ref="containerRef">
+  <div class="page-wrapper" ref="containerRef" data-scroll-container>
     <ScrollTopVue />
-
     <Cursor />
     <Navbar />
-    <div id="smooth-wrapper">
+    <router-view />
+
+    <!-- <div id="smooth-wrapper">
       <div id="smooth-content">
-        <router-view />
 
       </div>
-    </div>
+    </div> -->
 
   </div>
 </template>
@@ -26,7 +26,7 @@ import { scrollSmooth } from './js/utilits'
 
 
 // test
-import { bgColor } from './js/utilits'
+// import { bgColor } from './js/utilits'
 
 
 
@@ -39,7 +39,7 @@ onMounted(() => {
   if (index > 0) {
     window.location = loc.substring(0, index);
   }
-  bgColor();
+  // bgColor();
 
 })
 scrollSmooth();

@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div data-scroll-container>
     <Home />
     <About />
     <Resume />
@@ -14,4 +14,7 @@ import About from '@/components/About.vue';
 import Resume from '@/components/Resume.vue'
 import Skills from '@/components/Skills.vue'
 import Cta from '@/components/Cta.vue'
+
+import { scrollSmooth } from '@/js/utilits'
+scrollSmooth()
 </script>

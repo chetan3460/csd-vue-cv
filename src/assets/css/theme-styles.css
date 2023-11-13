@@ -250,6 +250,14 @@ li {
   list-style: none;
 }
 
+.bg-transparent {
+  background-color: transparent;
+}
+
+.bg-red-100 {
+  background-color: #ffc1c5;
+}
+
 /** Section Title style **/
 .section-title {
   margin-top: -7px;

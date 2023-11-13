@@ -8,7 +8,7 @@
                         <div class="about-content-part rel z-2 rmb-55">
                             <div class="section-title mb-35">
                                 <span class="sub-title mb-15"><v-icon name="la-user-solid"></v-icon> About Me</span>
-                                <h2 class="title-anim split-title-line">I can develop
+                                <h2 ref="scene1Actor1" class="title-anim split-title-line">I can develop
                                     that <span>help people</span>
                                 </h2>
 
@@ -69,6 +69,7 @@
 
 <script setup>
 import { useScrollAnimation } from '@/js/utilits'
+import { scrollInstance } from '../js/utilits';
 
 import {
     OhVueIcon,
