@@ -10,12 +10,12 @@ import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
-import ScrollSmoother from 'gsap/src/ScrollSmoother.min.js'
+// import ScrollSmoother from 'gsap/src/ScrollSmoother.min.js'
 // import tinycolor from "tinycolor2";
 
 import LocomotiveScroll from 'locomotive-scroll';
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin, ScrollSmoother)
+gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // Create a ref for the scroll instance
 // Create a ref for the scroll instance
