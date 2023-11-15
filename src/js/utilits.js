@@ -18,7 +18,6 @@ import LocomotiveScroll from 'locomotive-scroll';
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // Create a ref for the scroll instance
-// Create a ref for the scroll instance
 export const scrollInstance = ref(null);
 
 export const scrollSmooth = () => {
@@ -60,54 +59,123 @@ export const scrollSmooth = () => {
 };
 
 
+export const charAnimation = () => {
+  onMounted(() => {
+    let char_come = document.querySelectorAll(".animation__char_come")
+    char_come.forEach((char_come) => {
+      let split_char = new SplitType(char_come, { type: "chars, words," })
+      gsap.from(split_char.chars, { duration: 1, x: 70, autoAlpha: 0, stagger: 0.06 });
+    })
 
 
 
-export const bgColor = () => {
+  })
+}
 
-  /* SMOOTH SCROLL */
-  // gsap.to(window, {
-  //   scrollTo: {
-  //     y: ".page-wrapper",
-  //     offsetY: 100, // Adjust this value based on your layout
-  //   },
-  //   duration: 1, // Adjust the duration as needed
-  //   ease: 'power2.inOut',
-  //   scrollTrigger: {
-  //     trigger: ".page-wrapper",
-  //     start: "top top",
-  //     end: "bottom bottom",
-  //     scrub: true,
-  //   },
-  // });
+export const heroText = () => {
+  onMounted(() => {
+    var tl = gsap.timeline();
+    const split = new SplitType(".hero-2__title, .hero-2__subtitle", { type: "chars" })
 
-  /* COLOR CHANGER */
-  document.addEventListener("DOMContentLoaded", function () {
-    const scrollColorElems = document.querySelectorAll("[data-bgcolor]");
-    scrollColorElems.forEach((colorSection, i) => {
-      const prevBg = i === 0 ? "" : scrollColorElems[i - 1].dataset.bgcolor;
-      const prevText = i === 0 ? "" : scrollColorElems[i - 1].dataset.textcolor;
+    tl.from(split.chars, { opacity: 0, y: 50, duration: 1, ease: "back", stagger: 0.05 })
+    tl.fromTo(".secondary-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, "-=1")
+    tl.fromTo(".main-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, ">-0.2")
+  })
+}
 
-      ScrollTrigger.create({
-        trigger: colorSection,
-        start: "top 50%",
-        onEnter: () =>
-          gsap.to("body", {
-            backgroundColor: colorSection.dataset.bgcolor,
-            color: colorSection.dataset.textcolor,
-            overwrite: "auto"
-          }),
-        onLeaveBack: () =>
-          gsap.to("body", {
-            backgroundColor: prevBg,
-            color: prevText,
-            overwrite: "auto"
-          })
-      });
+
+export const revealLetter = () => {
+
+
+
+  let targetParagraphs = [];
+  let letters = [];
+
+  onMounted(() => {
+    targetParagraphs = document.querySelectorAll('.target-paragraphs');
+
+    targetParagraphs.forEach((paragraph) => {
+      let pArray = paragraph.textContent.split('');
+      paragraph.innerHTML = pArray.map((letter) => `<span>${letter}</span>`).join('');
     });
+
+    letters = document.querySelectorAll('.target-paragraphs span');
+
+    function revealLetters() {
+      for (let i = 0; i < letters.length; i++) {
+        let { left, top } = letters[i].getBoundingClientRect();
+        top = top - window.innerHeight * 0.5;
+        let opacityValue =
+          1 - (top * 0.01 + left * 0.001) < 0.1
+            ? 0.1
+            : 1 - (top * 0.01 + left * 0.001);
+
+        opacityValue = opacityValue > 1 ? 1 : parseFloat(opacityValue.toFixed(3));
+        letters[i].style.opacity = opacityValue;
+      }
+    }
+
+    gsap.to(letters, {
+      opacity: 0,
+      scrollTrigger: {
+        scroller: "[data-scroll-container]",
+
+        trigger: targetParagraphs[0],
+        start: '-1000px',
+        end: '1000px',
+        onUpdate: revealLetters,
+      },
+    });
+
+    revealLetters();
   });
 
 }
+// export const bgColor = () => {
+
+//   /* SMOOTH SCROLL */
+//   // gsap.to(window, {
+//   //   scrollTo: {
+//   //     y: ".page-wrapper",
+//   //     offsetY: 100, // Adjust this value based on your layout
+//   //   },
+//   //   duration: 1, // Adjust the duration as needed
+//   //   ease: 'power2.inOut',
+//   //   scrollTrigger: {
+//   //     trigger: ".page-wrapper",
+//   //     start: "top top",
+//   //     end: "bottom bottom",
+//   //     scrub: true,
+//   //   },
+//   // });
+
+//   /* COLOR CHANGER */
+//   document.addEventListener("DOMContentLoaded", function () {
+//     const scrollColorElems = document.querySelectorAll("[data-bgcolor]");
+//     scrollColorElems.forEach((colorSection, i) => {
+//       const prevBg = i === 0 ? "" : scrollColorElems[i - 1].dataset.bgcolor;
+//       const prevText = i === 0 ? "" : scrollColorElems[i - 1].dataset.textcolor;
+
+//       ScrollTrigger.create({
+//         trigger: colorSection,
+//         start: "top 50%",
+//         onEnter: () =>
+//           gsap.to("body", {
+//             backgroundColor: colorSection.dataset.bgcolor,
+//             color: colorSection.dataset.textcolor,
+//             overwrite: "auto"
+//           }),
+//         onLeaveBack: () =>
+//           gsap.to("body", {
+//             backgroundColor: prevBg,
+//             color: prevText,
+//             overwrite: "auto"
+//           })
+//       });
+//     });
+//   });
+
+// }
 
 
 
@@ -133,9 +201,62 @@ export const bgColor = () => {
 //   // })
 
 // }
+/*======================================
+33. Paragraph Animation
+========================================*/
+export const paraAnimation = () => {
+  const deviceWidth = ref(window.innerWidth);
 
+  onMounted(() => {
+    if (deviceWidth.value > 576) {
+      const textIntoView = document.querySelectorAll(".p-text");
 
+      textIntoView.forEach((elem) => {
+        const innerSplit = new SplitType(elem, {
+          type: "lines",
+          linesClass: "text-line"
+        });
+        const outerSplit = new SplitType(elem, {
+          type: "lines",
+          linesClass: "text-mask"
+        });
 
+        const splitTimeline = gsap.timeline({
+          scrollTrigger: {
+            scroller: "[data-scroll-container]",
+            trigger: elem,
+            scrub: false,
+            pin: false,
+            start: "top 90%",
+            end: "bottom 0%"
+          },
+          onComplete: () => {
+            outerSplit.revert();
+            innerSplit.revert();
+          }
+        });
+
+        splitTimeline
+          .to(innerSplit.lines, {
+            duration: 1.1,
+            autoAlpha: 1,
+            y: 0,
+            ease: "Power4.easeOut",
+            stagger: 0.20
+          })
+          .to(elem, {
+            duration: 0,
+            autoAlpha: 1
+          }, "<");
+      });
+    }
+
+    // Add an event listener to update deviceWidth on window resize
+    window.addEventListener('resize', () => {
+      deviceWidth.value = window.innerWidth;
+    });
+  })
+}
 
 /*======================================
   Custom Cursor 
@@ -254,6 +375,7 @@ export const useScrollAnimation = () => {
     splitTitleLines.value.forEach((splitTextLine) => {
       const tl = gsap.timeline({
         scrollTrigger: {
+          scroller: "[data-scroll-container]",
           trigger: splitTextLine,
           start: "top 90%",
           end: "bottom 60%",
@@ -300,6 +422,8 @@ export const btnStickyScroll = () => {
   const initScrollTrigger = () => {
     if (testInner <= 991) {
       ScrollTrigger.create({
+        scroller: "[data-scroll-container]",
+
         trigger: '.bd-position-sticky',
         start: '-100 top',
         end: '10% +20px center',
@@ -310,6 +434,8 @@ export const btnStickyScroll = () => {
       });
     } else {
       ScrollTrigger.create({
+        scroller: "[data-scroll-container]",
+
         trigger: '.bd-position-sticky',
         start: '-180 top',
         end: '90% +190px center',
@@ -336,16 +462,16 @@ export const splitTextAnimation = () => {
   // let testInner = window.innerWidth;
 
   onMounted(() => {
-    if (device_width > 576) {
 
-
-    }
     element.value = document.querySelectorAll(".folks-text")
     element.value.forEach((element) => {
       let folksBD = gsap.timeline({
         repeat: -1,
         delay: 0.5,
+        scroller: "[data-scroll-container]",
+
         scrollTrigger: {
+          scroller: "[data-scroll-container]",
           trigger: element,
           start: 'bottom 100%-=50px'
         }
@@ -358,6 +484,8 @@ export const splitTextAnimation = () => {
         duration: 1,
         ease: 'power2.out',
         scrollTrigger: {
+          scroller: "[data-scroll-container]",
+
           trigger: element,
           start: 'bottom 100%-=50px',
           once: true
@@ -513,109 +641,3 @@ export const scrollTop = () => {
 
 
 
-// export const headerBg = () => {
-
-//   const liquidElements = () => {
-//     const liquidWindow = ref(null);
-//     const liquidHtml = ref(null);
-//     const liquidBody = ref(null);
-//     const liquidSiteWrap = ref(null);
-//     const liquidContents = ref(null);
-//     const liquidContentsWrap = ref(null);
-//     const liquidMainHeader = ref(null);
-//     const liquidMainFooter = ref(null);
-//     const liquidSectionsWrapper = ref(null);
-
-//     const elementorSectionsSelector = `
-//       > .elementor-section-wrap > .elementor-section,
-//       > .elementor-section,
-//       > .e-con,
-//       > .e-con > .e-con,
-//       > .e-con > .e-con-inner > .e-con,
-//       > .e-container,
-//       > .e-container > .e-container,
-//       > .elementor-section-wrap > .elementor-top-section > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-inner-section,
-//       > .elementor-top-section > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-inner-section`;
-
-//     const elementorFooterSections = liquidMainFooter.value.querySelectorAll('> .elementor', elementorSectionsSelector);
-//     const liquidSections = liquidIsElementor ? liquidSectionsWrapper.value.querySelectorAll(elementorSectionsSelector).concat(Array.from(elementorFooterSections)) : liquidSectionsWrapper.value.concat(Array.from(liquidMainFooter.value.querySelectorAll('.lqd-section, > .vc_row, > .vc_section, > .vc_section > .vc_row, > .lqd-section-scroll-sections > .vc_row, > .vc_element')));
-
-//     const liquidBodyBg = liquidBody.value.style.backgroundColor;
-//     const liquidContentsBg = liquidContents.value.style.backgroundColor;
-//     const liquidMainFooterBg = liquidMainFooter.value.style.backgroundColor;
-
-//     return {
-//       liquidWindow,
-//       liquidHtml,
-//       liquidBody,
-//       liquidSiteWrap,
-//       liquidContents,
-//       liquidContentsWrap,
-//       liquidMainHeader,
-//       liquidMainFooter,
-//       liquidSectionsWrapper,
-//       elementorSectionsSelector,
-//       elementorFooterSections,
-//       liquidSections,
-//       liquidBodyBg,
-//       liquidContentsBg,
-//       liquidMainFooterBg,
-//     };
-//   };
-
-//   class LiquidSectionsDetails {
-//     constructor() {
-//       this.sections = [];
-//       this.footerBg = tinycolor(this.liquidMainFooterBg).getAlpha() === 0 ? this.liquidBodyBg : this.liquidMainFooterBg;
-//     }
-
-//     // checkpoint
-//     getLuminosity(obj, instance) {
-//       let { backgroundColor } = obj;
-//       if (obj.isInnerSection && obj.parentSection && tinycolor(backgroundColor).getAlpha() === 0) {
-//         backgroundColor = obj.parentSection.backgroundColor;
-//       }
-//       if (tinycolor(backgroundColor).getAlpha() === 0) {
-//         if (obj.isInFooter) {
-//           backgroundColor = instance.footerBg;
-//         } else {
-//           backgroundColor = instance.liquidContentsBg;
-//         }
-//       }
-//       return tinycolor(backgroundColor).isDark() ? 'dark' : 'light';
-//     }
-
-//     async addLuminosity(instance) {
-//       await nextTick();
-//       instance.sections.forEach(async sec => {
-//         sec.isBgTransparent = tinycolor(sec.backgroundColor).getAlpha() === 0;
-//         sec.luminosity = sec.predefinedLuminosity ? sec.predefinedLuminosity : instance.getLuminosity(sec, instance);
-//         sec.el.setAttribute('data-section-luminosity', sec.luminosity);
-//       });
-//     }
-//   }
-
-//   onMounted(() => {
-//     const liquidBgEls = document.querySelectorAll('[data-liquid-bg]');
-//     // liquidBgEls.liquidBgColor();
-
-//     if (liquidIsElementor) {
-//       liquidBgEls.forEach(el => {
-//         const $el = el;
-//         if ($el.is(liquidContents) && liquidMainHeader.length && !liquidMainHeader.getAttribute('data-liquid-bg')) {
-//           liquidMainHeader.liquidBgColor({
-//             setBgTo: `
-//               > .elementor > .elementor-section-wrap > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_header_image .navbar-brand-solid .navbar-brand-inner,
-//               > .elementor > .elementor-section-wrap > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-solid,
-//               > .elementor > .elementor-section-wrap > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-icon-solid .btn-icon,
-//               > .elementor > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_header_image .navbar-brand-solid .navbar-brand-inner,
-//               > .elementor > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-solid,
-//               > .elementor > .elementor-section:not(.lqd-hide-onstuck) > .elementor-container > .elementor-column > .elementor-widget-wrap > .elementor-widget-ld_button .btn-icon-solid .btn-icon`,
-//             manipulateColor: [{ 'darken': 30 }, { 'brighten': 15 }, { 'saturate': 20 }],
-//           });
-//         }
-//       });
-//     }
-//   });
-
-// }

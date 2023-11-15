@@ -61,6 +61,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p id="bottom" class="target-paragraphs">No one knows
+
+                            the right person for the job better than people who’ve actually done it.</p>
+
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -70,6 +78,7 @@
 <script setup>
 import { useScrollAnimation } from '@/js/utilits'
 import { scrollInstance } from '../js/utilits';
+import { revealLetter } from '../js/utilits';
 
 import {
     OhVueIcon,
@@ -85,6 +94,7 @@ import {
 } from 'oh-vue-icons/icons'
 addIcons(LaUserSolid, MdSpeedSharp, MdComputer, IoBulbOutline, IoRocketOutline)
 useScrollAnimation()
+revealLetter()
 </script>
 
 
