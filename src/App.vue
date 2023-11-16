@@ -1,5 +1,6 @@
 <template>
   <div class="page-wrapper" ref="containerRef" data-scroll-container>
+    <div class="body-overlay"></div>
     <ScrollTopVue />
     <Cursor />
     <Navbar />

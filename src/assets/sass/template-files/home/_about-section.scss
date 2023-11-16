@@ -1,11 +1,27 @@
-.target-paragraphs {
-    text-align: left;
-    letter-spacing: -.05em;
-    padding-top: 0;
-    font-size: 8em;
-    line-height: 1em;
-    color: #ccc;
+.about-section {
+    padding: 100px 0;
+
+    .tp-hero-2__exp-subtitle {
+        font-weight: 400;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: 0.06em;
+        color: #ffffff;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .tp-hero-2__exp-title {
+        font-weight: 600;
+        font-size: 70px;
+        line-height: 1;
+        letter-spacing: -0.04em;
+        text-transform: uppercase;
+    }
 }
+
 
 .about-content-part .section-title p {
     max-width: 620px;

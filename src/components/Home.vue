@@ -86,7 +86,9 @@
                                 <div class="d-lg-flex justify-content-center align-items-center">
                                     <strong
                                         class="custom-hero-font-1 text-dark custom-stroke-text-effect-1 hero-2__title">Creative</strong>
-
+                                    <p class="custom-hero-text-1 text-start text-center text-lg-start d-block pb-2 pb-lg-0">
+                                        Hello, I am <strong class="text-dark">John Doe</strong> an Art Director and Digital
+                                        Designer currently available to work as freelancer or full-time.</p>
                                 </div>
                             </div>
                         </div>

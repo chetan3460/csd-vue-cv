@@ -73,6 +73,9 @@ $themeDefault: #23f7dd;
   z-index: 2;
   width: 100%;
   position: relative;
+  background-color: #0C1821;
+  overflow: visible;
+
 }
 
 .bg_dots {
@@ -88,3 +91,17 @@ $themeDefault: #23f7dd;
   right: 0%;
   pointer-events: none;
 }
+
+// .body-overlay {
+//   position: fixed;
+//   z-index: 9;
+//   pointer-events: none;
+//   top: 0;
+//   opacity: 1;
+//   inset-inline-start: 0;
+//   width: 100vw;
+//   height: 100vh;
+//   background-repeat: repeat;
+//   background-position: top left;
+//   background-image: url("../images/body-bg.png");
+// }

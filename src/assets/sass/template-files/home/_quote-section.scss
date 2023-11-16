@@ -1,0 +1,17 @@
+.quote-section {
+    background: #171717;
+    padding: 150px 0;
+    background-color: rgba(0, 0, 0, .2);
+    border-radius: 24px;
+    margin: 0 1em;
+
+    .target-paragraphs {
+        text-align: left;
+        letter-spacing: -.05em;
+        padding-top: 0;
+        @include font-rem(128px, 135px);
+        // font-size: 8em;
+        // line-height: 1em;
+        color: #ccc;
+    }
+}
