@@ -538,6 +538,32 @@ export const splitTextAnimation = () => {
   });
 }
 
+
+export const titleAnimation = () => {
+  const animateTitle = () => {
+    const tl = gsap.timeline();
+    const mySplitText = new SplitType(".title-anim", { type: "words,chars" });
+    const chars = mySplitText.chars;
+
+    tl.from(chars, {
+      duration: 0.8,
+      opacity: 0,
+      scale: 0,
+      delay: 1,
+      y: 80,
+      rotationX: 180,
+      transformOrigin: "0% 50% -50",
+      ease: "back",
+      stagger: 0.08
+    });
+  };
+
+  onMounted(() => {
+    animateTitle();
+  });
+}
+
+
 // 
 export const listAnimation = () => {
   onMounted(() => {
