@@ -37,6 +37,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
   letter-spacing: 0.2px;
+
   // background: #0f183e;
   p {
     margin-bottom: 20px;
@@ -110,10 +111,11 @@ h2,
 
 h3,
 .h3 {
-  @include font-rem(16px, 17px);
-  font-weight: 700;
-  color: color(primary, blue);
+  @include font-rem(24px, 30px);
+  font-weight: 500;
+  color: color(primary, white);
   letter-spacing: 0;
+  text-transform: uppercase;
   // @include bp(mobile) {
   //   @include font-rem(16px, 31px);
   // }

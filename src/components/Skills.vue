@@ -124,9 +124,10 @@ import {
 
 } from 'oh-vue-icons/icons'
 addIcons(LaShapesSolid, MdSpeedSharp, FaWordpressSimple, ViFileTypeScss2, CoJquery, CoJavascript, ViFileTypeHtml, ViFileTypeCss, FaBootstrap, ViFileTypeVue, FaFacebookSquare)
-import { useScrollAnimation, } from '@/js/utilits'
 
-useScrollAnimation()
+import { sectionTitleAnim, } from '@/js/utilits'
+
+sectionTitleAnim()
 
 // import { test } from '@/js/utilits'
 // test();

@@ -97,7 +97,7 @@
 <script setup>
 import { onMounted } from 'vue';
 import { btnStickyScroll } from '@/js/utilits'
-import { useScrollAnimation } from '@/js/utilits';
+import { sectionTitleAnim } from '@/js/utilits';
 
 import {
     OhVueIcon,
@@ -114,7 +114,7 @@ addIcons(BiBriefcase, FaUserGraduate, FaUserTie, BiCloudDownload)
 
 btnStickyScroll();
 
-useScrollAnimation();
+sectionTitleAnim();
 
 
 

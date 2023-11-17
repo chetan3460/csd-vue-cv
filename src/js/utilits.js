@@ -10,9 +10,7 @@ import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
-// import ScrollSmoother from 'gsap/src/ScrollSmoother.min.js'
-// import tinycolor from "tinycolor2";
-
+import { Power2 } from 'gsap'
 import LocomotiveScroll from 'locomotive-scroll';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
@@ -59,30 +57,40 @@ export const scrollSmooth = () => {
 };
 
 
-export const charAnimation = () => {
-  onMounted(() => {
-    let char_come = document.querySelectorAll(".animation__char_come")
-    char_come.forEach((char_come) => {
-      let split_char = new SplitType(char_come, { type: "chars, words," })
-      gsap.from(split_char.chars, { duration: 1, x: 70, autoAlpha: 0, stagger: 0.06 });
-    })
 
+/*======================================
+ Hero Title Animation
+========================================*/
+export const titleAnimation = () => {
+  const animateTitle = () => {
+    const tl = gsap.timeline();
+    const mySplitText = new SplitType(".title-anim", { type: "words,chars" });
+    const chars = mySplitText.chars;
 
-
-  })
-}
-
-export const heroText = () => {
-  onMounted(() => {
-    var tl = gsap.timeline();
-    const split = new SplitType(".hero-2__title, .hero-2__subtitle", { type: "chars" })
-
-    tl.from(split.chars, { opacity: 0, y: 50, duration: 1, ease: "back", stagger: 0.05 })
-    tl.fromTo(".secondary-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, "-=1")
+    tl.from(chars, {
+      duration: 0.8,
+      opacity: 0,
+      scale: 0,
+      delay: 1,
+      y: 80,
+      rotationX: 180,
+      transformOrigin: "0% 50% -50",
+      ease: "back",
+      stagger: 0.08
+    });
     tl.fromTo(".main-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, ">-0.2")
-  })
+
+  };
+
+  onMounted(() => {
+    animateTitle();
+  });
 }
 
+
+/*======================================
+ Reveal Letter Animation
+========================================*/
 
 export const revealLetter = () => {
 
@@ -131,6 +139,174 @@ export const revealLetter = () => {
   });
 
 }
+
+
+
+/*======================================
+  Section Title Animation
+========================================*/
+export const sectionTitleAnim = () => {
+
+  const splitTitleLines = ref([]);
+
+  onMounted(() => {
+
+
+    splitTitleLines.value = document.querySelectorAll(".split-title-line");
+
+    splitTitleLines.value.forEach((splitTextLine) => {
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          scroller: "[data-scroll-container]",
+          trigger: splitTextLine,
+          start: "top 90%",
+          end: "bottom 60%",
+          scrub: false,
+          markers: false,
+          toggleActions: "play none none none",
+        },
+      });
+
+      const itemSplitted = new SplitType(splitTextLine, {
+        type: "words, lines",
+      });
+      gsap.set(splitTextLine, {
+        perspective: 400
+      });
+      itemSplitted.split({
+        type: "lines"
+      });
+
+      tl.from(itemSplitted.lines, {
+        duration: 1,
+        delay: 0.3,
+        opacity: 0,
+        rotationX: -80,
+        force3D: true,
+        transformOrigin: "top center -50",
+        stagger: 0.3,
+      });
+    });
+
+  });
+}
+
+/*======================================
+  About Me Title Animation
+========================================*/
+export const wordSlide = () => {
+  // Link timelines to scroll position
+  function createScrollTrigger(triggerElement, timeline) {
+    // Reset tl when scroll out of view past bottom of screen
+    ScrollTrigger.create({
+      scroller: "[data-scroll-container]",
+      trigger: triggerElement,
+      start: 'top bottom',
+      onLeaveBack: () => {
+        timeline.progress(0);
+        timeline.pause();
+      },
+    });
+    // Play tl when scrolled into view (60% from top of screen)
+    ScrollTrigger.create({
+      scroller: "[data-scroll-container]",
+      trigger: triggerElement,
+      start: 'top 60%',
+      onEnter: () => timeline.play(),
+    });
+  }
+
+  onMounted(() => {
+    // Split text into spans
+    const typeSplit = new SplitType('.text-split', {
+      types: 'words, chars',
+      tagName: 'span',
+    });
+
+    const wordsSlideFromRight = document.querySelectorAll('.words-slide-from-right');
+
+    wordsSlideFromRight.forEach((element) => {
+      const tl = gsap.timeline({ paused: true });
+      const wordElements = element.querySelectorAll('.word');
+
+      tl.from(wordElements, {
+        opacity: 0,
+        x: '1em',
+        duration: 1.5, // Adjust duration for a slower animation
+        ease: 'power4.out', // Adjust easing function for a smoother motion
+        stagger: { amount: 0.5 }, // Adjust stagger for more spacing between elements
+      });
+
+      createScrollTrigger(element, tl);
+    });
+
+    // Avoid flash of unstyled content
+    gsap.set('.text-split', { opacity: 1 });
+  });
+}
+
+
+
+/*======================================
+  About Image Animation
+========================================*/
+export const imgRevel = () => {
+  onMounted(() => {
+    let img_anim_reveal = document.querySelectorAll(".img_anim_reveal");
+
+    img_anim_reveal.forEach((img_reveal) => {
+      let image = img_reveal.querySelector("img");
+      let tl = gsap.timeline({
+        scrollTrigger: {
+          scroller: "[data-scroll-container]",
+          trigger: img_reveal,
+          start: "top 50%",
+        }
+      });
+
+      tl.set(img_reveal, { autoAlpha: 1 });
+      tl.from(img_reveal, 0.6, { // Adjust the duration for a faster animation
+        xPercent: -100,
+        ease: Power2.out
+      });
+      tl.from(image, 0.6, { // Adjust the duration for a faster animation
+        xPercent: 100,
+        scale: 1.3,
+        delay: -0.6, // Adjust the delay for proper sequencing
+        ease: Power2.out
+      });
+    });
+  });
+};
+
+
+
+
+export const charAnimation = () => {
+  onMounted(() => {
+    let word_come_long = document.querySelectorAll(".animation__word_come_long")
+    word_come_long.forEach((word_come_long) => {
+      let split_word_come_long = new SplitType(word_come_long, { type: "chars words", position: "absolute" })
+      gsap.from(split_word_come_long.words, { duration: 1, x: 50, autoAlpha: 0, stagger: 0.5 });
+    })
+
+  });
+}
+
+// Hero Title
+export const heroText = () => {
+  onMounted(() => {
+    var tl = gsap.timeline();
+    const split = new SplitType(".hero-2__title, .hero-2__subtitle", { type: "chars" })
+
+    tl.from(split.chars, { opacity: 0, y: 50, duration: 1, ease: "back", stagger: 0.05 })
+    tl.fromTo(".secondary-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, "-=1")
+    tl.fromTo(".main-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, ">-0.2")
+  })
+}
+
+
+
 // export const bgColor = () => {
 
 //   /* SMOOTH SCROLL */
@@ -349,7 +525,6 @@ export const scroll_ = () => {
 
 
 
-
 const windowOn = window;
 let larger = 1600;
 let xxl = 1400;
@@ -360,57 +535,6 @@ let sm = 576;
 let device_width = ref(window.innerWidth);
 
 
-/*======================================
-Title Animation
-========================================*/
-export const useScrollAnimation = () => {
-
-  const splitTitleLines = ref([]);
-
-  onMounted(() => {
-
-
-    splitTitleLines.value = document.querySelectorAll(".split-title-line");
-
-    splitTitleLines.value.forEach((splitTextLine) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          scroller: "[data-scroll-container]",
-          trigger: splitTextLine,
-          start: "top 90%",
-          end: "bottom 60%",
-          scrub: false,
-          markers: false,
-          toggleActions: "play none none none",
-        },
-      });
-
-      const itemSplitted = new SplitType(splitTextLine, {
-        type: "words, lines",
-      });
-      gsap.set(splitTextLine, {
-        perspective: 400
-      });
-      itemSplitted.split({
-        type: "lines"
-      });
-
-      tl.from(itemSplitted.lines, {
-        duration: 1,
-        delay: 0.3,
-        opacity: 0,
-        rotationX: -80,
-        force3D: true,
-        transformOrigin: "top center -50",
-        stagger: 0.3,
-      });
-    });
-
-  });
-
-
-
-}
 
 /*======================================
  Position Sticky js
@@ -468,7 +592,6 @@ export const splitTextAnimation = () => {
       let folksBD = gsap.timeline({
         repeat: -1,
         delay: 0.5,
-        scroller: "[data-scroll-container]",
 
         scrollTrigger: {
           scroller: "[data-scroll-container]",
@@ -539,29 +662,6 @@ export const splitTextAnimation = () => {
 }
 
 
-export const titleAnimation = () => {
-  const animateTitle = () => {
-    const tl = gsap.timeline();
-    const mySplitText = new SplitType(".title-anim", { type: "words,chars" });
-    const chars = mySplitText.chars;
-
-    tl.from(chars, {
-      duration: 0.8,
-      opacity: 0,
-      scale: 0,
-      delay: 1,
-      y: 80,
-      rotationX: 180,
-      transformOrigin: "0% 50% -50",
-      ease: "back",
-      stagger: 0.08
-    });
-  };
-
-  onMounted(() => {
-    animateTitle();
-  });
-}
 
 
 // 
@@ -602,6 +702,17 @@ export const listAnimation = () => {
 
   });
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 // export const listAnimation = () => {
@@ -645,6 +756,8 @@ export const scrollTop = () => {
   } else {
     bar.classList.remove("animate");
   }
+
+
 
 
 };

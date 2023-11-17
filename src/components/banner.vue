@@ -19,7 +19,7 @@
                         <strong class="photographer__abouthero-title  text-white title-anim">Developer</strong>
                     </div>
                 </div>
-                <div class="photographer__abouthero-arrowdown has_fade_anim">
+                <div class="photographer__abouthero-arrowdown">
                     <img src="../assets/images/hero/arrrow-down.png" alt="arrow-down">
                 </div>
             </div>
