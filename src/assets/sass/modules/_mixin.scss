@@ -10,10 +10,10 @@
 // *
 
 @mixin font-rem($font-size, $line-height: 0) {
-  font-size: ($font-size / $baseFontSize) * 1rem;
+  font-size: calc($font-size / $baseFontSize) * 1rem;
 
   @if ($line-height > 0) {
-    line-height: ($line-height / $baseFontSize) * 1rem;
+    line-height: calc($line-height / $baseFontSize) * 1rem;
   }
 }
 

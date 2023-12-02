@@ -7,6 +7,7 @@ import '@/assets/css/locomotive-scroll.css'
 
 import '@/assets/css/style.css'
 import '@/assets/css/theme-styles.css'
+import '../src/assets/sass/theme-styles.scss'
 
 import {
     createApp
