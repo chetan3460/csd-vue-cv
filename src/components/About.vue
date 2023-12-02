@@ -57,6 +57,10 @@
 </template>
 
 <script setup>
+// Test
+// import { testCode } from '../js/utilits';
+// testCode()
+
 import { sectionTitleAnim } from '@/js/utilits'
 
 import { wordSlide } from '../js/utilits';

@@ -58,6 +58,68 @@ export const scrollSmooth = () => {
 
 
 
+
+
+
+
+
+// export const testCode = () => {
+//   onMounted(() => {
+//     const view = document.querySelector("#homepage");
+//     const DOM = {
+//       homePlayer: view.querySelector(".c-hm-hero_media"),
+//       homePlayerReel: view.querySelector(".hm-reel"),
+//     };
+
+//     gsap.set(view, { opacity: 1 });
+
+//     gsap.to(DOM.homePlayer, {
+//       duration: 1.5,
+//       yPercent: 0,
+//       z: 0,
+//       ease: "expo.inOut",
+//       clearProps: "all",
+//     });
+
+//     gsap.to(
+//       [DOM.homePlayerReel, DOM.homePlayer],
+//       {
+//         duration: 1.5,
+//         paddingTop: 100,
+//         height: 100,
+//         ease: "expo.inOut",
+//       },
+//       "A"
+//     );
+
+//     gsap.scrollTrigger({
+//       scroller: "[data-scroll-container]",
+
+//       trigger: DOM.homePlayer,
+//       scrub: true,
+//       start: "top top+=30",
+//       pin: true,
+//       pinType: "transform",
+//       pinSpacing: false,
+//     });
+
+
+//   })
+
+
+
+
+
+// }
+
+
+
+
+
+
+
+
+
 /*======================================
  Hero Title Animation
 ========================================*/

@@ -1,9 +1,8 @@
-@charset "UTF-8";
 @font-face {
   font-family: "flaticon_noxfolio";
-  src: url("./flaticon_noxfolio.ttf?943527ded4c907448c49887765f842d3") format("truetype"), url("./flaticon_noxfolio.woff?943527ded4c907448c49887765f842d3") format("woff"), url("./flaticon_noxfolio.woff2?943527ded4c907448c49887765f842d3") format("woff2"), url("./flaticon_noxfolio.eot?943527ded4c907448c49887765f842d3#iefix") format("embedded-opentype"), url("./flaticon_noxfolio.svg?943527ded4c907448c49887765f842d3#flaticon_noxfolio") format("svg"); }
-
-i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+  src: url("./flaticon_noxfolio.ttf?943527ded4c907448c49887765f842d3") format("truetype"), url("./flaticon_noxfolio.woff?943527ded4c907448c49887765f842d3") format("woff"), url("./flaticon_noxfolio.woff2?943527ded4c907448c49887765f842d3") format("woff2"), url("./flaticon_noxfolio.eot?943527ded4c907448c49887765f842d3#iefix") format("embedded-opentype"), url("./flaticon_noxfolio.svg?943527ded4c907448c49887765f842d3#flaticon_noxfolio") format("svg");
+}
+i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
   font-family: flaticon_noxfolio !important;
   font-style: normal;
   font-weight: normal !important;
@@ -11,25 +10,33 @@ i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
   text-transform: none;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+}
 
 .flaticon-asterisk:before {
-  content: ""; }
+  content: "\f101";
+}
 
 .flaticon-sun:before {
-  content: ""; }
+  content: "\f102";
+}
 
 .flaticon-star:before {
-  content: ""; }
+  content: "\f103";
+}
 
 .flaticon-asterisk-1:before {
-  content: ""; }
+  content: "\f104";
+}
 
 .flaticon-call:before {
-  content: ""; }
+  content: "\f105";
+}
 
 .flaticon-waning-moon:before {
-  content: ""; }
+  content: "\f106";
+}
 
 .flaticon-moon:before {
-  content: ""; }
+  content: "\f107";
+}/*# sourceMappingURL=flaticon_noxfolio.css.map */
