@@ -1,6 +1,6 @@
 <template>
     <!-- photographer about hero -->
-    <section class="photographer__abouthero" data-scroll-section>
+    <!-- <section class="photographer__abouthero" data-scroll-section>
         <span class="photographer__abouthero-circleshape dark-circleshape"></span>
         <div class="container">
             <div class="photographer__abouthero-wrapper">
@@ -24,8 +24,50 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
     <!-- /photographer about hero  -->
+
+
+
+    <section class="tg-intro__area" data-scroll-section>
+        <div class="tg-intro__area-bg-wrap">
+            <img src="../assets/images/hero/intro-sky.png" alt="sky image">
+        </div>
+        <div class="container">
+            <div class="tg-intro__area-wrap">
+                <div class="tg-intro__area-title-wrap">
+
+                    <div class="tg-intro__area-name-wrap">
+                        <p class="tg-intro__area-name">Hi, This is
+                            chetan</p>
+                    </div>
+
+
+                    <h1 class="tg-intro__area-title ">I am <span class="space-end"></span> Front-End <br> Developer</h1>
+
+                    <div class="tg-intro__area-latest-place">
+                        <img src="../assets/images/hero/nature-image.jpg" alt="latest-place">
+                    </div>
+                    <div class="tg-intro__area-circle-wrap">
+                        <div class="btn-wrapper cf_btn_circle">
+                            <a href="#" class="circle-text btn-item video-popup">
+                                <img class="text" src="../assets/images/hero/intro-rect-text.png" alt="Video">
+                                <img class="icon" src="../assets/images/hero/intro-rect-arow.png" alt="Icon">
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="shape-1 img_anim_reveal">
+                        <img src="../assets/images/hero/intro-tree.png" alt="shape">
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+    </section>
 </template>
 <script setup>
 import { heroText } from '../js/utilits'
