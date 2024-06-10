@@ -12,3 +12,15 @@
     src: url('../fonts/Romans-Story.ttf');
     font-weight: 400;
 }
+
+
+@font-face {
+    font-family: 'gallery_modernregular';
+    src: url('../fonts/gallerymodern-webfont.woff2') format('woff2'),
+        url('../fonts/gallerymodern-webfont.woff') format('woff'),
+        // url('../assets/fonts/gallerymodern-webfont.ttf') format('truetype');
+        url('../fonts/gallerymodern-webfont.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}

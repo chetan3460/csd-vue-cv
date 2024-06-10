@@ -4,113 +4,284 @@ import {
   onMounted
 } from 'vue'
 
-
+import anime from 'animejs/lib/anime.es.js';
 import chroma from "chroma-js"
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import { Power2 } from 'gsap'
-import LocomotiveScroll from 'locomotive-scroll';
+import Lenis from 'lenis'
+import { Flip } from 'gsap/Flip';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
-// Create a ref for the scroll instance
-export const scrollInstance = ref(null);
 
+
+
+
+
+// Lenis Scroll 
 export const scrollSmooth = () => {
   onMounted(() => {
-    // Create a new LocomotiveScroll instance
-    const scroll = new LocomotiveScroll({
-      el: document.querySelector("[data-scroll-container]"),
+
+
+
+    const lenis = new Lenis({
+      lerp: 0.1,
       smooth: true,
-      tablet: { smooth: true },
-      smartphone: { smooth: true }
+      // direction: 'vertical',
+      // gestureDirection: 'vertical',
+      // smoothTouch: false,
+      touchMultiplier: 2,
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
     });
 
-    // Update the ref value with the scroll instance
-    scrollInstance.value = scroll;
 
-    // Attach a scroll event listener to update ScrollTrigger
-    scroll.on("scroll", ScrollTrigger.update);
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
 
-    // Set up ScrollTrigger scrollerProxy
-    ScrollTrigger.scrollerProxy("[data-scroll-container]", {
-      scrollTop(value) {
-        return arguments.length
-          ? scroll.scrollTo(value, 0, 0)
-          : scroll.scroll.instance.scroll.y;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight
-        };
-      }
-    });
+    requestAnimationFrame(raf);
 
-    ScrollTrigger.addEventListener("refresh", () => scroll.update());
-    ScrollTrigger.refresh();
+    lenis.on('scroll', ScrollTrigger.update)
+
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000)
+    })
+
+    gsap.ticker.lagSmoothing(0)
   });
 };
 
+// Banner animation
+export const useBannerAnimation = () => {
+  const view = ref(null);
+  const homeHeroText = ref(null)
+  const homeHeroHead = ref(null);
+  const homePlayer = ref(null);
+  const homePlayerReel = ref(null);
+
+  onMounted(() => {
 
 
+    const DOM = {
+      homeHeroText: homeHeroText.value,
+      homePlayer: homePlayer.value,
+      homePlayerReel: homePlayerReel.value,
+
+    };
+    const homeHeroHead = document.querySelector(".c-hm-hero_head");
+
+    const animation = gsap.to(homeHeroHead, {
+      transformOrigin: "center bottom",
+      opacity: 0,
+      yPercent: 150,
+      ease: "power2.inOut",
+      scrollTrigger: {
+        trigger: homeHeroHead,
+        scrub: 0.3,
+        start: "top top+=30",
+        // markers: true,
+      }
+    });
 
 
+    const timeline = gsap.timeline();
+
+    timeline
+      .set(view.value, { opacity: 1 })
+      .set(DOM.homeHeroText, { opacity: 0 })
+      .set(DOM.homePlayer, {
+        yPercent: -40,
+        z: 150,
+        transformOrigin: "center bottom"
+      })
+      .to(
+        DOM.homePlayer,
+        {
+          duration: 1.5,
+          yPercent: 0,
+          z: 0,
+          ease: "expo.inOut",
+          clearProps: "all"
+        },
+        "S"
+      )
+      .to(DOM.homeHeroText, { opacity: 1 }, "S+=0.5")
+      .set(DOM.homePlayer, { clearProps: "all" })
+      .add(timeline.kill);
+
+    const scrollTimeline = gsap.timeline({
+      scrollTrigger: {
+        trigger: DOM.homePlayer,
+        scrub: true,
+        start: "top top+=10",
+        pin: true,
+        pinType: "transform",
+        pinSpacing: false,
+        // markers: true,
+      }
+    });
+
+    scrollTimeline
+      .to(DOM.homePlayerReel, { paddingTop: 100 }, "A")
+      .to(DOM.homePlayer, { height: 100 }, "A");
+  });
+  return { view, homeHeroText, homeHeroHead, homePlayer, homePlayerReel };
+
+}
 
 
+export const Cards = () => {
 
-// export const testCode = () => {
-//   onMounted(() => {
-//     const view = document.querySelector("#homepage");
-//     const DOM = {
-//       homePlayer: view.querySelector(".c-hm-hero_media"),
-//       homePlayerReel: view.querySelector(".hm-reel"),
-//     };
+  //Move Thumbs Gallery			
+  onMounted(() => {
+    if ($('.move-thumbs-wrapper').length > 0) {
 
-//     gsap.set(view, { opacity: 1 });
+      if (!isMobile()) {
 
-//     gsap.to(DOM.homePlayer, {
-//       duration: 1.5,
-//       yPercent: 0,
-//       z: 0,
-//       ease: "expo.inOut",
-//       clearProps: "all",
-//     });
+        function animateElements(moveThumbs, overlappingThumbs, moveThumbsParent) {
 
-//     gsap.to(
-//       [DOM.homePlayerReel, DOM.homePlayer],
-//       {
-//         duration: 1.5,
-//         paddingTop: 100,
-//         height: 100,
-//         ease: "expo.inOut",
-//       },
-//       "A"
-//     );
+          moveThumbs.forEach((moveThumb, index) => {
+            const state = Flip.getState(moveThumb);
+            overlappingThumbs[index].appendChild(moveThumb);
 
-//     gsap.scrollTrigger({
-//       scroller: "[data-scroll-container]",
+            const moveAnimation = Flip.from(state, {
+              duration: 1,
+              ease: 'power4.inOut',
+            });
 
-//       trigger: DOM.homePlayer,
-//       scrub: true,
-//       start: "top top+=30",
-//       pin: true,
-//       pinType: "transform",
-//       pinSpacing: false,
-//     });
+            const startOffset = moveThumbsParent[index].dataset.start;
+            const endOffset = moveThumbsParent[index].dataset.stop;
+
+            ScrollTrigger.create({
+              trigger: moveThumbsParent[index], // Folosim fiecare element parent ĂŽn parte
+              start: startOffset,
+              end: endOffset,
+              scrub: true,
+              animation: moveAnimation,
+            });
+
+          });
+
+          gsap.to(startThumbsCaption, {
+            scrollTrigger: {
+              trigger: startThumbsCaption,
+              start: function () {
+                const startPin = (window.innerHeight - startThumbsCaption.offsetHeight) / 2;
+                return "top +=" + startPin;
+              },
+              end: function () {
+                const durationHeight = window.innerHeight;
+                return "+=" + durationHeight;
+              },
+              pin: true,
+              pinSpacing: false,
+              scrub: true,
+            },
+            opacity: 0,
+            ease: "power1.inOut",
+          });
+
+        }
 
 
-//   })
+        const moveThumbsWrapper = document.querySelector('.move-thumbs-wrapper');
+        const startThumbsCaption = document.querySelector('.start-thumbs-caption');
+        const moveThumbsParent = document.querySelectorAll('.start-thumbs-wrapper .start-move-thumb');
+        const moveThumbs = document.querySelectorAll('.start-thumbs-wrapper .move-thumb-inner');
+        const endThumbsWrapper = document.querySelector('.end-thumbs-wrapper');
+        const overlappingThumbs = document.querySelectorAll('.end-thumbs-wrapper .end-move-thumb');
+
+        animateElements(Array.from(moveThumbs), Array.from(overlappingThumbs), Array.from(moveThumbsParent));
+
+      }
+
+    }
+  })
+
+}
+
+/* ===================================
+  Infinite looping animation
+  ====================================== */
+export const loopAnim = () => {
+  onMounted(() => {
 
 
+    const wrapperEl = document.querySelector('.looping-wrapper') || false;
+    const numberOfEls = 100;
+    const duration = 6000;
+    const delay = duration / numberOfEls;
+
+    let tl = anime.timeline({
+      duration: delay,
+      complete: function () {
+        tl.restart();
+      }
+    });
+
+    function createEl(i) {
+      let el = document.createElement('div');
+      const rotate = (360 / numberOfEls) * i;
+      const translateY = -50;
+      el.classList.add('el');
+      el.style.transform = 'rotate(' + rotate + 'deg) translateY(' + translateY + '%)';
+      tl.add({
+        begin: function () {
+          anime({
+            targets: el,
+            rotate: [rotate + 'deg', rotate + 10 + 'deg'],
+            translateY: [translateY + '%', translateY + 10 + '%'],
+            scale: [1, 1.25],
+            easing: 'easeInOutSine',
+            direction: 'alternate',
+            duration: duration * .1
+          });
+        }
+      });
+      if (wrapperEl)
+        wrapperEl.appendChild(el);
+    }
+
+    for (let i = 0; i < numberOfEls; i++)
+      createEl(i);
+
+  })
+}
 
 
+export const titleAnim = () => {
+  onMounted(() => {
+    const zm = gsap.matchMedia();
 
-// }
+    zm.add("(min-width: 1200px)", () => {
+      if (document.querySelector('.tp-hero-title-wrap')) {
+        // Set initial properties for the image
+        gsap.set(".tp-zoom-img", { scale: 0, opacity: 0 });
+
+        // Define the animation
+        gsap.to(".tp-zoom-img", {
+          scrollTrigger: {
+            trigger: ".tp-hero-title-wrap",
+            start: "top 10%",
+            // start: "center center",
+            // markers: true
+          },
+          duration: 1.5,
+          ease: "none",
+          scale: 1,
+          opacity: 1,
+        });
+      }
+    });
+
+  })
+}
+
 
 
 
@@ -188,7 +359,6 @@ export const revealLetter = () => {
     gsap.to(letters, {
       opacity: 0,
       scrollTrigger: {
-        scroller: "[data-scroll-container]",
 
         trigger: targetParagraphs[0],
         start: '-1000px',
@@ -219,7 +389,6 @@ export const sectionTitleAnim = () => {
     splitTitleLines.value.forEach((splitTextLine) => {
       const tl = gsap.timeline({
         scrollTrigger: {
-          scroller: "[data-scroll-container]",
           trigger: splitTextLine,
           start: "top 90%",
           end: "bottom 60%",
@@ -261,7 +430,6 @@ export const wordSlide = () => {
   function createScrollTrigger(triggerElement, timeline) {
     // Reset tl when scroll out of view past bottom of screen
     ScrollTrigger.create({
-      scroller: "[data-scroll-container]",
       trigger: triggerElement,
       start: 'top bottom',
       onLeaveBack: () => {
@@ -271,7 +439,6 @@ export const wordSlide = () => {
     });
     // Play tl when scrolled into view (60% from top of screen)
     ScrollTrigger.create({
-      scroller: "[data-scroll-container]",
       trigger: triggerElement,
       start: 'top 60%',
       onEnter: () => timeline.play(),
@@ -320,7 +487,6 @@ export const imgRevel = () => {
       let image = img_reveal.querySelector("img");
       let tl = gsap.timeline({
         scrollTrigger: {
-          scroller: "[data-scroll-container]",
           trigger: img_reveal,
           start: "top 50%",
         }
@@ -369,76 +535,7 @@ export const heroText = () => {
 
 
 
-// export const bgColor = () => {
 
-//   /* SMOOTH SCROLL */
-//   // gsap.to(window, {
-//   //   scrollTo: {
-//   //     y: ".page-wrapper",
-//   //     offsetY: 100, // Adjust this value based on your layout
-//   //   },
-//   //   duration: 1, // Adjust the duration as needed
-//   //   ease: 'power2.inOut',
-//   //   scrollTrigger: {
-//   //     trigger: ".page-wrapper",
-//   //     start: "top top",
-//   //     end: "bottom bottom",
-//   //     scrub: true,
-//   //   },
-//   // });
-
-//   /* COLOR CHANGER */
-//   document.addEventListener("DOMContentLoaded", function () {
-//     const scrollColorElems = document.querySelectorAll("[data-bgcolor]");
-//     scrollColorElems.forEach((colorSection, i) => {
-//       const prevBg = i === 0 ? "" : scrollColorElems[i - 1].dataset.bgcolor;
-//       const prevText = i === 0 ? "" : scrollColorElems[i - 1].dataset.textcolor;
-
-//       ScrollTrigger.create({
-//         trigger: colorSection,
-//         start: "top 50%",
-//         onEnter: () =>
-//           gsap.to("body", {
-//             backgroundColor: colorSection.dataset.bgcolor,
-//             color: colorSection.dataset.textcolor,
-//             overwrite: "auto"
-//           }),
-//         onLeaveBack: () =>
-//           gsap.to("body", {
-//             backgroundColor: prevBg,
-//             color: prevText,
-//             overwrite: "auto"
-//           })
-//       });
-//     });
-//   });
-
-// }
-
-
-
-
-
-
-
-// export const test = () => {
-
-//   // onMounted(() => {
-//   //   if (document.getElementById('smooth-wrapper2')) {
-
-//   //     let smoother = ScrollSmoother.create({
-//   //       wrapper: "#smooth-wrapper2",
-//   //       smooth: 3,
-//   //       ease: "Power3.easeOut",
-//   //       ignoreMobileResize: true,
-
-//   //       // seconds it takes to "catch up" to native scroll position
-//   //       effects: true // look for data-speed and data-lag attributes on elements and animate accordingly
-//   //     });
-//   //   }
-//   // })
-
-// }
 /*======================================
 33. Paragraph Animation
 ========================================*/
@@ -461,7 +558,6 @@ export const paraAnimation = () => {
 
         const splitTimeline = gsap.timeline({
           scrollTrigger: {
-            scroller: "[data-scroll-container]",
             trigger: elem,
             scrub: false,
             pin: false,
@@ -608,7 +704,6 @@ export const btnStickyScroll = () => {
   const initScrollTrigger = () => {
     if (testInner <= 991) {
       ScrollTrigger.create({
-        scroller: "[data-scroll-container]",
 
         trigger: '.bd-position-sticky',
         start: '-100 top',
@@ -656,7 +751,6 @@ export const splitTextAnimation = () => {
         delay: 0.5,
 
         scrollTrigger: {
-          scroller: "[data-scroll-container]",
           trigger: element,
           start: 'bottom 100%-=50px'
         }

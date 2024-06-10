@@ -75,7 +75,8 @@
 
                             <a href="cv/chetan-dhargalkar-cv.png" class="resume-btn" download>
                                 <div class="inner-circle">
-                                    <img class="image-text" src="../assets/images/illustration/download-circel-white.png"
+                                    <img class="image-text"
+                                        src="../assets/images/illustration/download-circel-white.png"
                                         alt="image not found">
                                     <span class="download-icon">
                                         <v-icon name="bi-cloud-download" scale="3" fill="#14cf93"></v-icon>
@@ -92,6 +93,47 @@
 
     </section>
     <!-- Resume Area end -->
+
+
+
+    <div class="container-fluid">
+        <div class="sticky-container-wrapper">
+            <div id="w-node-cf0cb765-d900-141b-76de-0d17009807fd-7b48cd91" class="sticky-content-block _01"><img
+                    src="https://assets-global.website-files.com/663c9ea3db426e2f7b48cd90/663d042423b4805ca920f21b_service-icon-01.svg"
+                    loading="lazy" alt="" class="service-icon">
+                <h2 class="service-title">UI/Ux<br>Design</h2>
+                <div class="spacer-medium"></div>
+                <p class="text-size-regular">creating intuitive and engaging interfaces tha prioritize the user
+                    experience,
+                    focusing on usability</p>
+            </div>
+            <div id="w-node-cf0cb765-d900-141b-76de-0d1700980803-7b48cd91" class="sticky-content-block _02"><img
+                    src="https://assets-global.website-files.com/663c9ea3db426e2f7b48cd90/663d0424983e373aca93d687_service-icon-02.svg"
+                    loading="lazy" alt="" class="service-icon">
+                <h2 class="service-title">Visual<br>Identity</h2>
+                <div class="spacer-medium"></div>
+                <p class="text-size-regular">developing cohesive brand identities by designing logos, color, schemes,
+                    typography and visual elements</p>
+            </div>
+            <div id="w-node-cf0cb765-d900-141b-76de-0d1700980809-7b48cd91" class="sticky-content-block _03"><img
+                    src="https://assets-global.website-files.com/663c9ea3db426e2f7b48cd90/663d0424f7e1095c6f890c71_service-icon-03.svg"
+                    loading="lazy" alt="" class="service-icon">
+                <h2 class="service-title">Digital<br>Marketing</h2>
+                <div class="spacer-medium"></div>
+                <p class="text-size-regular">designing assets and materials for digital markting campaigns to
+                    communicate
+                    messages effectively</p>
+            </div>
+            <div id="w-node-cf0cb765-d900-141b-76de-0d170098080f-7b48cd91" class="sticky-content-block _04"><img
+                    src="https://assets-global.website-files.com/663c9ea3db426e2f7b48cd90/663d042419bdb4785baa9fee_service-icon-04.svg"
+                    loading="lazy" alt="" class="service-icon">
+                <h2 class="service-title">Website<br>Design</h2>
+                <div class="spacer-medium"></div>
+                <p class="text-size-regular">Creation of visually appealing and functional websites, adapted to clients'
+                    needs and easy navigation</p>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -124,4 +166,81 @@ sectionTitleAnim();
 </script>
 
 
-<style></style>
+<style scoped>
+.service-title {
+    font-size: 3rem;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+.sticky-container-wrapper {
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+    flex-direction: row;
+    grid-template-rows: auto;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-auto-columns: 1fr;
+    justify-content: center;
+    align-items: flex-start;
+    display: grid;
+}
+
+.sticky-content-block {
+    border: 1px solid #000;
+    background-color: #f95d2d;
+
+    width: 100%;
+    padding: 2.5rem 1.5rem;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 10vh;
+}
+
+.sticky-content-block._02 {
+    margin-top: 80vh;
+}
+
+.sticky-content-block._03 {
+    margin-top: 140vh;
+}
+
+.sticky-content-block._04 {
+    margin-top: 200vh;
+}
+
+.service-icon {
+    height: 3rem;
+    margin-bottom: 1.5rem;
+}
+
+@media screen and (max-width: 991px) {
+    .sticky-container-wrapper {
+        flex-direction: column;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .sticky-content-block._02 {
+        margin-top: 10vh;
+    }
+
+    .sticky-content-block._03 {
+        margin-top: 15vh;
+    }
+
+    .sticky-content-block._04 {
+        margin-top: 25vh;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .sticky-container-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    .sticky-content-block._02,
+    .sticky-content-block._03,
+    .sticky-content-block._04 {
+        margin-top: 5vh;
+    }
+}
+</style>

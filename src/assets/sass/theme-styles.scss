@@ -11,8 +11,7 @@
 // ==========================================================================
 //  IMPORT COMPONENTS AND HELPERS
 //  ==========================================================================
-@import "components/all";
-@import "helpers";
+// @import "components/all";@import "helpers";
 
 // ==========================================================================
 //  IMPORT COMPONENTS AND HELPERS
@@ -30,3 +29,74 @@
 @import "pages/all";
 
 @import "fonts";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+// Lenis
+
+html.lenis,
+html.lenis body {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+.looping-wrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1px;
+    height: 100vh;
+    left: 50%;
+    top: 0;
+
+    .el {
+        position: absolute;
+        opacity: 1;
+        width: 2px;
+        height: 24vh;
+        margin-top: -18vh;
+        transform-origin: 50% 100%;
+        background: #beff01;
+    }
+}
+
+.looping-wrapper-gray {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 1px;
+    height: 100vh;
+    left: 50%;
+    top: 0;
+
+    .el {
+        position: absolute;
+        opacity: 1;
+        width: 2px;
+        height: 24vh;
+        margin-top: -18vh;
+        transform-origin: 50% 100%;
+        background: #beff01;
+    }
+}

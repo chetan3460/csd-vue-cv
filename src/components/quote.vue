@@ -1,5 +1,5 @@
 <template>
-    <section class="quote-section" data-scroll-section>
+    <section class="quote-section">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">

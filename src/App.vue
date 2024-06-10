@@ -1,17 +1,10 @@
 <template>
-  <div class="page-wrapper" ref="containerRef" data-scroll-container>
+  <div class="page-wrapper bg-[#171718]">
     <div class="body-overlay"></div>
     <ScrollTopVue />
     <Cursor />
-    <Navbar />
+    <!-- <Navbar /> -->
     <router-view />
-
-    <!-- <div id="smooth-wrapper">
-      <div id="smooth-content">
-
-      </div>
-    </div> -->
-
   </div>
 </template>
 
