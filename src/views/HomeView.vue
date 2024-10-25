@@ -1,12 +1,17 @@
 <template>
-  <div data-scroll-container>
+  <div>
     <!-- <Home /> -->
     <Banner></Banner>
-    <Quote />
-    <About />
+    <div class="z-[1] bg-[var(--light-gray)] perspective-[1000px] w-full relative">
+      <div class="hero__gradient"></div>
+      <Quote />
+      <!-- <About /> -->
+    </div>
+
+    <!-- 
     <Resume />
     <Skills />
-    <Cta />
+    <Cta />  -->
   </div>
 </template>
 <script setup>

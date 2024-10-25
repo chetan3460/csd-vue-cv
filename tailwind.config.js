@@ -53,8 +53,8 @@ module.exports = {
       lg_992: '992px',
     },
     fontFamily: {
-      'Syne': ['"Syne", sans-serif'],
-      'gallery_modernregular': ['"gallery_modernregular", sans-serif'],
+      'Phudu': ['"Phudu", serif;'],
+      'OpenSans': ['"Open Sans", sans-serif'],
     },
     extend: {
       colors: {
@@ -63,15 +63,7 @@ module.exports = {
         grey: "rgba(51, 51, 51, 1)",
         white: "#F5F7F5",
       },
-      keyframes: {
-        rotate2: {
-          '0%': { transform: 'rotate(0deg)' },
-          '100%': { transform: 'rotate(360deg)' },
-        },
-      },
-      animation: {
-        rotate2: 'rotate2 5s linear infinite',
-      },
+
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
@@ -94,7 +86,7 @@ module.exports = {
       addBase({
         body: {
           color: theme("colors.grey"),
-          background: theme("colors.dark"),
+          // background: theme("colors.dark"),
           fontFamily: theme("fontFamily.Syne"),
           lineHeight: "28px",
           margin: "0",
@@ -111,7 +103,7 @@ module.exports = {
           lineHeight: "1.1",
           letterSpacing: "normal",
           fontWeight: "400",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
+          fontFamily: theme("fontFamily.Phudu"),
           color: theme("colors.grey"),
           "@media (min-width: 640px)": {
             fontSize: "7rem",

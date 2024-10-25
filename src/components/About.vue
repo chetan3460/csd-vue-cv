@@ -1,141 +1,17 @@
 <template>
-    <!-- about inner area start  -->
-    <section class="int-inab-area pt-150 pb-150">
+    <section class="about-me--block">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intDesigner-about__sec-title-wrapper text-start about-section-title">
-                        <h3 class="int-inab-sub-title mb-30   split-title-line">About me</h3>
-                        <h2 data-scroll class="int-inab-title   words-slide-from-right text-split">Hi, I'm
-                            Chetan
-                            Frontend Developer </h2>
-                        <div class="tp-service-title-box p-relative">
-                            <span class="tp-section-subtitle subtitle-position tp-char-animation">I Think a lot</span>
-                            <h4 class="tp-section-title tp-char-animation">
-                                Thoughtful<br>
-                                <span>Process</span>
-                            </h4>
-                        </div>
-                    </div>
-                </div>
+            <div class="about-me--main-wrapper">
+                <h2
+                    class="text-[300px] leading-[0.9em] tracking-[-15px] mt-[0.2em] mb-0 ml-0 mr-0 text-[#B9DFFF] align-middle transition-colors duration-300 font-extrabold uppercase">
+                    HI, I'm
+                    <span class="block">Chetan</span>
+                </h2>
             </div>
-            <div class="row">
 
-                <div class="col-lg-5">
-
-                    <div class="about-img rel">
-                        <div class="cf_image intDesigner-about__thumb img_anim_reveal">
-                            <img src="../assets/images/about/curly-hair-man.png" alt="">
-                        </div>
-
-                        <div class="fashion__abouthero-circle">
-                            <div class="subscribe-circle-2 cf_badge has_fade_anim" data-scroll
-                                data-scroll-direction="vertical" data-scroll-speed="5" data-scroll-delay=".7"
-                                data-scroll-repeat>
-                                <span>Based in <br> New York</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-5">
-                    <div class="intDesigner-about__text-wrapper has_fade_anim">
-
-                        <div class="cf_text intDesigner-about__text has_fade_anim">
-                            <p>With 4 years of experience and a strong foundation in web development, I'm a dedicated
-                                developer. I'm skilled in languages like JavaScript, TypeScript, and CSS, and I'm
-                                enthusiastic about staying informed on the latest trends while eagerly embracing new
-                                technologies and frameworks.
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
-    <!-- about inner area end  -->
 
-
-    <!-- Row -->
-    <div class="content-row text-align-center dark-section" data-bgcolor="#0c0c0c">
-
-
-        <div class="move-thumbs-wrapper">
-
-            <div class="start-thumbs-caption">
-                <h2 class="primary-font-title big-title has-mask-fill">Recognitions</h2>
-                <p>OUR PRESTIGIOUS DESIGN AWARDS</p>
-            </div>
-
-
-
-            <div class="start-thumbs-wrapper">
-
-                <div class="start-move-thumb" data-start="top 120%" data-stop="600%">
-                    <div class="move-thumb-inner">
-                        <div class="section-image">
-                            <img src="http://clapat.ro/themes/montoya/images/aw01.jpg" class="item-image" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="start-move-thumb" data-start="top 90%" data-stop="1100%">
-                    <div class="move-thumb-inner">
-                        <div class="section-image">
-                            <img src="http://clapat.ro/themes/montoya/images/aw01.jpg" class="item-image" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="start-move-thumb" data-start="top 90%" data-stop="400%">
-                    <div class="move-thumb-inner">
-                        <div class="section-image">
-                            <img src="http://clapat.ro/themes/montoya/images/aw01.jpg" class="item-image" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="start-move-thumb" data-start="top 120%" data-stop="600%">
-                    <div class="move-thumb-inner">
-                        <div class="section-image">
-                            <img src="http://clapat.ro/themes/montoya/images/aw01.jpg" class="item-image" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="start-move-thumb" data-start="top 100%" data-stop="750%">
-                    <div class="move-thumb-inner">
-                        <div class="section-image">
-                            <img src="http://clapat.ro/themes/montoya/images/aw01.jpg" class="item-image" alt="">
-                        </div>
-                    </div>
-                </div>
-
-                <div class="start-move-thumb" data-start="top 40%" data-stop="300%">
-                    <div class="move-thumb-inner">
-                        <div class="section-image">
-                            <img src="http://clapat.ro/themes/montoya/images/aw01.jpg" class="item-image" alt="">
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div class="end-thumbs-wrapper">
-                <div class="end-move-thumb"></div>
-                <div class="end-move-thumb"></div>
-                <div class="end-move-thumb"></div>
-                <div class="end-move-thumb"></div>
-                <div class="end-move-thumb"></div>
-                <div class="end-move-thumb"></div>
-            </div>
-
-        </div>
-
-
-    </div>
-    <!--/Row -->
 
 </template>
 

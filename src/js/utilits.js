@@ -4,7 +4,6 @@ import {
   onMounted
 } from 'vue'
 
-import anime from 'animejs/lib/anime.es.js';
 import chroma from "chroma-js"
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
@@ -57,6 +56,106 @@ export const scrollSmooth = () => {
 };
 
 // Banner animation
+
+
+
+export const heroAnimationControl = () => {
+  // if (window.innerWidth > 625) {
+
+  //   const heroSection = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: '.hero',
+  //       pin: true,
+  //       pinSpacing: false,
+  //       start: 'top top',
+  //       end: 'bottom top',
+  //       scrub: 1,
+  //       ease: 'linear',
+  //     }
+  //   });
+
+  //   heroSection.to('.hero--inner', {
+  //     scale: 0.7,
+  //     stagger: 0.5,
+  //   });
+
+  //   // Replacing jQuery with native JavaScript
+  //   const worksElement = document.querySelector('.works');
+  //   const heroElement = document.querySelector('.hero');
+
+  //   if (worksElement && heroElement) {
+  //     gsap.from(worksElement, {
+  //       scrollTrigger: {
+  //         trigger: worksElement,
+  //         scrub: true,
+  //         start: "top 95%",
+  //         onEnter: () => heroElement.classList.add('hero-disable'),
+  //         onLeaveBack: () => heroElement.classList.remove('hero-disable'),
+  //       },
+  //     });
+  //   }
+  // }
+  if (window.innerWidth > 625) {
+    const heroSection = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.hero',
+        pin: true,
+        pinSpacing: false,
+        start: 'top top',
+        end: 'bottom top',
+        scrub: 1,
+        ease: 'linear',
+      },
+    });
+
+    heroSection.to('.hero--inner', {
+      scale: 0.7,
+      stagger: 0.5,
+    });
+
+    gsap.from(document.querySelector('.works'), {
+      scrollTrigger: {
+        trigger: document.querySelector('.works'),
+        scrub: true,
+        start: 'top 95%',
+        onEnter: () => document.querySelector('.hero').classList.add('hero-disable'),
+        onLeaveBack: () => document.querySelector('.hero').classList.remove('hero-disable'),
+      },
+    });
+  }
+
+};
+
+// Quote
+export const paralaxAnimation = () => {
+  const getParalaxElems = document.querySelectorAll('.paralax--effect');
+  let getParalaxElemsHeight;
+
+  if (window.innerWidth > 770) {
+    getParalaxElemsHeight = 200
+  } else {
+    getParalaxElemsHeight = 140
+  }
+
+  getParalaxElems.forEach(elem => {
+    gsap.from(elem, {
+      scrollTrigger: {
+        trigger: elem,
+        scrub: true,
+        start: "top bottom",
+        end: "+=100%"
+      },
+      height: getParalaxElemsHeight,
+      transformOrigin: "left top",
+      ease: "none",
+    });
+
+  });
+}
+
+
+
+
 export const useBannerAnimation = () => {
   const view = ref(null);
   const homeHeroText = ref(null)
@@ -133,6 +232,108 @@ export const useBannerAnimation = () => {
   return { view, homeHeroText, homeHeroHead, homePlayer, homePlayerReel };
 
 }
+
+// About
+export const stickyElement = () => {
+  function ShowcaseOverlapping() {
+    gsap.utils.toArray('.about-sec').forEach((pinnedSection) => {
+
+      const transformTextsAnim = pinnedSection.querySelectorAll('.sticky-statement2');
+
+      function setImagesProperties() {
+        gsap.set(transformTextsAnim, { height: window.innerHeight });
+      }
+
+      setImagesProperties();
+
+      window.addEventListener('resize', setImagesProperties);
+
+      transformTextsAnim.forEach((transformTextAnim, i, arr) => {
+        const durationMultiplier = arr.length - i - 1;
+
+
+        ScrollTrigger.create({
+          trigger: transformTextAnim,
+          start: function () {
+            const centerPin = (window.innerHeight - transformTextAnim.offsetHeight) / 2;
+            return "top +=" + centerPin;
+          },
+          end: function () {
+            const durationHeight = transformTextAnim.offsetHeight * durationMultiplier + (transformTextAnim.offsetHeight - transformTextAnim.offsetHeight) / 2;
+            return "+=" + durationHeight;
+          },
+          pin: true,
+          pinSpacing: false,
+          scrub: true,
+        });
+
+        const animationProperties = {
+          y: 500,
+          scale: 0.65,
+          opacity: 0,
+          zIndex: 0,
+          duration: 0.05,
+          ease: 0.05,
+          // ease: Linear.easeNone
+        };
+
+        // animationProperties.filter = "blur(10px)";
+
+        ScrollTrigger.create({
+          trigger: transformTextAnim,
+          start: function () {
+            const centerPin = (window.innerHeight - transformTextAnim.offsetHeight) / 2;
+            console.log('center pin', centerPin);
+            return "top top";
+          },
+          end: function () {
+            const durationHeight = transformTextAnim.offsetHeight + (transformTextAnim.offsetHeight - transformTextAnim.offsetHeight) / 2;
+            return "+=" + durationHeight;
+          },
+          scrub: true,
+          animation: gsap.to(transformTextAnim, animationProperties),
+        });
+
+      });
+
+    });
+
+  }
+  ShowcaseOverlapping();
+
+
+
+
+  gsap.to('.services_gategory-heading', {
+    scrollTrigger: {
+      trigger: '.services_right-col',
+      start: '40% top',
+      end: '40% top',
+      toggleActions: 'restart none reverse',
+    },
+    yPercent: -100,
+    duration: 0.5,
+    ease: 'power2.inOut',
+  })
+
+  gsap.from('.slide', {
+    scrollTrigger: {
+      trigger: '.services_right-col',
+      start: '-25% top',
+      end: '80% top',
+      scrub: true,
+      toggleActions: 'restart none reverse',
+    },
+    x: '+=5rem',
+    opacity: 0,
+    duration: 0.5,
+    stagger: 0.2,
+    ease: 'power4.out',
+  })
+
+}
+
+
 
 
 export const Cards = () => {
@@ -521,76 +722,7 @@ export const charAnimation = () => {
   });
 }
 
-// Hero Title
-export const heroText = () => {
-  onMounted(() => {
-    var tl = gsap.timeline();
-    const split = new SplitType(".hero-2__title, .hero-2__subtitle", { type: "chars" })
 
-    tl.from(split.chars, { opacity: 0, y: 50, duration: 1, ease: "back", stagger: 0.05 })
-    tl.fromTo(".secondary-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, "-=1")
-    tl.fromTo(".main-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, ">-0.2")
-  })
-}
-
-
-
-
-/*======================================
-33. Paragraph Animation
-========================================*/
-export const paraAnimation = () => {
-  const deviceWidth = ref(window.innerWidth);
-
-  onMounted(() => {
-    if (deviceWidth.value > 576) {
-      const textIntoView = document.querySelectorAll(".p-text");
-
-      textIntoView.forEach((elem) => {
-        const innerSplit = new SplitType(elem, {
-          type: "lines",
-          linesClass: "text-line"
-        });
-        const outerSplit = new SplitType(elem, {
-          type: "lines",
-          linesClass: "text-mask"
-        });
-
-        const splitTimeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: elem,
-            scrub: false,
-            pin: false,
-            start: "top 90%",
-            end: "bottom 0%"
-          },
-          onComplete: () => {
-            outerSplit.revert();
-            innerSplit.revert();
-          }
-        });
-
-        splitTimeline
-          .to(innerSplit.lines, {
-            duration: 1.1,
-            autoAlpha: 1,
-            y: 0,
-            ease: "Power4.easeOut",
-            stagger: 0.20
-          })
-          .to(elem, {
-            duration: 0,
-            autoAlpha: 1
-          }, "<");
-      });
-    }
-
-    // Add an event listener to update deviceWidth on window resize
-    window.addEventListener('resize', () => {
-      deviceWidth.value = window.innerWidth;
-    });
-  })
-}
 
 /*======================================
   Custom Cursor 

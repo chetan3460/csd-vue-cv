@@ -1,16 +1,15 @@
 <template>
-  <div class="page-wrapper bg-[#171718]">
-    <div class="body-overlay"></div>
-    <ScrollTopVue />
-    <Cursor />
-    <!-- <Navbar /> -->
-    <router-view />
-  </div>
+  <!-- <div class="body-overlay"></div> -->
+  <!-- <ScrollTopVue /> -->
+  <!-- <Cursor /> -->
+  <Header />
+  <router-view />
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
-import Navbar from '@/components/Navbar.vue'
+import Header from './components/Header.vue';
+
 import Cursor from './components/layout/Cursor.vue'
 import ScrollTopVue from "@/components/layout/ScrollTop.vue";
 
@@ -40,5 +39,3 @@ scrollSmooth();
 
 
 </script>
-
-
