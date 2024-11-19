@@ -1,93 +1,13 @@
-@use "header";
+// @use "header";
+@use "lenis";
 
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Phudu:wght@300..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&family=Phudu:wght@300..900&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 // Lenis
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
-
-.lenis.lenis-smooth {
-  scroll-behavior: auto !important;
-}
-
-.lenis.lenis-smooth [data-lenis-prevent] {
-  overscroll-behavior: contain;
-}
-
-.lenis.lenis-stopped {
-  overflow: hidden;
-}
-
-.lenis.lenis-scrolling iframe {
-  pointer-events: none;
-}
-
-.looping-wrapper {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 1px;
-  height: 100vh;
-  left: 50%;
-  top: 0;
-
-  .el {
-    position: absolute;
-    opacity: 1;
-    width: 2px;
-    height: 24vh;
-    margin-top: -18vh;
-    transform-origin: 50% 100%;
-    background: #beff01;
-  }
-}
-
-.looping-wrapper-gray {
-  position: absolute;
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 1px;
-  height: 100vh;
-  left: 50%;
-  top: 0;
-
-  .el {
-    position: absolute;
-    opacity: 1;
-    width: 2px;
-    height: 24vh;
-    margin-top: -18vh;
-    transform-origin: 50% 100%;
-    background: #beff01;
-  }
-}
-
-#tsparticles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  /* Ensure it is behind other content */
-}
-
-.hero__gradient {
-  background: radial-gradient(circle at 50% 100%, #ff7176 0%, #f5acfd 56.27%);
-  filter: blur(70px);
-  -webkit-transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  width: 130%;
-  height: 300vh;
-  position: absolute;
-  inset: 0 0% auto -15%;
+:root {
+  --accent: #8082f8;
 }

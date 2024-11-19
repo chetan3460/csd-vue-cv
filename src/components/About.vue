@@ -1,252 +1,154 @@
 <template>
-    <section class="about-me--block">
+    <!-- <section class="about-me--block about-sec  relative flex items-center justify-center  py-16">
         <div class="container">
-            <div class="about-me--main-wrapper">
+
+            <div
+                class="about-me--info-wrapper text-center flex flex-col flex-nowrap items-center justify-center gap-10 h-[40vh] w-full overflow-hidden sticky top-0 py-10 pt-20 will-change-transform">
                 <h2
-                    class="text-[300px] leading-[0.9em] tracking-[-15px] mt-[0.2em] mb-0 ml-0 mr-0 text-[#B9DFFF] align-middle transition-colors duration-300 font-extrabold uppercase">
-                    HI, I'm
-                    <span class="block">Chetan</span>
+                    class="sticky-statement2 font-Phudu text-[110px] font-extrabold uppercase leading-[0.8em] tracking-[-0.01em] align-middle transition-colors duration-300 text-[#9f337d]">
+                    More about me
                 </h2>
             </div>
+            <div class="about-bottom-content-wrap flex flex-col justify-center items-center text-center">
+                <div class="img-box  h-[644px] max-w-[638px]  overflow-hidden w-full">
+                    <div class="img-box-inner w-full h-full relative scale-125">
+                        <img class="block w-full h-full object-cover" data-jarallax-element="-20 0"
+                            src="https://adaptivecolorspro.liquid-themes.com/wp-content/uploads/2020/12/Image@2x.jpg"
+                            alt="About">
+                    </div>
+                </div>
+                <div class="about-bottom-content flex flex-col justify-center items-center text-center gap-7 pt-20">
+                    <div class="">
+                        <h4
+                            class="font-Phudu text-[30px] font-bold uppercase leading-none leading-[40px] text-[#9f337d]">
+                            I'M AN
+                            INNOVATIVE DESIGNER AND DIGITAL ARTIST IN TOKYO. <br>MY PASSION FOR MINIMALIST
+                            AESTHETICS, ELEGANT TYPOGRAPHY, <br>AND INTUITIVE DESIGN SHINES THROUGH IN MY WORK.</h4>
+                    </div>
+                    <div class="prose prose-p:text-[#9f337d]">
+                        <p>I'm on the cutting edge of no-code tools that allow me to bring my creative visions to
+                            life. Though my methods may be unconventional, my dedication to the craft is
+                            unparalleled. I thrive on finding <i>"unexpected solutions"</i> and believe that with
+                            the right perspective, design can elevate the human experience.</p>
+                        <p class="responsive-mode">I'm on the edge of no-code tools that allow me to bring my creativity
+                            to
+                            life.</p>
 
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </section> -->
+    <section class="about--block p-5  px-[5%] ">
+        <div class="main--wrapper bg-white py-16 rounded-3xl relative">
+            <div class="text-center max-w-[32rem] mx-auto ">
+                <h2 class="text-8xl uppercase font-Phudu font-bold mb-10">ABOUT ME</h2>
+                <p class="uppercase font-medium">I’m Chetan Dhargalkar,based in Goa a Creative <b>Developer</b> with
+                    over <a class="underline font-bold text-black hover:text-black"
+                        href="https://www.linkedin.com/in/chetan-dhargalkar-882411bb/" target="_blank">5
+                        years
+                        experience</a>.
+                </p>
+                <div>
+                    <h3 class="text-7xl  font-Phudu font-bold py-10">
+                        I can help you
+                        <span class="block">stand out</span>
+                        to make the
+                        <span class="block">website</span>
+                        of your
+                        <span class="block">dreams</span>
+                    </h3>
+                </div>
+                <p>I am passionate about crafting digital solutions with a <b>strong</b> emphasis on <b>design</b>,
+                    <b>usability</b>
+                    and
+                    <b>accessibility</b>. I enjoy creating web experiences that involve meaningful interaction with
+                    the user.
+                </p>
+            </div>
+            <div class="blocks-wrapper">
+                <div class="blocks">
+                    <div v-for="(block, index) in blocks" :key="index" class="block"
+                        :class="{ active: activeBlock === index }" @mouseover="handleMouseOver(index)">
+                        Block {{ index + 1 }}
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-
 </template>
-
-
-
 <script setup>
-import { onMounted, ref } from 'vue';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Flip } from 'gsap/Flip';
 
-gsap.registerPlugin(ScrollTrigger, Flip);
+import handSvg from "../assets/images/hand.webp";
 
-const moveThumbsWrapper = ref(null);
-const startThumbsCaption = ref(null);
-const moveThumbsParent = ref([]);
-const moveThumbs = ref([]);
-const endThumbsWrapper = ref(null);
-const overlappingThumbs = ref([]);
 
-const animateElements = (moveThumbs, overlappingThumbs, moveThumbsParent) => {
-    moveThumbs.forEach((moveThumb, index) => {
-        const state = Flip.getState(moveThumb);
-        overlappingThumbs[index].appendChild(moveThumb);
+import { ref } from "vue";
 
-        const moveAnimation = Flip.from(state, {
-            duration: 1,
-            ease: 'power4.inOut',
-        });
+const blocks = ref(Array(5).fill(null)); // Simulating 5 blocks
+const activeBlock = ref(null); // Tracks the currently active block index
+const resetDuration = 300;
+let timeoutId = null; // Tracks the timeout for the hover effect
 
-        const startOffset = moveThumbsParent[index].dataset.start;
-        const endOffset = moveThumbsParent[index].dataset.stop;
+const handleMouseOver = (index) => {
+    clearTimeout(timeoutId); // Clear any previous timeout
+    activeBlock.value = index; // Set the active block to the current index
 
-        ScrollTrigger.create({
-            trigger: moveThumbsParent[index],
-            start: startOffset,
-            end: endOffset,
-            scrub: true,
-            animation: moveAnimation,
-        });
-    });
-
-    gsap.to(startThumbsCaption.value, {
-        scrollTrigger: {
-            trigger: startThumbsCaption.value,
-            start: () => {
-                const startPin = (window.innerHeight - startThumbsCaption.value.offsetHeight) / 2;
-                return "top +=" + startPin;
-            },
-            end: () => {
-                const durationHeight = window.innerHeight;
-                return "+=" + durationHeight;
-            },
-            pin: true,
-            pinSpacing: false,
-            scrub: true,
-        },
-        opacity: 0,
-        ease: "power1.inOut",
-    });
+    // Remove the active class after the specified duration
+    timeoutId = setTimeout(() => {
+        activeBlock.value = null;
+    }, resetDuration);
 };
-
-const isMobile = () => {
-    const screenWidth = window.innerWidth;
-    console.log(`Screen width detected: ${screenWidth}px`);
-    return screenWidth <= 1024;
-};
-
-onMounted(() => {
-    if (isMobile()) {
-        console.log('Animation disabled for mobile view (<= 1024px)');
-        return; // Exit if on mobile
-    }
-
-    const moveThumbsWrapperElement = document.querySelector('.move-thumbs-wrapper');
-    if (moveThumbsWrapperElement) {
-        console.log('Initializing animations for desktop view (> 1024px)');
-
-        moveThumbsWrapper.value = moveThumbsWrapperElement;
-        startThumbsCaption.value = document.querySelector('.start-thumbs-caption');
-        moveThumbsParent.value = document.querySelectorAll('.start-thumbs-wrapper .start-move-thumb');
-        moveThumbs.value = document.querySelectorAll('.start-thumbs-wrapper .move-thumb-inner');
-        endThumbsWrapper.value = document.querySelector('.end-thumbs-wrapper');
-        overlappingThumbs.value = document.querySelectorAll('.end-thumbs-wrapper .end-move-thumb');
-
-        animateElements(Array.from(moveThumbs.value), Array.from(overlappingThumbs.value), Array.from(moveThumbsParent.value));
-    } else {
-        console.log('.move-thumbs-wrapper element not found.');
-    }
-});
 
 </script>
-
-
-<style scoped>
-/*--------------------------------------------------
-	Move Thumbs Gallery
----------------------------------------------------*/
-
-.move-thumbs-wrapper {
-    margin-left: calc(50% - 50vw) !important;
-    margin-right: calc(50% - 50vw) !important;
-    max-width: 1000% !important;
-    width: 100vw !important;
-}
-
-.start-thumbs-caption {
-    position: relative;
-    width: 100%;
-    height: 50vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.start-thumbs-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
+<style>
+.blocks-wrapper {
+    z-index: 100;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
     flex-wrap: wrap;
-    box-sizing: border-box;
-    padding: 0 40px;
-}
-
-.start-move-thumb {
-    box-sizing: border-box;
-    position: relative;
-    width: calc(25% - 80px);
-    height: calc(25vw - 40px);
-    margin: 0 40px;
-    margin-bottom: 40px;
-}
-
-.start-move-thumb:nth-of-type(3n + 2) {
-    width: calc(15% - 80px);
-    height: calc(15vw - 40px);
-    margin-top: 50vh;
-}
-
-.start-move-thumb:nth-of-type(3n + 3) {
-    width: calc(35% - 80px);
-    height: calc(35vw - 40px);
-    margin-top: 25vh;
-}
-
-.start-move-thumb .overlapping-image-inner {
+    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
+    grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: row;
+    justify-content: space-between;
     width: 100%;
     height: 100%;
-    position: absolute;
-    top: 0;
-}
-
-.end-move-thumb .move-thumb-inner {
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-}
-
-.rounded-borders .start-move-thumb .move-thumb-inner,
-.rounded-borders .end-move-thumb .move-thumb-inner {
-    border-radius: 12px;
-    overflow: hidden;
-}
-
-.end-thumbs-wrapper {
     display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-top: 100vh;
-    padding-left: 40px;
-    padding-right: 40px;
-    box-sizing: border-box;
+    position: absolute;
+    top: 0%;
+    bottom: 0%;
+    left: 0%;
+    right: 0%;
 }
 
-.end-move-thumb {
-    box-sizing: border-box;
+.block {
+    width: 75px;
+    height: 75px;
+    opacity: 0;
+    mix-blend-mode: hard-light;
+    /* background: #0c0c0c; */
+    background: #8C24C5;
+    transition: opacity 0.3 ease-in;
+}
+
+.block {
+    z-index: 50;
+    opacity: 0;
+    mix-blend-mode: hard-light;
+    transition: opacity .3s ease-in;
     position: relative;
-    width: calc(33.33% - 80px);
-    height: calc(33.33vw - 80px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 40px;
 }
 
-
-@media only screen and (max-width: 1466px) {
-    .start-move-thumb:nth-of-type(3n + 2) {
-        width: calc(15% - 60px);
-        height: calc(15vw - 30px);
-        margin-top: 50vh;
-    }
-}
-
-@media only screen and (max-width: 1466px) {
-    .start-move-thumb {
-        width: calc(25% - 60px);
-        height: calc(25vw - 30px);
-        margin: 0 30px;
-        margin-bottom: 30px;
-    }
-}
-
-@media only screen and (max-width: 1024px) {
-
-    .start-move-thumb,
-    .start-move-thumb:nth-of-type(3n+2),
-    .start-move-thumb:nth-of-type(3n+3) {
-        width: calc(33.33% - 40px);
-        height: calc(33.33vw - 40px);
-        margin: 25px 20px;
-    }
-}
-
-@media only screen and (max-width: 767px) {
-
-    .start-move-thumb,
-    .start-move-thumb:nth-of-type(3n+2),
-    .start-move-thumb:nth-of-type(3n+3) {
-        width: calc(50% - 30px);
-        height: calc(50vw - 30px);
-        margin: 10px 15px;
-    }
-}
-
-@media only screen and (max-width: 479px) {
-
-    .start-move-thumb,
-    .start-move-thumb:nth-of-type(3n+2),
-    .start-move-thumb:nth-of-type(3n+3) {
-        width: calc(50% - 20px);
-        height: calc(50vw - 20px);
-        margin: 5px 10px;
-    }
-}
+/* .paralax--effect {
+    position: absolute;
+    width: 100%;
+    left: 0;
+    top: calc(100% - 2px);
+    transform: translateY(99%);
+    z-index: 4;
+} */
 </style>

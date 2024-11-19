@@ -138,7 +138,7 @@
 
 <script setup>
 import { onMounted } from 'vue';
-import { btnStickyScroll } from '@/js/utilits'
+// import { btnStickyScroll } from '@/js/utilits'
 import { sectionTitleAnim } from '@/js/utilits';
 
 import {

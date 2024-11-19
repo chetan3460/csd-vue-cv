@@ -58,7 +58,7 @@ module.exports = {
     },
     extend: {
       colors: {
-        dark: "#121212",
+        dark: "#000",
         black: "rgba(0, 0, 0, 1)",
         grey: "rgba(51, 51, 51, 1)",
         white: "#F5F7F5",
@@ -82,12 +82,13 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    plugin(({ addComponents, addBase, theme }) => {
+    plugin(({ addBase, theme }) => {
       addBase({
         body: {
           color: theme("colors.grey"),
-          // background: theme("colors.dark"),
+          background: theme("colors.dark"),
           fontFamily: theme("fontFamily.Syne"),
+          fontSize: "18px",
           lineHeight: "28px",
           margin: "0",
           fontWeight: "normal",
@@ -97,149 +98,7 @@ module.exports = {
           overflowX: "hidden",
         },
       });
-      addComponents({
-        h1: {
-          fontSize: "5rem",
-          lineHeight: "1.1",
-          letterSpacing: "normal",
-          fontWeight: "400",
-          fontFamily: theme("fontFamily.Phudu"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "7rem",
-            lineHeight: "1",
-            letterSpacing: "-0.5px",
-          },
-          "@media (min-width: 1024px)": {
-            fontSize: "5.6rem",
-            lineHeight: "1",
-            letterSpacing: "-0.5px",
-          },
-          "@media (min-width: 1199px)": {
-            fontSize: "6.5rem",
-            lineHeight: "1",
-            letterSpacing: "-0.5px",
-          },
-          "@media (min-width: 1200px)": {
-            fontSize: "6.7rem",
-            lineHeight: "1",
-            letterSpacing: "-0.5px",
-          },
-          "@media (min-width: 1400px)": {
-            fontSize: "8rem",
-            lineHeight: "1",
-            letterSpacing: "-0.5px",
-          },
-          "@media (min-width: 1700px)": {
-            fontSize: "11rem",
-            lineHeight: "1",
-            letterSpacing: "-0.5px",
-          },
-        },
-        h2: {
-          fontSize: "4rem",
-          lineHeight: "1.1",
-          fontWeight: "400",
-          letterSpacing: "-0.5px",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "6rem",
-          },
-        },
-        h3: {
-          fontSize: "2.6rem",
-          fontWeight: "400",
-          lineHeight: "1.1",
-          letterSpacing: "-0.5px",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "4.6rem",
-          },
-        },
-        h4: {
-          fontSize: "3.2rem",
-          lineHeight: "1.3",
-          fontWeight: "400",
-          letterSpacing: "normal",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-        },
-        h5: {
-          fontSize: "2.6rem",
-          lineHeight: "1.1",
-          fontWeight: "400",
-          letterSpacing: "normal",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "3rem",
-          },
-        },
-        h6: {
-          fontSize: "2.4rem",
-          lineHeight: "1.1",
-          fontWeight: "400",
-          letterSpacing: "normal",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-        },
-        ".h1": {
-          fontSize: "4rem",
-          lineHeight: "1.1",
-          letterSpacing: "normal",
-          fontWeight: "400",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "8rem",
-            lineHeight: "1.2",
-            letterSpacing: "-0.5px",
-          },
-        },
-        ".h2": {
-          fontSize: "4rem",
-          lineHeight: "1.1",
-          fontWeight: "400",
-          letterSpacing: "-0.5px",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "6rem",
-          },
-        },
-        ".h3": {
-          fontSize: "2.6rem",
-          fontWeight: "400",
-          lineHeight: "1.1",
-          letterSpacing: "-0.5px",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-          "@media (min-width: 640px)": {
-            fontSize: "4.6rem",
-          },
-        },
-        ".h4": {
-          fontSize: "3.2rem",
-          lineHeight: "1.3",
-          fontWeight: "400",
-          letterSpacing: "normal",
-          fontFamily: theme("fontFamily.gallery_modernregular"),
-          color: theme("colors.grey"),
-        },
-        p: {
-          fontSize: "1.6rem",
-          fontWeight: "300",
-          lineHeight: "1.2",
-          letterSpacing: "0.5px",
-          color: theme("colors.black"),
-        },
-        a: {
-          textDecoration: "none",
-          cursor: "pointer",
-        },
-      });
+
     }),
   ],
 }

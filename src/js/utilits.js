@@ -1,7 +1,9 @@
 // GSAP 
 import {
   ref,
-  onMounted
+  onMounted,
+  onUnmounted,
+  nextTick
 } from 'vue'
 
 import chroma from "chroma-js"
@@ -12,6 +14,8 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import { Power2 } from 'gsap'
 import Lenis from 'lenis'
 import { Flip } from 'gsap/Flip';
+import * as imagesLoaded from 'imagesloaded';
+// import imagesLoaded from 'imagesloaded'
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
@@ -22,79 +26,92 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
 
 // Lenis Scroll 
 export const scrollSmooth = () => {
-  onMounted(() => {
+  // onMounted(() => {
 
 
 
-    const lenis = new Lenis({
-      lerp: 0.1,
-      smooth: true,
-      // direction: 'vertical',
-      // gestureDirection: 'vertical',
-      // smoothTouch: false,
-      touchMultiplier: 2,
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  //   const lenis = new Lenis({
+  //     lerp: 0.1,
+  //     smooth: true,
+  //     // direction: 'vertical',
+  //     // gestureDirection: 'vertical',
+  //     // smoothTouch: false,
+  //     touchMultiplier: 2,
+  //     duration: 1.2,
+  //     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t))
+  //   });
+
+
+  //   function raf(time) {
+  //     lenis.raf(time);
+  //     requestAnimationFrame(raf);
+  //   }
+
+  //   requestAnimationFrame(raf);
+
+  //   lenis.on('scroll', ScrollTrigger.update)
+
+  //   gsap.ticker.add((time) => {
+  //     lenis.raf(time * 1000)
+  //   })
+
+  //   gsap.ticker.lagSmoothing(0)
+  // });
+  let lenis; // Variable to hold the Lenis instance
+
+  // Function to initialize Lenis for smooth scrolling
+  const initSmoothScrolling = () => {
+    // Instantiate the Lenis object with specified properties
+    lenis = new Lenis({
+      lerp: 0.1, // Lower values create a smoother scroll effect
+      smoothWheel: true, // Enables smooth scrolling for mouse wheel events
     });
 
+    // Update ScrollTrigger each time the user scrolls
+    lenis.on('scroll', () => ScrollTrigger.update());
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
+    // Define a function to run at each animation frame
+    const scrollFn = (time) => {
+      lenis.raf(time); // Run Lenis' requestAnimationFrame method
+      requestAnimationFrame(scrollFn); // Recursively call scrollFn on each frame
+    };
 
-    requestAnimationFrame(raf);
+    // Start the animation frame loop
+    requestAnimationFrame(scrollFn);
+  };
+  onMounted(() => {
+    // Initialize smooth scrolling when the component is mounted
+    initSmoothScrolling();
+  });
 
-    lenis.on('scroll', ScrollTrigger.update)
+};
 
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000)
-    })
-
-    gsap.ticker.lagSmoothing(0)
+export const preloadImages = (selector = 'img') => {
+  return new Promise((resolve) => {
+    imagesLoaded(document.querySelectorAll(selector), { background: true }, resolve);
   });
 };
+
+
+
+
+
+
 
 // Banner animation
 
 
 
+
+
+
+
+
+
+
+
 export const heroAnimationControl = () => {
-  // if (window.innerWidth > 625) {
 
-  //   const heroSection = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: '.hero',
-  //       pin: true,
-  //       pinSpacing: false,
-  //       start: 'top top',
-  //       end: 'bottom top',
-  //       scrub: 1,
-  //       ease: 'linear',
-  //     }
-  //   });
-
-  //   heroSection.to('.hero--inner', {
-  //     scale: 0.7,
-  //     stagger: 0.5,
-  //   });
-
-  //   // Replacing jQuery with native JavaScript
-  //   const worksElement = document.querySelector('.works');
-  //   const heroElement = document.querySelector('.hero');
-
-  //   if (worksElement && heroElement) {
-  //     gsap.from(worksElement, {
-  //       scrollTrigger: {
-  //         trigger: worksElement,
-  //         scrub: true,
-  //         start: "top 95%",
-  //         onEnter: () => heroElement.classList.add('hero-disable'),
-  //         onLeaveBack: () => heroElement.classList.remove('hero-disable'),
-  //       },
-  //     });
-  //   }
-  // }
   if (window.innerWidth > 625) {
     const heroSection = gsap.timeline({
       scrollTrigger: {
@@ -304,34 +321,126 @@ export const stickyElement = () => {
 
 
 
-  gsap.to('.services_gategory-heading', {
-    scrollTrigger: {
-      trigger: '.services_right-col',
-      start: '40% top',
-      end: '40% top',
-      toggleActions: 'restart none reverse',
-    },
-    yPercent: -100,
-    duration: 0.5,
-    ease: 'power2.inOut',
-  })
-
-  gsap.from('.slide', {
-    scrollTrigger: {
-      trigger: '.services_right-col',
-      start: '-25% top',
-      end: '80% top',
-      scrub: true,
-      toggleActions: 'restart none reverse',
-    },
-    x: '+=5rem',
-    opacity: 0,
-    duration: 0.5,
-    stagger: 0.2,
-    ease: 'power4.out',
-  })
-
 }
+
+// Journey
+export const JourneyBlock = () => {
+  // function nestedLinesSplit(target, vars) {
+  //   target = gsap.utils.toArray(target);
+  //   if (target.length > 1) {
+  //     let splits = target.map(t => nestedLinesSplit(t, vars)),
+  //       result = splits[0],
+  //       resultRevert = result.revert;
+  //     result.lines = splits.reduce((acc, cur) => acc.concat(cur.lines), []);
+  //     result.revert = () => splits.forEach(s => s === result ? resultRevert() : s.revert());
+  //     return result;
+  //   }
+  //   target = target[0];
+  //   let contents = target.innerHTML;
+  //   gsap.utils.toArray(target.children).forEach(child => {
+  //     let split = new SplitType(child, { type: "lines" });
+  //     split.lines.forEach(line => {
+  //       let clone = child.cloneNode(false);
+  //       clone.innerHTML = line.innerHTML;
+  //       target.insertBefore(clone, child);
+  //     });
+  //     target.removeChild(child);
+  //   });
+  //   let split = new SplitType(target, vars),
+  //     originalRevert = split.revert;
+  //   split.revert = () => {
+  //     originalRevert.call(split);
+  //     target.innerHTML = contents;
+  //   };
+  //   return split;
+  // }
+
+  // nestedLinesSplit();
+  function abtMiles() {
+
+    // Setup
+    const mainItems = document.querySelectorAll('.abt-mil__main-item');
+    const scrollDistance = (mainItems.length + 0.7) * 50;
+    const shipElement = document.querySelector('.abt-mil__ship');
+    const shipImgElement = document.querySelector('.abt-mil__ship img');
+    const shipDistance = (shipElement?.offsetHeight / 2) + (shipImgElement?.offsetHeight / 10 || 0);
+    const windowHeight = window.innerHeight;
+
+    // Set initial position for ship image
+    gsap.set('.abt-mil__ship-img', { y: -shipDistance });
+
+    // Timeline for ship
+    const tlShip = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.abt-mil__wrap',
+        start: 'top bottom',
+        end: `bottom top-=${scrollDistance}%`,
+        scrub: true,
+      }
+    });
+    tlShip.to('.abt-mil__ship-img', { y: shipDistance + windowHeight * 0.35, ease: 'none' });
+
+    // Main inner distance
+    const mainInner = document.querySelector('.abt-mil__main-inner');
+    const mainDistance = mainInner?.offsetHeight - windowHeight * 0.3 || 0;
+    const pinContainer = document.querySelector('.abt-mil-pin-container');
+    const wrapElement = document.querySelector('.abt-mil__wrap');
+    const isMobile = window.innerWidth <= 767;
+
+    // Timeline for main content
+    const tlMain = gsap.timeline({
+      scrollTrigger: {
+        trigger: wrapElement,
+        start: 'top top',
+        end: isMobile ? `top top-=${scrollDistance - 50}%` : `top top-=${scrollDistance}%`,
+        scrub: true,
+        pin: !isMobile ? pinContainer : false,
+      }
+    });
+
+    if (isMobile) {
+      if (pinContainer && mainInner) {
+        Object.assign(pinContainer.style, {
+          height: `${mainInner.offsetHeight + document.querySelector('.abt-mil__head').offsetHeight}px`,
+          position: 'sticky',
+          top: '-1px'
+        });
+      }
+    } else {
+      const pinSpacer = pinContainer?.closest('.pin-spacer');
+      if (pinSpacer) {
+        gsap.to(pinSpacer, { background: 'transparent' });
+      }
+    }
+
+    tlMain
+      .to('.abt-mil__main-inner', { y: -mainDistance, ease: 'none' })
+      .to('.abt-mil__progress-dot', { top: '100%', ease: 'none' }, 0);
+
+    // Animations for label and title
+    // const abtMilLabel = new SplitType('.abt-mil__label', typeOpts.chars);
+    // const abtMilTitle = nestedLinesSplit('.abt-mil__title', typeOpts.words);
+
+    // const tlHead = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: '.abt-mil__head',
+    //     start: 'top top+=65%'
+    //   },
+    //   onComplete: () => {
+    //     abtMilLabel.revert();
+    //     new SplitType('.abt-mil__title', typeOpts.lines);
+    //   }
+    // });
+
+    // tlHead
+    //   .from(abtMilLabel.chars, { yPercent: 60, autoAlpha: 0, duration: 0.6, stagger: 0.02 })
+    //   .from(abtMilTitle.words, { yPercent: 60, autoAlpha: 0, duration: 0.6, stagger: 0.03 }, '<=0.2')
+    //   .from('.abt-mil__progress', { autoAlpha: 0, duration: 0.4 }, '0');
+  }
+
+  abtMiles();
+}
+
 
 
 
@@ -498,8 +607,8 @@ export const titleAnim = () => {
 export const titleAnimation = () => {
   const animateTitle = () => {
     const tl = gsap.timeline();
-    const mySplitText = new SplitType(".title-anim", { type: "words,chars" });
-    const chars = mySplitText.chars;
+    const mySplitType = new SplitType(".title-anim", { type: "words,chars" });
+    const chars = mySplitType.chars;
 
     tl.from(chars, {
       duration: 0.8,
@@ -827,47 +936,6 @@ let device_width = ref(window.innerWidth);
 
 
 /*======================================
- Position Sticky js
-========================================*/
-export const btnStickyScroll = () => {
-  let testInner = window.innerWidth;
-
-  // Function to initialize ScrollTrigger
-  const initScrollTrigger = () => {
-    if (testInner <= 991) {
-      ScrollTrigger.create({
-
-        trigger: '.bd-position-sticky',
-        start: '-100 top',
-        end: '10% +20px center',
-        pin: '.column.two',
-        pinSpacing: false,
-        // markers: true,
-
-      });
-    } else {
-      ScrollTrigger.create({
-        scroller: "[data-scroll-container]",
-
-        trigger: '.bd-position-sticky',
-        start: '-180 top',
-        end: '90% +190px center',
-        pin: '.column.two',
-        pinSpacing: false,
-        // markers: true,
-
-      });
-    }
-  };
-
-  // Call initScrollTrigger when the component is mounted
-  onMounted(() => {
-    initScrollTrigger();
-  });
-
-}
-
-/*======================================
  Text split Animation
 ========================================*/
 export const splitTextAnimation = () => {
@@ -902,10 +970,10 @@ export const splitTextAnimation = () => {
           once: true
         }
       });
-      let mySplitText = new SplitType(element, {
+      let mySplitType = new SplitType(element, {
         type: "words,chars,capitalize"
       });
-      let chars = mySplitText.chars;
+      let chars = mySplitType.chars;
       let folksGradient = chroma.scale(['#14CF93', '#F8EC3A']);
       folksBD.to(chars, {
         duration: 0.5,
