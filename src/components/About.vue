@@ -42,24 +42,25 @@
 
         </div>
     </section> -->
-    <section class="about--block p-5  px-[5%] ">
+    <section class="about--block px-5 pt-10  px-[5%] ">
         <div class="main--wrapper bg-white py-16 rounded-3xl relative">
             <div class="text-center max-w-[32rem] mx-auto ">
-                <h2 class="text-8xl uppercase font-Phudu font-bold mb-10">ABOUT ME</h2>
-                <p class="uppercase font-medium">I’m Chetan Dhargalkar,based in Goa a Creative <b>Developer</b> with
+                <h2 class="text-8xl uppercase font-Phudu font-bold mb-10 text-shadow text-[#0f1b61]" data-scroll-var>
+                    ABOUT ME</h2>
+                <p class=" font-medium">I’m Chetan Dhargalkar, based in Goa a Creative <b>Developer</b> with
                     over <a class="underline font-bold text-black hover:text-black"
                         href="https://www.linkedin.com/in/chetan-dhargalkar-882411bb/" target="_blank">5
                         years
                         experience</a>.
                 </p>
                 <div>
-                    <h3 class="text-7xl  font-Phudu font-bold py-10">
+                    <h3 class="text-7xl  font-Phudu  py-10 text-[#0f1b61]">
                         I can help you
-                        <span class="block">stand out</span>
+                        <span class="block font-bold">stand out</span>
                         to make the
-                        <span class="block">website</span>
+                        <span class="block font-bold">website</span>
                         of your
-                        <span class="block">dreams</span>
+                        <span class="block font-bold">dreams</span>
                     </h3>
                 </div>
                 <p>I am passionate about crafting digital solutions with a <b>strong</b> emphasis on <b>design</b>,
@@ -69,14 +70,7 @@
                     the user.
                 </p>
             </div>
-            <div class="blocks-wrapper">
-                <div class="blocks">
-                    <div v-for="(block, index) in blocks" :key="index" class="block"
-                        :class="{ active: activeBlock === index }" @mouseover="handleMouseOver(index)">
-                        Block {{ index + 1 }}
-                    </div>
-                </div>
-            </div>
+
         </div>
     </section>
 
@@ -85,26 +79,10 @@
 
 import handSvg from "../assets/images/hand.webp";
 
-
-import { ref } from "vue";
-
-const blocks = ref(Array(5).fill(null)); // Simulating 5 blocks
-const activeBlock = ref(null); // Tracks the currently active block index
-const resetDuration = 300;
-let timeoutId = null; // Tracks the timeout for the hover effect
-
-const handleMouseOver = (index) => {
-    clearTimeout(timeoutId); // Clear any previous timeout
-    activeBlock.value = index; // Set the active block to the current index
-
-    // Remove the active class after the specified duration
-    timeoutId = setTimeout(() => {
-        activeBlock.value = null;
-    }, resetDuration);
-};
-
+import { fontAnim } from "../js/utilits";
+fontAnim();
 </script>
-<style>
+<!-- <style>
 .blocks-wrapper {
     z-index: 100;
     grid-column-gap: 0px;
@@ -130,7 +108,6 @@ const handleMouseOver = (index) => {
     height: 75px;
     opacity: 0;
     mix-blend-mode: hard-light;
-    /* background: #0c0c0c; */
     background: #8C24C5;
     transition: opacity 0.3 ease-in;
 }
@@ -143,12 +120,5 @@ const handleMouseOver = (index) => {
     position: relative;
 }
 
-/* .paralax--effect {
-    position: absolute;
-    width: 100%;
-    left: 0;
-    top: calc(100% - 2px);
-    transform: translateY(99%);
-    z-index: 4;
-} */
-</style>
+
+</style> -->

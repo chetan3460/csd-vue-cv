@@ -13,11 +13,10 @@ import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
 import { Power2 } from 'gsap'
 import Lenis from 'lenis'
-import { Flip } from 'gsap/Flip';
-import * as imagesLoaded from 'imagesloaded';
-// import imagesLoaded from 'imagesloaded'
+import Flip from 'gsap/Flip';
+import imagesLoaded from 'imagesloaded'
 
-gsap.registerPlugin(ScrollTrigger, ScrollToPlugin)
+gsap.registerPlugin(Flip, ScrollTrigger);
 
 
 
@@ -110,38 +109,149 @@ export const preloadImages = (selector = 'img') => {
 
 
 
-export const heroAnimationControl = () => {
 
-  if (window.innerWidth > 625) {
-    const heroSection = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.hero',
-        pin: true,
-        pinSpacing: false,
-        start: 'top top',
-        end: 'bottom top',
-        scrub: 1,
-        ease: 'linear',
+
+
+
+// Font 
+export const fontAnim = () => {
+  onMounted(() => {
+    const elements = [...document.querySelectorAll("[data-scroll-var]")];
+
+    elements.forEach((el) => {
+      const end = el.dataset.end || "bottom center";
+      const start = el.dataset.start || "top bottom";
+      const scrollOnce = el.dataset.scrollOnce === "true";
+      const markers = el.dataset.markers === "true";
+      const ease = el.dataset.ease || "power1.inOut";
+
+      gsap.to(el, {
+        scrollTrigger: {
+          trigger: el,
+          start,
+          end: scrollOnce ? false : end,
+          scrub: !scrollOnce && 1,
+          once: scrollOnce,
+          markers,
+        },
+        "--i": 1,
+        duration: 1,
+        ease,
+      });
+    });
+  });
+}
+
+
+
+// Flip 
+export const stickyCards = () => {
+  const galleryEl = ref(null);
+
+  const triggerFlipOnScroll = (galleryEl, options) => {
+    let settings = {
+      flip: {
+        absoluteOnLeave: false,
+        absolute: false,
+        scale: true,
+        simple: true,
       },
-    });
-
-    heroSection.to('.hero--inner', {
-      scale: 0.7,
-      stagger: 0.5,
-    });
-
-    gsap.from(document.querySelector('.works'), {
       scrollTrigger: {
-        trigger: document.querySelector('.works'),
+        start: 'center center',
+        end: '+=300%',
+        marker: true
+      },
+      stagger: 0,
+    };
+
+    settings = Object.assign({}, settings, options);
+
+    // Select gallery items and ensure they are valid DOM elements
+    const galleryCaption = galleryEl.querySelector('.caption');
+    const galleryItems = galleryEl.querySelectorAll('.gallery__item');
+
+    // Ensure we are getting a proper array of elements
+    const galleryItemsArray = Array.from(galleryItems);
+
+    // Check if elements exist before proceeding
+    if (galleryItemsArray.length === 0 || !galleryCaption) {
+      console.error("Gallery items or caption not found.");
+      return;
+    }
+
+    // Temporarily add a class to capture the final state of Flip
+    galleryEl.classList.add('gallery--switch');
+
+    // Manually convert NodeLists to arrays and pass to Flip.getState()
+    const flipState = Flip.getState([...galleryItemsArray, galleryCaption], { props: 'filter, opacity' });
+
+    galleryEl.classList.remove('gallery--switch');
+
+    // Create the Flip animation
+    const tl = Flip.to(flipState, {
+      ease: 'none',
+      absoluteOnLeave: settings.flip.absoluteOnLeave,
+      absolute: settings.flip.absolute,
+      scale: settings.flip.scale,
+      simple: settings.flip.simple,
+      scrollTrigger: {
+        trigger: galleryEl,
+        start: settings.scrollTrigger.start,
+        end: settings.scrollTrigger.end,
+        pin: galleryEl.parentNode,
         scrub: true,
-        start: 'top 95%',
-        onEnter: () => document.querySelector('.hero').classList.add('hero-disable'),
-        onLeaveBack: () => document.querySelector('.hero').classList.remove('hero-disable'),
       },
+      stagger: settings.stagger,
     });
-  }
 
-};
+    // If inner elements exist, animate them too
+    // const galleryItemsInner = [...galleryItemsArray].map(item => item.children.length > 0 ? [...item.children] : []).flat();
+    // if (galleryItemsInner.length) {
+    //   tl.fromTo(galleryItemsInner, {
+    //     scale: 2,
+    //   }, {
+    //     scale: 2,
+    //     scrollTrigger: {
+    //       trigger: galleryEl,
+    //       start: settings.scrollTrigger.start,
+    //       end: settings.scrollTrigger.end,
+    //       scrub: true,
+    //     },
+    //   }, 0);
+    // }
+
+    console.log("Gallery Items Array: ", galleryItemsArray);
+    console.log("Gallery Caption: ", galleryCaption);
+  };
+
+  // Scroll-triggered animations setup
+  const scroll = () => {
+    const galleries = [
+
+      { id: '#gallery-3', options: { flip: { absolute: true, scale: false }, scrollTrigger: { start: 'center center', end: '+=900%' }, stagger: 0.05 } },
+      { id: '#gallery-4' },
+
+    ];
+
+    galleries.forEach(gallery => {
+      const galleryElement = document.querySelector(gallery.id);
+      if (galleryElement) {
+        triggerFlipOnScroll(galleryElement, gallery.options);
+      }
+    });
+  };
+  // Preload images
+  onMounted(() => {
+    preloadImages('.gallery__item').then(() => {
+      // Initialize scroll-triggered animations after images are loaded
+      scroll();
+
+      document.body.classList.remove('loading');
+    });
+  });
+}
+
+
 
 // Quote
 export const paralaxAnimation = () => {
@@ -173,462 +283,7 @@ export const paralaxAnimation = () => {
 
 
 
-export const useBannerAnimation = () => {
-  const view = ref(null);
-  const homeHeroText = ref(null)
-  const homeHeroHead = ref(null);
-  const homePlayer = ref(null);
-  const homePlayerReel = ref(null);
 
-  onMounted(() => {
-
-
-    const DOM = {
-      homeHeroText: homeHeroText.value,
-      homePlayer: homePlayer.value,
-      homePlayerReel: homePlayerReel.value,
-
-    };
-    const homeHeroHead = document.querySelector(".c-hm-hero_head");
-
-    const animation = gsap.to(homeHeroHead, {
-      transformOrigin: "center bottom",
-      opacity: 0,
-      yPercent: 150,
-      ease: "power2.inOut",
-      scrollTrigger: {
-        trigger: homeHeroHead,
-        scrub: 0.3,
-        start: "top top+=30",
-        // markers: true,
-      }
-    });
-
-
-    const timeline = gsap.timeline();
-
-    timeline
-      .set(view.value, { opacity: 1 })
-      .set(DOM.homeHeroText, { opacity: 0 })
-      .set(DOM.homePlayer, {
-        yPercent: -40,
-        z: 150,
-        transformOrigin: "center bottom"
-      })
-      .to(
-        DOM.homePlayer,
-        {
-          duration: 1.5,
-          yPercent: 0,
-          z: 0,
-          ease: "expo.inOut",
-          clearProps: "all"
-        },
-        "S"
-      )
-      .to(DOM.homeHeroText, { opacity: 1 }, "S+=0.5")
-      .set(DOM.homePlayer, { clearProps: "all" })
-      .add(timeline.kill);
-
-    const scrollTimeline = gsap.timeline({
-      scrollTrigger: {
-        trigger: DOM.homePlayer,
-        scrub: true,
-        start: "top top+=10",
-        pin: true,
-        pinType: "transform",
-        pinSpacing: false,
-        // markers: true,
-      }
-    });
-
-    scrollTimeline
-      .to(DOM.homePlayerReel, { paddingTop: 100 }, "A")
-      .to(DOM.homePlayer, { height: 100 }, "A");
-  });
-  return { view, homeHeroText, homeHeroHead, homePlayer, homePlayerReel };
-
-}
-
-// About
-export const stickyElement = () => {
-  function ShowcaseOverlapping() {
-    gsap.utils.toArray('.about-sec').forEach((pinnedSection) => {
-
-      const transformTextsAnim = pinnedSection.querySelectorAll('.sticky-statement2');
-
-      function setImagesProperties() {
-        gsap.set(transformTextsAnim, { height: window.innerHeight });
-      }
-
-      setImagesProperties();
-
-      window.addEventListener('resize', setImagesProperties);
-
-      transformTextsAnim.forEach((transformTextAnim, i, arr) => {
-        const durationMultiplier = arr.length - i - 1;
-
-
-        ScrollTrigger.create({
-          trigger: transformTextAnim,
-          start: function () {
-            const centerPin = (window.innerHeight - transformTextAnim.offsetHeight) / 2;
-            return "top +=" + centerPin;
-          },
-          end: function () {
-            const durationHeight = transformTextAnim.offsetHeight * durationMultiplier + (transformTextAnim.offsetHeight - transformTextAnim.offsetHeight) / 2;
-            return "+=" + durationHeight;
-          },
-          pin: true,
-          pinSpacing: false,
-          scrub: true,
-        });
-
-        const animationProperties = {
-          y: 500,
-          scale: 0.65,
-          opacity: 0,
-          zIndex: 0,
-          duration: 0.05,
-          ease: 0.05,
-          // ease: Linear.easeNone
-        };
-
-        // animationProperties.filter = "blur(10px)";
-
-        ScrollTrigger.create({
-          trigger: transformTextAnim,
-          start: function () {
-            const centerPin = (window.innerHeight - transformTextAnim.offsetHeight) / 2;
-            console.log('center pin', centerPin);
-            return "top top";
-          },
-          end: function () {
-            const durationHeight = transformTextAnim.offsetHeight + (transformTextAnim.offsetHeight - transformTextAnim.offsetHeight) / 2;
-            return "+=" + durationHeight;
-          },
-          scrub: true,
-          animation: gsap.to(transformTextAnim, animationProperties),
-        });
-
-      });
-
-    });
-
-  }
-  ShowcaseOverlapping();
-
-
-
-
-}
-
-// Journey
-export const JourneyBlock = () => {
-  // function nestedLinesSplit(target, vars) {
-  //   target = gsap.utils.toArray(target);
-  //   if (target.length > 1) {
-  //     let splits = target.map(t => nestedLinesSplit(t, vars)),
-  //       result = splits[0],
-  //       resultRevert = result.revert;
-  //     result.lines = splits.reduce((acc, cur) => acc.concat(cur.lines), []);
-  //     result.revert = () => splits.forEach(s => s === result ? resultRevert() : s.revert());
-  //     return result;
-  //   }
-  //   target = target[0];
-  //   let contents = target.innerHTML;
-  //   gsap.utils.toArray(target.children).forEach(child => {
-  //     let split = new SplitType(child, { type: "lines" });
-  //     split.lines.forEach(line => {
-  //       let clone = child.cloneNode(false);
-  //       clone.innerHTML = line.innerHTML;
-  //       target.insertBefore(clone, child);
-  //     });
-  //     target.removeChild(child);
-  //   });
-  //   let split = new SplitType(target, vars),
-  //     originalRevert = split.revert;
-  //   split.revert = () => {
-  //     originalRevert.call(split);
-  //     target.innerHTML = contents;
-  //   };
-  //   return split;
-  // }
-
-  // nestedLinesSplit();
-  function abtMiles() {
-
-    // Setup
-    const mainItems = document.querySelectorAll('.abt-mil__main-item');
-    const scrollDistance = (mainItems.length + 0.7) * 50;
-    const shipElement = document.querySelector('.abt-mil__ship');
-    const shipImgElement = document.querySelector('.abt-mil__ship img');
-    const shipDistance = (shipElement?.offsetHeight / 2) + (shipImgElement?.offsetHeight / 10 || 0);
-    const windowHeight = window.innerHeight;
-
-    // Set initial position for ship image
-    gsap.set('.abt-mil__ship-img', { y: -shipDistance });
-
-    // Timeline for ship
-    const tlShip = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.abt-mil__wrap',
-        start: 'top bottom',
-        end: `bottom top-=${scrollDistance}%`,
-        scrub: true,
-      }
-    });
-    tlShip.to('.abt-mil__ship-img', { y: shipDistance + windowHeight * 0.35, ease: 'none' });
-
-    // Main inner distance
-    const mainInner = document.querySelector('.abt-mil__main-inner');
-    const mainDistance = mainInner?.offsetHeight - windowHeight * 0.3 || 0;
-    const pinContainer = document.querySelector('.abt-mil-pin-container');
-    const wrapElement = document.querySelector('.abt-mil__wrap');
-    const isMobile = window.innerWidth <= 767;
-
-    // Timeline for main content
-    const tlMain = gsap.timeline({
-      scrollTrigger: {
-        trigger: wrapElement,
-        start: 'top top',
-        end: isMobile ? `top top-=${scrollDistance - 50}%` : `top top-=${scrollDistance}%`,
-        scrub: true,
-        pin: !isMobile ? pinContainer : false,
-      }
-    });
-
-    if (isMobile) {
-      if (pinContainer && mainInner) {
-        Object.assign(pinContainer.style, {
-          height: `${mainInner.offsetHeight + document.querySelector('.abt-mil__head').offsetHeight}px`,
-          position: 'sticky',
-          top: '-1px'
-        });
-      }
-    } else {
-      const pinSpacer = pinContainer?.closest('.pin-spacer');
-      if (pinSpacer) {
-        gsap.to(pinSpacer, { background: 'transparent' });
-      }
-    }
-
-    tlMain
-      .to('.abt-mil__main-inner', { y: -mainDistance, ease: 'none' })
-      .to('.abt-mil__progress-dot', { top: '100%', ease: 'none' }, 0);
-
-    // Animations for label and title
-    // const abtMilLabel = new SplitType('.abt-mil__label', typeOpts.chars);
-    // const abtMilTitle = nestedLinesSplit('.abt-mil__title', typeOpts.words);
-
-    // const tlHead = gsap.timeline({
-    //   scrollTrigger: {
-    //     trigger: '.abt-mil__head',
-    //     start: 'top top+=65%'
-    //   },
-    //   onComplete: () => {
-    //     abtMilLabel.revert();
-    //     new SplitType('.abt-mil__title', typeOpts.lines);
-    //   }
-    // });
-
-    // tlHead
-    //   .from(abtMilLabel.chars, { yPercent: 60, autoAlpha: 0, duration: 0.6, stagger: 0.02 })
-    //   .from(abtMilTitle.words, { yPercent: 60, autoAlpha: 0, duration: 0.6, stagger: 0.03 }, '<=0.2')
-    //   .from('.abt-mil__progress', { autoAlpha: 0, duration: 0.4 }, '0');
-  }
-
-  abtMiles();
-}
-
-
-
-
-
-export const Cards = () => {
-
-  //Move Thumbs Gallery			
-  onMounted(() => {
-    if ($('.move-thumbs-wrapper').length > 0) {
-
-      if (!isMobile()) {
-
-        function animateElements(moveThumbs, overlappingThumbs, moveThumbsParent) {
-
-          moveThumbs.forEach((moveThumb, index) => {
-            const state = Flip.getState(moveThumb);
-            overlappingThumbs[index].appendChild(moveThumb);
-
-            const moveAnimation = Flip.from(state, {
-              duration: 1,
-              ease: 'power4.inOut',
-            });
-
-            const startOffset = moveThumbsParent[index].dataset.start;
-            const endOffset = moveThumbsParent[index].dataset.stop;
-
-            ScrollTrigger.create({
-              trigger: moveThumbsParent[index], // Folosim fiecare element parent ĂŽn parte
-              start: startOffset,
-              end: endOffset,
-              scrub: true,
-              animation: moveAnimation,
-            });
-
-          });
-
-          gsap.to(startThumbsCaption, {
-            scrollTrigger: {
-              trigger: startThumbsCaption,
-              start: function () {
-                const startPin = (window.innerHeight - startThumbsCaption.offsetHeight) / 2;
-                return "top +=" + startPin;
-              },
-              end: function () {
-                const durationHeight = window.innerHeight;
-                return "+=" + durationHeight;
-              },
-              pin: true,
-              pinSpacing: false,
-              scrub: true,
-            },
-            opacity: 0,
-            ease: "power1.inOut",
-          });
-
-        }
-
-
-        const moveThumbsWrapper = document.querySelector('.move-thumbs-wrapper');
-        const startThumbsCaption = document.querySelector('.start-thumbs-caption');
-        const moveThumbsParent = document.querySelectorAll('.start-thumbs-wrapper .start-move-thumb');
-        const moveThumbs = document.querySelectorAll('.start-thumbs-wrapper .move-thumb-inner');
-        const endThumbsWrapper = document.querySelector('.end-thumbs-wrapper');
-        const overlappingThumbs = document.querySelectorAll('.end-thumbs-wrapper .end-move-thumb');
-
-        animateElements(Array.from(moveThumbs), Array.from(overlappingThumbs), Array.from(moveThumbsParent));
-
-      }
-
-    }
-  })
-
-}
-
-/* ===================================
-  Infinite looping animation
-  ====================================== */
-export const loopAnim = () => {
-  onMounted(() => {
-
-
-    const wrapperEl = document.querySelector('.looping-wrapper') || false;
-    const numberOfEls = 100;
-    const duration = 6000;
-    const delay = duration / numberOfEls;
-
-    let tl = anime.timeline({
-      duration: delay,
-      complete: function () {
-        tl.restart();
-      }
-    });
-
-    function createEl(i) {
-      let el = document.createElement('div');
-      const rotate = (360 / numberOfEls) * i;
-      const translateY = -50;
-      el.classList.add('el');
-      el.style.transform = 'rotate(' + rotate + 'deg) translateY(' + translateY + '%)';
-      tl.add({
-        begin: function () {
-          anime({
-            targets: el,
-            rotate: [rotate + 'deg', rotate + 10 + 'deg'],
-            translateY: [translateY + '%', translateY + 10 + '%'],
-            scale: [1, 1.25],
-            easing: 'easeInOutSine',
-            direction: 'alternate',
-            duration: duration * .1
-          });
-        }
-      });
-      if (wrapperEl)
-        wrapperEl.appendChild(el);
-    }
-
-    for (let i = 0; i < numberOfEls; i++)
-      createEl(i);
-
-  })
-}
-
-
-export const titleAnim = () => {
-  onMounted(() => {
-    const zm = gsap.matchMedia();
-
-    zm.add("(min-width: 1200px)", () => {
-      if (document.querySelector('.tp-hero-title-wrap')) {
-        // Set initial properties for the image
-        gsap.set(".tp-zoom-img", { scale: 0, opacity: 0 });
-
-        // Define the animation
-        gsap.to(".tp-zoom-img", {
-          scrollTrigger: {
-            trigger: ".tp-hero-title-wrap",
-            start: "top 10%",
-            // start: "center center",
-            // markers: true
-          },
-          duration: 1.5,
-          ease: "none",
-          scale: 1,
-          opacity: 1,
-        });
-      }
-    });
-
-  })
-}
-
-
-
-
-
-
-
-
-
-
-/*======================================
- Hero Title Animation
-========================================*/
-export const titleAnimation = () => {
-  const animateTitle = () => {
-    const tl = gsap.timeline();
-    const mySplitType = new SplitType(".title-anim", { type: "words,chars" });
-    const chars = mySplitType.chars;
-
-    tl.from(chars, {
-      duration: 0.8,
-      opacity: 0,
-      scale: 0,
-      delay: 1,
-      y: 80,
-      rotationX: 180,
-      transformOrigin: "0% 50% -50",
-      ease: "back",
-      stagger: 0.08
-    });
-    tl.fromTo(".main-img", { opacity: 0, ease: "back", scale: .7 }, { opacity: 1, ease: "back", scale: 1 }, ">-0.2")
-
-  };
-
-  onMounted(() => {
-    animateTitle();
-  });
-}
 
 
 /*======================================
@@ -683,153 +338,6 @@ export const revealLetter = () => {
 }
 
 
-
-/*======================================
-  Section Title Animation
-========================================*/
-export const sectionTitleAnim = () => {
-
-  const splitTitleLines = ref([]);
-
-  onMounted(() => {
-
-
-    splitTitleLines.value = document.querySelectorAll(".split-title-line");
-
-    splitTitleLines.value.forEach((splitTextLine) => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: splitTextLine,
-          start: "top 90%",
-          end: "bottom 60%",
-          scrub: false,
-          markers: false,
-          toggleActions: "play none none none",
-        },
-      });
-
-      const itemSplitted = new SplitType(splitTextLine, {
-        type: "words, lines",
-      });
-      gsap.set(splitTextLine, {
-        perspective: 400
-      });
-      itemSplitted.split({
-        type: "lines"
-      });
-
-      tl.from(itemSplitted.lines, {
-        duration: 1,
-        delay: 0.3,
-        opacity: 0,
-        rotationX: -80,
-        force3D: true,
-        transformOrigin: "top center -50",
-        stagger: 0.3,
-      });
-    });
-
-  });
-}
-
-/*======================================
-  About Me Title Animation
-========================================*/
-export const wordSlide = () => {
-  // Link timelines to scroll position
-  function createScrollTrigger(triggerElement, timeline) {
-    // Reset tl when scroll out of view past bottom of screen
-    ScrollTrigger.create({
-      trigger: triggerElement,
-      start: 'top bottom',
-      onLeaveBack: () => {
-        timeline.progress(0);
-        timeline.pause();
-      },
-    });
-    // Play tl when scrolled into view (60% from top of screen)
-    ScrollTrigger.create({
-      trigger: triggerElement,
-      start: 'top 60%',
-      onEnter: () => timeline.play(),
-    });
-  }
-
-  onMounted(() => {
-    // Split text into spans
-    const typeSplit = new SplitType('.text-split', {
-      types: 'words, chars',
-      tagName: 'span',
-    });
-
-    const wordsSlideFromRight = document.querySelectorAll('.words-slide-from-right');
-
-    wordsSlideFromRight.forEach((element) => {
-      const tl = gsap.timeline({ paused: true });
-      const wordElements = element.querySelectorAll('.word');
-
-      tl.from(wordElements, {
-        opacity: 0,
-        x: '1em',
-        duration: 1.5, // Adjust duration for a slower animation
-        ease: 'power4.out', // Adjust easing function for a smoother motion
-        stagger: { amount: 0.5 }, // Adjust stagger for more spacing between elements
-      });
-
-      createScrollTrigger(element, tl);
-    });
-
-    // Avoid flash of unstyled content
-    gsap.set('.text-split', { opacity: 1 });
-  });
-}
-
-
-
-/*======================================
-  About Image Animation
-========================================*/
-export const imgRevel = () => {
-  onMounted(() => {
-    let img_anim_reveal = document.querySelectorAll(".img_anim_reveal");
-
-    img_anim_reveal.forEach((img_reveal) => {
-      let image = img_reveal.querySelector("img");
-      let tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: img_reveal,
-          start: "top 50%",
-        }
-      });
-
-      tl.set(img_reveal, { autoAlpha: 1 });
-      tl.from(img_reveal, 0.6, { // Adjust the duration for a faster animation
-        xPercent: -100,
-        ease: Power2.out
-      });
-      tl.from(image, 0.6, { // Adjust the duration for a faster animation
-        xPercent: 100,
-        scale: 1.3,
-        delay: -0.6, // Adjust the delay for proper sequencing
-        ease: Power2.out
-      });
-    });
-  });
-};
-
-
-
-
-export const charAnimation = () => {
-  onMounted(() => {
-    let word_come_long = document.querySelectorAll(".animation__word_come_long")
-    word_come_long.forEach((word_come_long) => {
-      let split_word_come_long = new SplitType(word_come_long, { type: "chars words", position: "absolute" })
-      gsap.from(split_word_come_long.words, { duration: 1, x: 50, autoAlpha: 0, stagger: 0.5 });
-    })
-
-  });
-}
 
 
 
@@ -886,15 +394,7 @@ export const customCursor = () => {
   }
 };
 
-export const aTagClick = () => {
-  const aTag = document.querySelectorAll("[href='#']");
-  for (let i = 0; i < aTag.length; i++) {
-    const a = aTag[i];
-    a.addEventListener("click", (e) => {
-      e.preventDefault();
-    });
-  }
-};
+
 
 /*======================================
   On Scroll Add Active class

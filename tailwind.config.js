@@ -54,14 +54,15 @@ module.exports = {
     },
     fontFamily: {
       'Phudu': ['"Phudu", serif;'],
-      'OpenSans': ['"Open Sans", sans-serif'],
+      'InstrumentSans': ['"Instrument Sans", sans-serif'],
     },
     extend: {
       colors: {
-        dark: "#000",
+        dark: "#0f1b61",
         black: "rgba(0, 0, 0, 1)",
         grey: "rgba(51, 51, 51, 1)",
         white: "#F5F7F5",
+        lightBlue: "#e1eff7",
       },
 
       typography: ({ theme }) => ({
@@ -69,7 +70,7 @@ module.exports = {
           css: {
             maxWidth: "100%",
             "--tw-prose-body": theme("colors.white"),
-            "--tw-prose-headings": theme("colors.grey"),
+            "--tw-prose-headings": theme("colors.dark"),
             "--tw-prose-lead": theme("colors.white"),
             "--tw-prose-links": theme("colors.grenadier"),
             "--tw-prose-bold": theme("colors.white"),
@@ -85,18 +86,20 @@ module.exports = {
     plugin(({ addBase, theme }) => {
       addBase({
         body: {
-          color: theme("colors.grey"),
-          background: theme("colors.dark"),
-          fontFamily: theme("fontFamily.Syne"),
-          fontSize: "18px",
-          lineHeight: "28px",
+          color: theme("colors.dark"),
+          background: theme("colors.lightBlue"),
+          fontFamily: theme("fontFamily.InstrumentSans"),
+          fontSize: "20px",
+          lineHeight: "30px",
+          fontWeight: "500",
+
           margin: "0",
-          fontWeight: "normal",
           fontSmoothing: "antialiased",
           "-webkit-font-smoothing": "antialiased",
           "-moz-osx-font-smoothing": "grayscale",
           overflowX: "hidden",
         },
+
       });
 
     }),

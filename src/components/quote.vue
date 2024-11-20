@@ -27,15 +27,5 @@
     </section>
 </template>
 <script setup>
-import { onMounted } from 'vue';
-import { revealLetter } from '../js/utilits';
-import { heroAnimationControl, paralaxAnimation, stickyElement } from '../js/utilits';
-
-onMounted(() => {
-    heroAnimationControl();
-    stickyElement();
-    revealLetter()
-
-});
 
 </script>

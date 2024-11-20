@@ -2,13 +2,13 @@
   <!-- <div class="body-overlay"></div> -->
   <!-- <ScrollTopVue /> -->
   <!-- <Cursor /> -->
-  <!-- <Header /> -->
+  <Header />
   <router-view />
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
-// import Header from './components/Header.vue';
+import Header from './components/Header.vue';
 
 // import Cursor from './components/layout/Cursor.vue'
 // import ScrollTopVue from "@/components/layout/ScrollTop.vue";

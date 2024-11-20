@@ -4,7 +4,7 @@
     <!-- <div class="hero__gradient"></div> -->
     <About />
     <Skills />
-    <!-- <Journey /> -->
+    <Journey />
     <!-- <Quote /> -->
 
     <!-- 
@@ -17,7 +17,7 @@
 import Home from '@/components/Home.vue';
 import Banner from '@/components/banner.vue';
 import About from '@/components/About.vue';
-// import Journey from '@/components/journey.vue';
+import Journey from '@/components/journey.vue';
 
 import Quote from '@/components/quote.vue';
 import Resume from '@/components/Resume.vue'
