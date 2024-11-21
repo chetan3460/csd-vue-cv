@@ -4,11 +4,13 @@
   <!-- <Cursor /> -->
   <Header />
   <router-view />
+  <Footer />
 </template>
 
 <script setup>
 import { onMounted } from 'vue'
 import Header from './components/Header.vue';
+import Footer from './components/Footer.vue';
 
 // import Cursor from './components/layout/Cursor.vue'
 // import ScrollTopVue from "@/components/layout/ScrollTop.vue";

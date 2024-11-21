@@ -9,6 +9,7 @@ module.exports = {
   // important: true,
   safelist: [
     "dark",
+    "darkBlue",
     "header-transition",
     "bg-transparent",
     "text-grey",
@@ -59,6 +60,7 @@ module.exports = {
     extend: {
       colors: {
         dark: "#0f1b61",
+        darkBlue: "#0f1b61",
         black: "rgba(0, 0, 0, 1)",
         grey: "rgba(51, 51, 51, 1)",
         white: "#F5F7F5",
@@ -86,13 +88,12 @@ module.exports = {
     plugin(({ addBase, theme }) => {
       addBase({
         body: {
-          color: theme("colors.dark"),
+          color: theme("colors.darkBlue"),
           background: theme("colors.lightBlue"),
           fontFamily: theme("fontFamily.InstrumentSans"),
           fontSize: "20px",
           lineHeight: "30px",
           fontWeight: "500",
-
           margin: "0",
           fontSmoothing: "antialiased",
           "-webkit-font-smoothing": "antialiased",

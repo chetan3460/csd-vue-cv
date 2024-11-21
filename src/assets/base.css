@@ -272,25 +272,7 @@ body #cdawrap {
   svg {
     width: 45px;
     height: 45px;
-    @media-query (max-width:375px) {
-      width: 35px;
-      height: 35px;
-    }
   }
-}
-
-.gallery__item-cut {
-  overflow: hidden;
-  display: grid;
-  place-items: center;
-}
-
-.gallery__item-inner {
-  width: 100%;
-  height: 100%;
-  background-position: 50% 50%;
-  background-size: cover;
-  background-repeat: no-repeat;
 }
 
 .caption {
@@ -298,42 +280,6 @@ body #cdawrap {
   line-height: 5.5rem; /* Fixed line height of 1.5rem */
 
   z-index: 101;
-}
-
-.gallery--row {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
-  --size-factor: 1.25;
-  --item-height: 20vh;
-}
-
-.gallery--row .gallery__item {
-  width: auto;
-  aspect-ratio: 2 / 3;
-}
-
-.gallery--row .gallery__item--s {
-  height: var(--item-height);
-}
-
-.gallery--row .gallery__item--m {
-  height: calc(var(--size-factor) * var(--item-height));
-}
-
-.gallery--row .gallery__item--l {
-  height: calc(var(--size-factor) * 2 * var(--item-height));
-}
-
-.gallery--row .gallery__item--xl {
-  z-index: 100;
-  height: calc(var(--size-factor) * 3 * var(--item-height));
-}
-
-.gallery--switch.gallery--row .gallery__item--m,
-.gallery--switch.gallery--row .gallery__item--l {
-  height: var(--item-height);
 }
 
 .gallery--row .caption {
@@ -422,7 +368,11 @@ body #cdawrap {
   background-color: #87ceeb;
   text-align: center;
 }
-
+.gallery__item {
+  img {
+    width: 45px;
+  }
+}
 .gallery--stack-glass .gallery__item {
   filter: opacity(1);
 }
@@ -452,39 +402,6 @@ body #cdawrap {
 }
 
 @media screen and (min-width: 53em) {
-  .frame {
-    grid-template-columns: auto auto auto 1fr;
-    grid-template-areas: "title prev ... sponsor";
-    align-content: space-between;
-    justify-items: start;
-    grid-gap: 2rem;
-  }
-  .frame__demos {
-    justify-self: end;
-  }
-  .project--intro {
-    grid-template-columns: auto 1fr;
-    grid-template-areas:
-      "label-name name"
-      "label-date date"
-      "title title"
-      "label-mission mission";
-  }
-
-  .project--details {
-    grid-template-areas: "label-default paragraph";
-    grid-template-columns: auto auto;
-  }
-  .project__label {
-    text-align: right;
-  }
-  .project__mission {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: auto auto;
-    grid-template-areas: "p1 ..." "... p2";
-    column-gap: 2rem;
-  }
   .gallery--grid10 {
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(4, 1fr);
@@ -539,7 +456,7 @@ body #cdawrap {
   }
 
   .gallery--stack .caption {
-    bottom: 40%;
+    bottom: 25%;
     width: 60vw;
     max-width: 800px;
   }

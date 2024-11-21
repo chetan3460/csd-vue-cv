@@ -16,7 +16,7 @@ import Lenis from 'lenis'
 import Flip from 'gsap/Flip';
 import imagesLoaded from 'imagesloaded'
 
-gsap.registerPlugin(Flip, ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Flip);
 
 
 
@@ -92,27 +92,6 @@ export const preloadImages = (selector = 'img') => {
 };
 
 
-
-
-
-
-
-// Banner animation
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // Font 
 export const fontAnim = () => {
   onMounted(() => {
@@ -145,9 +124,103 @@ export const fontAnim = () => {
 
 
 // Flip 
+// export const stickyCards = () => {
+//   const galleryEl = ref(null);
+
+//   const triggerFlipOnScroll = (galleryEl, options) => {
+//     let settings = {
+//       flip: {
+//         absoluteOnLeave: false,
+//         absolute: false,
+//         scale: true,
+//         simple: true,
+//       },
+//       scrollTrigger: {
+//         start: 'center center',
+//         end: '+=300%',
+//         marker: true
+//       },
+//       stagger: 0,
+//     };
+
+//     settings = Object.assign({}, settings, options);
+
+//     // Select gallery items and ensure they are valid DOM elements
+//     const galleryCaption = galleryEl.querySelector('.caption');
+//     const galleryItems = galleryEl.querySelectorAll('.gallery__item');
+
+//     // Ensure we are getting a proper array of elements
+//     const galleryItemsArray = Array.from(galleryItems);
+
+//     // Check if elements exist before proceeding
+//     if (galleryItemsArray.length === 0 || !galleryCaption) {
+//       console.error("Gallery items or caption not found.");
+//       return;
+//     }
+
+//     // Temporarily add a class to capture the final state of Flip
+//     galleryEl.classList.add('gallery--switch');
+
+//     // Manually convert NodeLists to arrays and pass to Flip.getState()
+//     const flipState = Flip.getState([...galleryItemsArray, galleryCaption], { props: 'filter, opacity' });
+
+//     galleryEl.classList.remove('gallery--switch');
+
+//     // Create the Flip animation
+//     const tl = Flip.to(flipState, {
+//       ease: 'none',
+//       absoluteOnLeave: settings.flip.absoluteOnLeave,
+//       absolute: settings.flip.absolute,
+//       scale: settings.flip.scale,
+//       simple: settings.flip.simple,
+//       scrollTrigger: {
+//         trigger: galleryEl,
+//         start: settings.scrollTrigger.start,
+//         end: settings.scrollTrigger.end,
+//         pin: galleryEl.parentNode,
+//         scrub: true,
+//       },
+//       stagger: settings.stagger,
+//     });
+
+
+//   };
+
+//   // Scroll-triggered animations setup
+//   const scroll = () => {
+//     const galleries = [
+
+//       { id: '#gallery-3', options: { flip: { absolute: true, scale: false }, scrollTrigger: { start: 'center center', end: '+=900%' }, stagger: 0.05 } },
+//       { id: '#gallery-4' },
+
+//     ];
+
+//     galleries.forEach(gallery => {
+//       const galleryElement = document.querySelector(gallery.id);
+//       if (galleryElement) {
+//         triggerFlipOnScroll(galleryElement, gallery.options);
+//       }
+//     });
+//   };
+//   // Preload images
+//   onMounted(() => {
+//     preloadImages('.gallery__item').then(() => {
+//       // Initialize scroll-triggered animations after images are loaded
+//       scroll();
+
+//       document.body.classList.remove('loading');
+//     });
+//   });
+// }
+
+
+
+
+
 export const stickyCards = () => {
   const galleryEl = ref(null);
 
+  // Flip animation for sticky cards
   const triggerFlipOnScroll = (galleryEl, options) => {
     let settings = {
       flip: {
@@ -159,7 +232,7 @@ export const stickyCards = () => {
       scrollTrigger: {
         start: 'center center',
         end: '+=300%',
-        marker: true
+        marker: true,
       },
       stagger: 0,
     };
@@ -203,34 +276,62 @@ export const stickyCards = () => {
       },
       stagger: settings.stagger,
     });
+  };
 
-    // If inner elements exist, animate them too
-    // const galleryItemsInner = [...galleryItemsArray].map(item => item.children.length > 0 ? [...item.children] : []).flat();
-    // if (galleryItemsInner.length) {
-    //   tl.fromTo(galleryItemsInner, {
-    //     scale: 2,
-    //   }, {
-    //     scale: 2,
-    //     scrollTrigger: {
-    //       trigger: galleryEl,
-    //       start: settings.scrollTrigger.start,
-    //       end: settings.scrollTrigger.end,
-    //       scrub: true,
-    //     },
-    //   }, 0);
-    // }
+  // Related demos animation
+  const animateRelatedDemos = () => {
+    const relatedSection = document.querySelector('.card-wrap');
+    const relatedDemos = [...relatedSection.querySelectorAll('.card-wrap > .card')];
 
-    console.log("Gallery Items Array: ", galleryItemsArray);
-    console.log("Gallery Caption: ", galleryCaption);
+    gsap.from(relatedDemos, {
+      scale: 0,
+      ease: 'sine',
+      stagger: {
+        each: 0.04,
+        from: 'center',
+      },
+      scrollTrigger: {
+        trigger: relatedSection,
+        start: 'top bottom', // Trigger animation when the top of relatedSection hits the bottom of the viewport
+        end: '+=100%',       // End the trigger after the section has been fully in the viewport
+        scrub: true,         // Sync animation with scroll
+        // markers: true,       // Debug markers
+      },
+    });
+  };
+
+
+  const fontAnim = () => {
+    const elements = [...document.querySelectorAll("[data-scroll-var]")];
+
+    elements.forEach((el) => {
+      const end = el.dataset.end || "bottom center";
+      const start = el.dataset.start || "top bottom";
+      const scrollOnce = el.dataset.scrollOnce === "true";
+      const markers = el.dataset.markers === "true";
+      const ease = el.dataset.ease || "power1.inOut";
+
+      gsap.to(el, {
+        scrollTrigger: {
+          trigger: el,
+          start,
+          end: scrollOnce ? false : end,
+          scrub: !scrollOnce && 1,
+          once: scrollOnce,
+          markers,
+        },
+        "--i": 1,
+        duration: 1,
+        ease,
+      });
+    });
   };
 
   // Scroll-triggered animations setup
   const scroll = () => {
     const galleries = [
-
       { id: '#gallery-3', options: { flip: { absolute: true, scale: false }, scrollTrigger: { start: 'center center', end: '+=900%' }, stagger: 0.05 } },
       { id: '#gallery-4' },
-
     ];
 
     galleries.forEach(gallery => {
@@ -239,8 +340,14 @@ export const stickyCards = () => {
         triggerFlipOnScroll(galleryElement, gallery.options);
       }
     });
+
+    // Initialize related demos animation
+    animateRelatedDemos();
+    fontAnim();
+
   };
-  // Preload images
+
+  // Preload images and initialize scroll animations
   onMounted(() => {
     preloadImages('.gallery__item').then(() => {
       // Initialize scroll-triggered animations after images are loaded
@@ -249,7 +356,8 @@ export const stickyCards = () => {
       document.body.classList.remove('loading');
     });
   });
-}
+};
+
 
 
 
@@ -279,7 +387,6 @@ export const paralaxAnimation = () => {
 
   });
 }
-
 
 
 
