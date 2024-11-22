@@ -11,7 +11,7 @@ import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollToPlugin from 'gsap/ScrollToPlugin'
-import { Power2 } from 'gsap'
+import { Power2, Quint } from 'gsap'
 import Lenis from 'lenis'
 import Flip from 'gsap/Flip';
 import imagesLoaded from 'imagesloaded'
@@ -217,6 +217,8 @@ export const fontAnim = () => {
 
 
 
+
+
 export const stickyCards = () => {
   const galleryEl = ref(null);
 
@@ -400,50 +402,218 @@ export const paralaxAnimation = () => {
 export const revealLetter = () => {
 
 
-
-  let targetParagraphs = [];
-  let letters = [];
-
-  onMounted(() => {
-    targetParagraphs = document.querySelectorAll('.target-paragraphs');
-
-    targetParagraphs.forEach((paragraph) => {
-      let pArray = paragraph.textContent.split('');
-      paragraph.innerHTML = pArray.map((letter) => `<span>${letter}</span>`).join('');
-    });
-
-    letters = document.querySelectorAll('.target-paragraphs span');
-
-    function revealLetters() {
-      for (let i = 0; i < letters.length; i++) {
-        let { left, top } = letters[i].getBoundingClientRect();
-        top = top - window.innerHeight * 0.5;
-        let opacityValue =
-          1 - (top * 0.01 + left * 0.001) < 0.1
-            ? 0.1
-            : 1 - (top * 0.01 + left * 0.001);
-
-        opacityValue = opacityValue > 1 ? 1 : parseFloat(opacityValue.toFixed(3));
-        letters[i].style.opacity = opacityValue;
-      }
-    }
-
-    gsap.to(letters, {
-      opacity: 0,
+  const splitTypes = document.querySelectorAll('.reveal-type');
+  splitTypes.forEach((char, i) => {
+    const text = new SplitType(char, { types: ['chars', 'words'] });
+    gsap.from(text.chars, {
       scrollTrigger: {
-
-        trigger: targetParagraphs[0],
-        start: '-1000px',
-        end: '1000px',
-        onUpdate: revealLetters,
+        trigger: char,
+        start: 'top 80%',
+        end: 'top 20%',
+        scrub: true,
+        markers: false
       },
-    });
-
-    revealLetters();
+      opacity: 0.2,
+      stagger: 0.1,
+    })
   });
+
 
 }
 
+// export const Item = () => {
+//   // Initialize DOM and style related properties
+//   // Various elements within this item
+//   DOM = {
+//     // Main DOM element
+//     el: null,
+//     // .title-wrap element
+//     titleWrap: null,
+//     // .title--up
+//     titleUp: null,
+//     // .title--down
+//     titleDown: null,
+//     // .content elements
+//     content: null,
+//     // svg element
+//     svg: null,
+//     // This is the mask element, it can be either a circle or a path SVG element.
+//     // We will be animating the 'radius' attribute for circle or the 'd' attribute for path.
+//     mask: null,
+//     // image element
+//     image: null,
+//   };
+//   // flipstate saves the current state of title elements
+//   flipstate = null;
+
+//   /**
+//    * Sets up the necessary elements and data for an Item instance.
+//    * @param {HTMLElement} DOM_el - The DOM element that represents the item.
+//    */
+//   constructor(DOM_el) {
+//     // Assign DOM elements
+//     this.DOM.el = DOM_el;
+//     this.DOM.titleWrap = this.DOM.el.querySelector('.title-wrap');
+//     this.DOM.titleUp = this.DOM.titleWrap.querySelector('.title--up');
+//     this.DOM.titleDown = this.DOM.titleWrap.querySelector('.title--down');
+//     this.DOM.content = [...this.DOM.el.querySelectorAll('.content')];
+//     this.DOM.svg = this.DOM.el.querySelector('.content__img');
+//     this.DOM.mask = this.DOM.svg.querySelector('.mask');
+//     this.DOM.image = this.DOM.svg.querySelector('image');
+
+//     // Save current state
+//     this.flipstate = Flip.getState([this.DOM.titleUp, this.DOM.titleDown]);
+
+//     // Change layout
+//     this.DOM.content[1].prepend(this.DOM.titleUp, this.DOM.titleDown);
+
+//     // Check if the mask element is a circle or a path
+//     const isCircle = this.DOM.mask.tagName.toLowerCase() === 'circle';
+
+//     // Create the Flip.from that we'll pass into the ScrollTrigger animation property
+//     const flip = Flip.from(this.flipstate, {
+//       ease: 'none',
+//       simple: true
+//     })
+//       .fromTo(this.DOM.mask, {
+//         attr: isCircle ? { r: this.DOM.mask.getAttribute('r') } : { d: this.DOM.mask.getAttribute('d') },
+//       }, {
+//         ease: 'none',
+//         attr: isCircle ? { r: this.DOM.mask.dataset.valueFinal } : { d: this.DOM.mask.dataset.valueFinal },
+//       }, 0)
+//       // Also scale up the image element
+//       .fromTo(this.DOM.image, {
+//         transformOrigin: '50% 50%',
+//         filter: 'brightness(100%)'
+//       }, {
+//         ease: 'none',
+//         scale: isCircle ? 1.2 : 1,
+//         filter: 'brightness(150%)'
+//       }, 0);
+
+
+//     ScrollTrigger.create({
+//       trigger: this.DOM.titleWrap,
+//       ease: 'none',
+//       start: 'clamp(top bottom-=10%)',
+//       end: '+=40%',
+//       scrub: true,
+//       animation: flip,
+//     });
+
+
+
+//   }
+// }
+
+
+
+
+
+export const Item = () => {
+  const el = document.querySelector('.content--layout-1');
+  console.log({
+    titleWrap: el.querySelector('.title-wrap'),
+    titleUp: el.querySelector('.title--up'),
+    titleDown: el.querySelector('.title--down'),
+    content: [...el.querySelectorAll('.content')],
+    svg: el.querySelector('.content__img'),
+    mask: el.querySelector('.mask'),
+    image: el.querySelector('image'),
+  });
+  if (!el) {
+    console.error('Main element not found!');
+    return;
+  }
+
+  // Assign DOM elements
+  const DOM = {
+    el,
+    titleWrap: el.querySelector('.title-wrap'),
+    titleUp: el.querySelector('.title--up'),
+    titleDown: el.querySelector('.title--down'),
+    content: [...el.querySelectorAll('.content')],
+    svg: el.querySelector('.content__img'),
+    mask: el.querySelector('.mask'),
+    image: el.querySelector('image'),
+  };
+
+  // Check for missing elements
+  if (!DOM.titleWrap || !DOM.titleUp || !DOM.titleDown || !DOM.svg || !DOM.mask || !DOM.image) {
+    console.error('One or more required elements are missing!', DOM);
+    return;
+  }
+
+  const isCircle = DOM.mask.tagName.toLowerCase() === 'circle';
+
+  // Check initial attributes
+  const initialAttr = isCircle
+    ? DOM.mask.getAttribute('r')
+    : DOM.mask.getAttribute('d');
+  const finalAttr = DOM.mask.dataset.valueFinal;
+
+  if (!initialAttr || !finalAttr) {
+    console.error('Mask attributes are missing or invalid!', { initialAttr, finalAttr });
+    return;
+  }
+
+  // Save current Flip state
+  const flipstate = Flip.getState([DOM.titleUp, DOM.titleDown]);
+
+  // Change layout
+  if (DOM.content.length > 1) {
+    DOM.content[1].prepend(DOM.titleUp, DOM.titleDown);
+  }
+
+  // Create Flip animation
+  const flip = Flip.from(flipstate, {
+    ease: 'none',
+    simple: true,
+  })
+    .fromTo(
+      DOM.mask,
+      {
+        attr: isCircle ? { r: initialAttr } : { d: initialAttr },
+      },
+      {
+        attr: isCircle ? { r: finalAttr } : { d: finalAttr },
+        ease: 'none',
+      },
+      0
+    )
+    .fromTo(
+      DOM.image,
+      {
+        transformOrigin: '50% 50%',
+        filter: 'brightness(100%)',
+      },
+      {
+        scale: isCircle ? 1.2 : 1,
+        filter: 'brightness(150%)',
+        ease: 'none',
+      },
+      0
+    );
+
+  // Create ScrollTrigger
+  ScrollTrigger.create({
+    trigger: DOM.titleWrap || el,
+    start: 'clamp(top bottom-=10%)',
+    end: '+=40%',
+    scrub: true,
+    animation: flip,
+
+    scroller: lenis.scrollContainer,
+
+  });
+  // Call ScrollTrigger.refresh() when necessary (e.g., after DOM or layout changes)
+  function refreshScrollTrigger() {
+    ScrollTrigger.refresh();
+  }
+
+  // Optionally, add a resize event to refresh ScrollTrigger
+  window.addEventListener('resize', refreshScrollTrigger);
+};
 
 
 

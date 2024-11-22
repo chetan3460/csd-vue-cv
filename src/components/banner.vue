@@ -13,7 +13,7 @@
       </div>
 
    </section> -->
-   <section class="homepage-header">
+   <section class="homepage-header  h-screen">
       <div class="homepage-header__sticky-container">
          <div class="homepage-header__sticky ">
             <span class="homepage-header__title homepage-header__title--top font-Phudu font-bold" aria-hidden="true">

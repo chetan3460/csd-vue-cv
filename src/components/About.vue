@@ -42,26 +42,29 @@
 
         </div>
     </section> -->
-    <section class="about--block px-5 pt-10  px-[5%] ">
-        <div class="main--wrapper bg-white py-16 rounded-3xl relative">
+    <section class="about--block px-5 pt-10   ">
+        <!-- <div class="main--wrapper bg-white py-16 rounded-3xl relative">
             <div class="text-center max-w-[32rem] mx-auto ">
-                <h2 class="text-8xl uppercase font-Phudu font-bold mb-10 text-shadow text-[#0f1b61]" data-scroll-var>
-                    ABOUT ME</h2>
-                <p class=" font-medium">I’m Chetan Dhargalkar, based in Goa a Creative <b>Developer</b> with
-                    over <a class="underline font-bold text-black hover:text-black"
+                <h2 class="text-8xl uppercase font-Phudu font-bold mb-10 text-shadow text-[#0f1b61] " data-scroll-var>
+                    ABOUT
+                    ME
+                </h2>
+                <p class=" font-medium">Hi I'm Chetan, frontend Developer based in <b>Goa</b> with
+                    over <a class="block underline font-bold uppercase text-[#0f1b61] hover:text-[#0f1b61]"
                         href="https://www.linkedin.com/in/chetan-dhargalkar-882411bb/" target="_blank">5
                         years
-                        experience</a>.
+                        experience.</a>
                 </p>
                 <div>
-                    <h3 class="text-7xl  font-Phudu  py-10 text-[#0f1b61]">
+                    <h3 class="text-7xl  font-Phudu  py-10 text-[#0f1b61] reveal-type font-normal">
                         I can help you
-                        <span class="block font-bold">stand out</span>
+                        <span class="block font-bold highlight">stand out</span>
                         to make the
                         <span class="block font-bold">website</span>
                         of your
                         <span class="block font-bold">dreams</span>
                     </h3>
+
                 </div>
                 <p>I am passionate about crafting digital solutions with a <b>strong</b> emphasis on <b>design</b>,
                     <b>usability</b>
@@ -69,56 +72,54 @@
                     <b>accessibility</b>. I enjoy creating web experiences that involve meaningful interaction with
                     the user.
                 </p>
+
             </div>
 
+        </div> -->
+        <div class="p medium-heading caps font-bold prose-p:uppercase mx-[10rem] ml-0">
+            <p class="text-6xl font-Phudu font-bold text-[#101010]">I'm Chetan, an experienced frontend developer with a
+                passion
+                for crafting engaging user experiences. with over <a href="" class="underline !text-[#0f1b61]">5 years
+                    experience.</a>
+            </p>
         </div>
+
+
+
     </section>
 
 </template>
 <script setup>
 
+import { onMounted, ref } from "vue";
 import handSvg from "../assets/images/hand.webp";
+import imageSrc from '../assets/images/me.webp';
 
-import { fontAnim } from "../js/utilits";
+import { fontAnim, revealLetter, Item } from "../js/utilits";
 fontAnim();
+
+onMounted(() => {
+    revealLetter();
+
+})
+
+
+
+
+
+
 </script>
-<!-- <style>
-.blocks-wrapper {
-    z-index: 100;
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-    flex-wrap: wrap;
-    grid-template-rows: auto auto auto auto auto auto auto auto auto auto;
-    grid-template-columns: .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr .5fr;
-    grid-auto-columns: 1fr;
-    grid-auto-flow: row;
-    justify-content: space-between;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: absolute;
-    top: 0%;
-    bottom: 0%;
-    left: 0%;
-    right: 0%;
+
+
+<style>
+.highlight {
+    --underline-color: #f67796;
+    --underline-width: 0% 0.4em;
+    --underline-color: var(--color-medium);
+    background: linear-gradient(90deg, var(--underline-color), var(--underline-color));
+    background-position: var(--underline-position, 0 65%);
+    background-repeat: no-repeat;
+    background-size: var(--underline-width);
+    transition: background-size .3s ease-in-out;
 }
-
-.block {
-    width: 75px;
-    height: 75px;
-    opacity: 0;
-    mix-blend-mode: hard-light;
-    background: #8C24C5;
-    transition: opacity 0.3 ease-in;
-}
-
-.block {
-    z-index: 50;
-    opacity: 0;
-    mix-blend-mode: hard-light;
-    transition: opacity .3s ease-in;
-    position: relative;
-}
-
-
-</style> -->
+</style>
