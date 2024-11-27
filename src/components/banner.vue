@@ -39,14 +39,12 @@
 </template>
 
 <script setup>
-import { onMounted, onUnmounted } from "vue";
-import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
-
-gsap.registerPlugin(ScrollTrigger);
+import { onMounted, onUnmounted } from 'vue';
+import gsap from 'gsap';
 
 let Ji = null;
 
+// Function to update scaling of elements
 const Ki = (e, M) => {
    if (!e || !M) {
       console.warn("Missing elements for scaling:", e, M);
@@ -54,22 +52,16 @@ const Ki = (e, M) => {
    }
 
    const windowWidth = window.innerWidth;
-   const windowHeight =
-      windowWidth < 500
-         ? document.documentElement.clientHeight + 100
-         : window.innerHeight;
-   const b = windowWidth > 1024 ? windowWidth / 24 : 32;
-   const scaleE = (windowWidth - b) / e.offsetWidth;
-   const scaleM = (windowWidth - b) / M.offsetWidth;
+   const bufferWidth = windowWidth > 1024 ? windowWidth / 24 : 32;
+   const scaleE = (windowWidth - bufferWidth) / e.offsetWidth;
+   const scaleM = (windowWidth - bufferWidth) / M.offsetWidth;
 
    if (Ji !== scaleE) {
-      console.log(`Updating scales. scaleE: ${scaleE}, scaleM: ${scaleM}`);
+      // console.log(`Updating scales. scaleE: ${scaleE}, scaleM: ${scaleM}`);
       gsap.set(e, { scaleX: scaleE });
       gsap.set(M, { scaleX: scaleM });
       Ji = scaleE;
    }
-
-
 };
 
 onMounted(() => {
@@ -83,25 +75,32 @@ onMounted(() => {
       return;
    }
 
-   const handleResize = () => {
-      console.log("Resize detected");
-      Ki(e, M);
-   };
+   // Wait for fonts to load before applying scaling
+   document.fonts.ready.then(() => {
+      Ji = null; // Reset Ji to ensure scaling is applied after fonts load
+      Ki(e, M); // Apply initial scaling
+   });
 
-   // Initial calculation
-   console.log("Initializing scaling");
-   Ki(e, M);
+   // Fallback timeout in case fonts take too long to load
+   setTimeout(() => {
+      if (!Ji) {
+         Ji = null;
+         Ki(e, M); // Apply scaling if fonts load slower than expected
+      }
+   }, 2000); // Timeout after 2 seconds
 
    // Handle window resize
+   const handleResize = () => {
+      Ki(e, M); // Reapply scaling on resize
+   };
+
    window.addEventListener("resize", handleResize);
 
-   // Cleanup on unmount
+   // Cleanup event listener on component unmount
    onUnmounted(() => {
       window.removeEventListener("resize", handleResize);
    });
 });
 </script>
-
-
 
 <style scoped></style>

@@ -1,12 +1,14 @@
 <template>
     <div class="content-wrap" ref="contentWrap">
         <div class="content">
-            <h2 class="title-wrap font-Phudu font-bold">
-                <span class="title title--up text-8xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]"
+            <div class="title-wrap font-Phudu font-bold">
+                <span
+                    class="title title--up md:text-8xl text-6xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]"
                     data-scroll-var>About</span>
-                <span class="title title--down text-8xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]"
+                <span
+                    class="title title--down md:text-8xl text-6xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]"
                     data-scroll-var>Me</span>
-            </h2>
+            </div>
         </div>
         <div class="content content--layout content--layout-1 ">
             <svg class="content__img content__img--1 overflow-hidden" width="896" height="1344"
@@ -33,9 +35,10 @@
             </p>
         </div>
     </div>
+
 </template>
 
-<script setup>
+<!-- <script setup>
 import { onMounted, ref } from "vue";
 import { gsap } from "gsap";
 import { Flip, ScrollTrigger } from "gsap/all";
@@ -132,10 +135,116 @@ onMounted(() => {
         end: "+=40%",
         scrub: true,
         animation: flip,
+        ease: 'none',
+
+    });
+});
+</script> -->
+<script setup>
+import { onMounted, ref } from "vue";
+import { gsap } from "gsap";
+import { Flip, ScrollTrigger } from "gsap/all";
+import imageSrc from '../assets/images/me.png';
+
+gsap.registerPlugin(Flip, ScrollTrigger);
+
+const contentWrap = ref(null);
+
+onMounted(() => {
+    const el = contentWrap.value;
+    if (!el) {
+        console.error("Main element not found!");
+        return;
+    }
+
+    const DOM = {
+        el,
+        titleWrap: el.querySelector(".title-wrap"),
+        titleUp: el.querySelector(".title--up"),
+        titleDown: el.querySelector(".title--down"),
+        content: [...el.querySelectorAll(".content")],
+        svg: el.querySelector(".content__img"),
+        mask: el.querySelector(".mask"),
+        image: el.querySelector("image"),
+    };
+
+    if (
+        !DOM.titleWrap ||
+        !DOM.titleUp ||
+        !DOM.titleDown ||
+        !DOM.svg ||
+        !DOM.mask ||
+        !DOM.image
+    ) {
+        console.error("One or more required elements are missing!", DOM);
+        return;
+    }
+
+    // Use requestAnimationFrame to ensure layout is ready
+    requestAnimationFrame(() => {
+        const isCircle = DOM.mask.tagName.toLowerCase() === "circle";
+
+        const flipstate = Flip.getState([DOM.titleUp, DOM.titleDown]);
+
+        // Change layout
+        if (DOM.content.length > 1) {
+            DOM.content[1].prepend(DOM.titleUp, DOM.titleDown);
+        }
+
+        // Validate mask attributes
+        const initialAttr = isCircle
+            ? DOM.mask.getAttribute("r")
+            : DOM.mask.getAttribute("d");
+        const finalAttr = DOM.mask.dataset.valueFinal;
+
+        if (!initialAttr || !finalAttr) {
+            console.error("Mask attributes are missing or invalid!", {
+                initialAttr,
+                finalAttr,
+            });
+            return;
+        }
+
+        // Use Flip.fit to ensure proper dimensions
+        Flip.fit(DOM.titleUp, DOM.titleUp);
+        Flip.fit(DOM.titleDown, DOM.titleDown);
+
+        const flip = Flip.from(flipstate, {
+            ease: "none",
+            simple: true,
+        })
+            .fromTo(
+                DOM.mask,
+                {
+                    attr: isCircle ? { r: initialAttr } : { d: initialAttr },
+                },
+                {
+                    attr: isCircle ? { r: finalAttr } : { d: finalAttr },
+                    ease: "none",
+                },
+                0
+            )
+            .fromTo(
+                DOM.image,
+                {
+                    transformOrigin: "50% 50%",
+                    filter: "brightness(100%)",
+                },
+                {
+                    scale: isCircle ? 1.2 : 1,
+                    ease: "none",
+                },
+                0
+            );
+
+        ScrollTrigger.create({
+            trigger: DOM.titleWrap,
+            start: "top bottom-=10%",
+            end: "+=40%",
+            scrub: true,
+            animation: flip,
+            ease: "none",
+        });
     });
 });
 </script>
-
-<style>
-/* Add your styles here */
-</style>

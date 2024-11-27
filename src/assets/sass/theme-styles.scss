@@ -142,6 +142,34 @@ body::after {
 .homepage-header__title--bottom .split {
   transform: translateY(calc(-0.2em * var(--progress) - 0.01em));
 }
+@media only screen and (min-width: 0px) and (max-width: 1024px) {
+  .homepage-header__sticky-container {
+    height: 50vh;
+    height: 50svh;
+  }
+  .homepage-header__sticky {
+    overflow: visible;
+    height: auto;
+  }
+  .homepage-header__title {
+    font-size: 21vh;
+    font-size: 21svh;
+    // color: var(--background);
+  }
+}
+
+@media only screen and (min-width: 0px) and (max-width: 750px) {
+  .homepage-header__title {
+    text-shadow: 3px 0 0 var(--accent),
+      calc(-2px * 1) calc(2px * 1) 0 var(--accent),
+      calc(-2px * 2) calc(2px * 2) 0 var(--accent),
+      calc(-2px * 3) calc(2px * 3) 0 var(--accent),
+      calc(-2px * 4) calc(2px * 4) 0 var(--accent),
+      calc(-2px * 5) calc(2px * 5) 0 var(--accent),
+      calc(-2px * 6) calc(2px * 6) 0 var(--accent);
+  }
+}
+
 .text-shadow {
   --distance: (0.5 + var(--i));
   text-shadow: calc(2px + -0.0015em * 1 * var(--distance))
@@ -235,4 +263,21 @@ body::after {
 .pin-spacer {
   padding-bottom: 0 !important;
   margin-bottom: 0 !important;
+}
+
+.medium-heading {
+  font-size: 4.6666666667vw;
+  line-height: 1;
+  letter-spacing: -0.01em;
+}
+@media only screen and (max-width: 685.714px) {
+  .medium-heading {
+    font-size: 32px;
+  }
+}
+@layer utilities {
+  .text-block {
+    --padding: clamp(0.75rem, 2.0833333333vw, 2.5rem);
+    padding: calc(var(--padding) * 2) var(--padding) 0;
+  }
 }
