@@ -65,8 +65,11 @@ module.exports = {
         grey: "rgba(51, 51, 51, 1)",
         white: "#F5F7F5",
         lightBlue: "#e1eff7",
+        lightBrown: "#e6e6e1"
       },
-
+      spacing: {
+        'dynamic': 'clamp(0.75rem, 2.0833333333vw, 2.5rem)',
+      },
       typography: ({ theme }) => ({
         DEFAULT: {
           css: {
@@ -88,7 +91,7 @@ module.exports = {
     plugin(({ addBase, theme }) => {
       addBase({
         body: {
-          color: theme("colors.darkBlue"),
+          color: theme("colors.lightBrown"),
           background: theme("colors.lightBlue"),
           fontFamily: theme("fontFamily.InstrumentSans"),
           fontSize: "20px",

@@ -1,5 +1,5 @@
 <template>
-    <section class="journey--block px-5 py-16">
+    <section class="journey--block pl-dynamic pr-dynamic py-24">
         <div class="text-center max-w-[40rem] mx-auto relative ">
             <h2 class="text-8xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]" data-scroll-var>
                 journey

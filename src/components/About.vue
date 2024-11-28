@@ -1,6 +1,6 @@
 <template>
 
-    <section class="about--block text-block w-[67vw] font-bold  md:w-[83.33vw] sm:w-[100%]">
+    <section class="about--block pl-dynamic pr-dynamic w-[67vw] font-bold  md:w-[83.33vw] sm:w-[100%]">
         <div class="p medium-heading caps font-bold prose-p:uppercase ">
             <p class=" font-Phudu font-bold text-[#101010]">I'm Chetan, an experienced frontend developer with a
                 passion

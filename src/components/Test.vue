@@ -1,5 +1,5 @@
 <template>
-    <div class="content-wrap" ref="contentWrap">
+    <div class="content-wrap pl-dynamic pr-dynamic md:py-14 py-11" ref="contentWrap">
         <div class="content">
             <div class="title-wrap font-Phudu font-bold">
                 <span
@@ -38,110 +38,8 @@
 
 </template>
 
-<!-- <script setup>
-import { onMounted, ref } from "vue";
-import { gsap } from "gsap";
-import { Flip, ScrollTrigger } from "gsap/all";
-import imageSrc from '../assets/images/me.png';
-
-gsap.registerPlugin(Flip, ScrollTrigger);
-
-const contentWrap = ref(null);
-
-onMounted(() => {
-    const el = contentWrap.value;
-    if (!el) {
-        console.error("Main element not found!");
-        return;
-    }
-
-    const DOM = {
-        el,
-        titleWrap: el.querySelector(".title-wrap"),
-        titleUp: el.querySelector(".title--up"),
-        titleDown: el.querySelector(".title--down"),
-        content: [...el.querySelectorAll(".content")],
-        svg: el.querySelector(".content__img"),
-        mask: el.querySelector(".mask"),
-        image: el.querySelector("image"),
-    };
-
-    if (
-        !DOM.titleWrap ||
-        !DOM.titleUp ||
-        !DOM.titleDown ||
-        !DOM.svg ||
-        !DOM.mask ||
-        !DOM.image
-    ) {
-        console.error("One or more required elements are missing!", DOM);
-        return;
-    }
-
-    const isCircle = DOM.mask.tagName.toLowerCase() === "circle";
-
-    const flipstate = Flip.getState([DOM.titleUp, DOM.titleDown]);
-
-    // Change layout
-    if (DOM.content.length > 1) {
-        DOM.content[1].prepend(DOM.titleUp, DOM.titleDown);
-    }
-
-    const initialAttr = isCircle
-        ? DOM.mask.getAttribute("r")
-        : DOM.mask.getAttribute("d");
-    const finalAttr = DOM.mask.dataset.valueFinal;
-
-    if (!initialAttr || !finalAttr) {
-        console.error("Mask attributes are missing or invalid!", {
-            initialAttr,
-            finalAttr,
-        });
-        return;
-    }
-
-    const flip = Flip.from(flipstate, {
-        ease: "none",
-        simple: true,
-    })
-        .fromTo(
-            DOM.mask,
-            {
-                attr: isCircle ? { r: initialAttr } : { d: initialAttr },
-            },
-            {
-                attr: isCircle ? { r: finalAttr } : { d: finalAttr },
-                ease: "none",
-            },
-            0
-        )
-        .fromTo(
-            DOM.image,
-            {
-                transformOrigin: "50% 50%",
-                filter: "brightness(100%)",
-            },
-            {
-                scale: isCircle ? 1.2 : 1,
-                // filter: "brightness(150%)",
-                ease: "none",
-            },
-            0
-        );
-
-    ScrollTrigger.create({
-        trigger: DOM.titleWrap,
-        start: "clamp(top bottom-=10%)",
-        end: "+=40%",
-        scrub: true,
-        animation: flip,
-        ease: 'none',
-
-    });
-});
-</script> -->
 <script setup>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, nextTick } from "vue";
 import { gsap } from "gsap";
 import { Flip, ScrollTrigger } from "gsap/all";
 import imageSrc from '../assets/images/me.png';
@@ -157,94 +55,201 @@ onMounted(() => {
         return;
     }
 
-    const DOM = {
-        el,
-        titleWrap: el.querySelector(".title-wrap"),
-        titleUp: el.querySelector(".title--up"),
-        titleDown: el.querySelector(".title--down"),
-        content: [...el.querySelectorAll(".content")],
-        svg: el.querySelector(".content__img"),
-        mask: el.querySelector(".mask"),
-        image: el.querySelector("image"),
-    };
+    document.fonts.ready.then(() => {
+        nextTick(() => {
+            const DOM = {
+                el,
+                titleWrap: el.querySelector(".title-wrap"),
+                titleUp: el.querySelector(".title--up"),
+                titleDown: el.querySelector(".title--down"),
+                content: [...el.querySelectorAll(".content")],
+                svg: el.querySelector(".content__img"),
+                mask: el.querySelector(".mask"),
+                image: el.querySelector("image"),
+            };
 
-    if (
-        !DOM.titleWrap ||
-        !DOM.titleUp ||
-        !DOM.titleDown ||
-        !DOM.svg ||
-        !DOM.mask ||
-        !DOM.image
-    ) {
-        console.error("One or more required elements are missing!", DOM);
-        return;
-    }
+            if (
+                !DOM.titleWrap ||
+                !DOM.titleUp ||
+                !DOM.titleDown ||
+                !DOM.svg ||
+                !DOM.mask ||
+                !DOM.image
+            ) {
+                console.error("One or more required elements are missing!", DOM);
+                return;
+            }
 
-    // Use requestAnimationFrame to ensure layout is ready
-    requestAnimationFrame(() => {
-        const isCircle = DOM.mask.tagName.toLowerCase() === "circle";
+            // Trigger a reflow to ensure correct width
+            DOM.titleUp.offsetWidth;
+            DOM.titleDown.offsetWidth;
 
-        const flipstate = Flip.getState([DOM.titleUp, DOM.titleDown]);
+            const flipstate = Flip.getState([DOM.titleUp, DOM.titleDown]);
 
-        // Change layout
-        if (DOM.content.length > 1) {
-            DOM.content[1].prepend(DOM.titleUp, DOM.titleDown);
-        }
+            if (DOM.content.length > 1) {
+                DOM.content[1].prepend(DOM.titleUp, DOM.titleDown);
+            }
 
-        // Validate mask attributes
-        const initialAttr = isCircle
-            ? DOM.mask.getAttribute("r")
-            : DOM.mask.getAttribute("d");
-        const finalAttr = DOM.mask.dataset.valueFinal;
+            const isCircle = DOM.mask.tagName.toLowerCase() === "circle";
 
-        if (!initialAttr || !finalAttr) {
-            console.error("Mask attributes are missing or invalid!", {
-                initialAttr,
-                finalAttr,
+            const initialAttr = isCircle
+                ? DOM.mask.getAttribute("r")
+                : DOM.mask.getAttribute("d");
+            const finalAttr = DOM.mask.dataset.valueFinal;
+
+            if (!initialAttr || !finalAttr) {
+                console.error("Mask attributes are missing or invalid!", {
+                    initialAttr,
+                    finalAttr,
+                });
+                return;
+            }
+
+            Flip.fit(DOM.titleUp, DOM.titleUp);
+            Flip.fit(DOM.titleDown, DOM.titleDown);
+
+            const flip = Flip.from(flipstate, {
+                ease: "none",
+                simple: true,
+            })
+                .fromTo(
+                    DOM.mask,
+                    {
+                        attr: isCircle ? { r: initialAttr } : { d: initialAttr },
+                    },
+                    {
+                        attr: isCircle ? { r: finalAttr } : { d: finalAttr },
+                        ease: "none",
+                    },
+                    0
+                )
+                .fromTo(
+                    DOM.image,
+                    {
+                        transformOrigin: "50% 50%",
+                        filter: "brightness(100%)",
+                    },
+                    {
+                        scale: isCircle ? 1.2 : 1,
+                        ease: "none",
+                    },
+                    0
+                );
+
+            ScrollTrigger.create({
+                trigger: DOM.titleWrap,
+                start: "top bottom-=10%",
+                end: "+=40%",
+                scrub: true,
+                animation: flip,
+                ease: "none",
             });
-            return;
-        }
-
-        // Use Flip.fit to ensure proper dimensions
-        Flip.fit(DOM.titleUp, DOM.titleUp);
-        Flip.fit(DOM.titleDown, DOM.titleDown);
-
-        const flip = Flip.from(flipstate, {
-            ease: "none",
-            simple: true,
-        })
-            .fromTo(
-                DOM.mask,
-                {
-                    attr: isCircle ? { r: initialAttr } : { d: initialAttr },
-                },
-                {
-                    attr: isCircle ? { r: finalAttr } : { d: finalAttr },
-                    ease: "none",
-                },
-                0
-            )
-            .fromTo(
-                DOM.image,
-                {
-                    transformOrigin: "50% 50%",
-                    filter: "brightness(100%)",
-                },
-                {
-                    scale: isCircle ? 1.2 : 1,
-                    ease: "none",
-                },
-                0
-            );
-
-        ScrollTrigger.create({
-            trigger: DOM.titleWrap,
-            start: "top bottom-=10%",
-            end: "+=40%",
-            scrub: true,
-            animation: flip,
-            ease: "none",
         });
     });
 });
 </script>
+<style scoped>
+.content-wrap {
+    display: grid;
+    place-items: center;
+    grid-template-areas: "main";
+}
+
+.content {
+    grid-area: main;
+    display: grid;
+    place-items: center;
+    line-height: 1.2;
+    grid-template-areas: "content";
+}
+
+/* .content-wrap .content:first-child {
+    height: 100vh;
+} */
+
+.content--layout {
+    grid-template-areas:
+        "title-up title-down"
+        "img img"
+        "text text";
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.content__img {
+    grid-area: img;
+    max-width: 50%;
+    height: auto;
+}
+
+
+
+
+
+.title-wrap {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.title--up {
+    grid-area: title-up;
+}
+
+.title--down {
+    grid-area: title-down;
+}
+
+.content__text {
+    grid-area: text;
+    /* text-transform: uppercase;
+    margin: 0;
+    opacity: 0.5; */
+}
+
+@media screen and (min-width: 991px) {
+
+
+    .content__img {
+        max-width: none;
+    }
+
+    .content__img--1 {
+        height: auto;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100vh;
+    }
+
+    .content--layout-1 {
+        grid-template-areas:
+            "title-up img ..."
+            "text img title-down";
+        grid-template-columns: 30% auto 30%;
+        grid-template-rows: 1fr 1fr;
+        column-gap: 2vw;
+    }
+
+    .title--up {
+        justify-self: end;
+        align-self: start;
+    }
+
+    .title--down {
+        justify-self: start;
+        align-self: end;
+    }
+
+    .content--layout-1 .content__text {
+        max-width: 335px;
+        text-align: right;
+        justify-self: end;
+        align-self: end;
+    }
+
+    .card-wrap {
+        grid-template-columns: repeat(3, 250px);
+    }
+}
+</style>

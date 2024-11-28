@@ -1,19 +1,6 @@
 <template>
-   <!-- <section class="flex items-center justify-center h-screen w-full h-full text-center text-white p-5 homepage-header">
-      <div class="main-wrapper">
-         <h1 class="font-Phudu font-bold uppercase text-[#e1eff7]" style="font-size: 18vw; line-height: 16vw;">
-            <span class="homepage-header__title homepage-header__title--bottom" aria-hidden="true">
-               <span class="split">Creative</span>
-            </span>
-            <span class="block homepage-header__title homepage-header__title--bottom" aria-hidden="true">
-               <span class="split">Developer</span>
-            </span>
-         </h1>
 
-      </div>
-
-   </section> -->
-   <section class="homepage-header  h-screen">
+   <section class="homepage-header  ">
       <div class="homepage-header__sticky-container">
          <div class="homepage-header__sticky ">
             <span class="homepage-header__title homepage-header__title--top font-Phudu font-bold" aria-hidden="true">

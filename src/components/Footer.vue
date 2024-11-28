@@ -1,6 +1,6 @@
 <template>
     <!-- footer area start -->
-    <footer id="site-footer" class="main-footer footer p-6" data-sticky-footer="true">
+    <footer id="site-footer" class="main-footer footer pl-dynamic pr-dynamic pb-10" data-sticky-footer="true">
         <section id="contact" class="bg-[#e8fcff] py-10  rounded-3xl">
             <div class="container mx-auto">
                 <div class="flex flex-col  items-center">
