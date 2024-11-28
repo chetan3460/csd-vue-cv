@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@splinetool/runtime": "^1.9.46",
+    "@splinetool/viewer": "^1.9.46",
     "@tsparticles/all": "^3.5.0",
     "@tsparticles/engine": "^3.5.0",
     "@tsparticles/vue3": "^3.0.1",

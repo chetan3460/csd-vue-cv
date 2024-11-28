@@ -5,22 +5,22 @@
     <canvas ref="canvas" class="spline-canvas"></canvas>
 </template>
 
-<script>
+<script setup>
+import { onMounted, ref } from "vue";
 import { Application } from "@splinetool/runtime";
 
-export default {
-    name: "SplineScene",
-    mounted() {
-        const canvas = this.$refs.canvas; // Reference the canvas element
-        const splineApp = new Application(canvas); // Initialize Spline Application
+const canvas = ref(null); // Reference for the canvas element
 
-        // Load the Spline scene (replace with your exported URL)
-        splineApp
-            .load("https://prod.spline.design/QwzuXBZQFrKfrnRl/scene.splinecode")
-            .catch((err) => console.error("Error loading Spline scene:", err));
-    },
-};
+onMounted(() => {
+    const splineApp = new Application(canvas.value); // Initialize Spline Application
+
+    // Load the Spline scene (replace with your exported URL)
+    splineApp
+        .load("https://prod.spline.design/XeEonaOL7tiUSugW/scene.splinecode")
+        .catch((err) => console.error("Error loading Spline scene:", err));
+});
 </script>
+
 
 
 <style>

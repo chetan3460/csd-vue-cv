@@ -2,9 +2,10 @@
 
     <section class="about--block pl-dynamic pr-dynamic w-[67vw] font-bold  md:w-[83.33vw] sm:w-[100%]">
         <div class="p medium-heading caps font-bold prose-p:uppercase ">
-            <p class=" font-Phudu font-bold text-[#101010]">I'm Chetan, an experienced frontend developer with a
+            <p class=" font-Phudu font-bold ">I'm Chetan, an experienced frontend developer with a
                 passion
-                for crafting engaging user experiences. with over <a href="" class="underline !text-[#0f1b61]">5 years
+                for crafting engaging user experiences. with over <a href="" class="block underline !text-[#9a92d9]">5
+                    years
                     experience.</a>
             </p>
         </div>
