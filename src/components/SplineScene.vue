@@ -43,5 +43,7 @@ onMounted(() => {
     margin: auto;
     position: fixed;
     top: 0;
+    pointer-events: none;
+    z-index: -1;
 }
 </style>
