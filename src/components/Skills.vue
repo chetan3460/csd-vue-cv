@@ -1,7 +1,7 @@
 <template>
-    <section class="px-5 pt-16 relative">
+    <section class="skills--block px-5 pt-16 relative">
         <div class="text-center  max-w-[40rem] mx-auto flex flex-col gap-12">
-            <h2 class="text-8xl uppercase font-Phudu font-bold  text-shadow text-[#0f1b61]" data-scroll-var>Skills
+            <h2 class="md:text-8xl text-7xl uppercase font-Phudu font-bold  text-shadow ">Skills
             </h2>
             <p>"With 5 years of experience, I’ve developed a versatile toolkit that combines creativity and technical
                 expertise. Specializing in both front-end development and back-end architecture, I deliver visually
@@ -15,7 +15,6 @@
 
 
                 <div class="gallery__item pos-1">
-                    <!-- <v-icon hover fill="#5E3B7F" name="fa-bootstrap"></v-icon> -->
                     <div class="icon flex items-center justify-center flex-col">
                         <v-icon name="vi-file-type-vue" />
                         <span class="text-sm">Vue</span>
@@ -47,7 +46,6 @@
 
                 </div>
                 <div class="gallery__item pos-7">
-                    <!-- <v-icon name="baidu" /> -->
                     <img :src="customCmsIcon.src" :alt="customCmsIcon.name" :width="customCmsIcon.width"
                         :height="customCmsIcon.height" />
                     <span class="text-sm">Concerete 9</span>
@@ -99,10 +97,17 @@
                     <span class="text-sm">Sourcetree</span>
 
                 </div>
-                <div class="caption font-Phudu text-[#150050] font-bold text-center bg-[#F0FFFF] rounded-3xl">👨🏼‍🔬
-                    Embracing tech,
-                    👨🏼‍🎨
-                    creating art.
+                <div class="caption  bg-[#9a92d9] ">
+                    <div class="p-2">
+                        <p
+                            class="font-Phudu  font-bold text-center  rounded-3xl text-[#0b0623] md:text-6xl text-5xl max-w-[50rem]">
+                            Code is like
+                            poetry—crafted with care,
+                            <span class="inline-block">written with purpose,</span>
+                            and built to inspire.
+                        </p>
+                    </div>
+
                 </div>
 
             </div>
@@ -110,11 +115,10 @@
 
     </section>
 
-
 </template>
 
 <script setup>
-import { fontAnim, stickyCards } from "../js/utilits";
+import { stickyCards } from "../js/utilits";
 
 import {
     OhVueIcon,
@@ -159,13 +163,7 @@ const customCmsIcon = {
 
 
 addIcons(SiSourcetree, LaShapesSolid, CoGithub, IoLogoWordpress, ViFileTypeScss2, CoJquery, CoJavascript, ViFileTypeHtml, ViFileTypeCss, CoBootstrap, ViFileTypeVue, ViFileTypeWebpack, ViFileTypeNuxt, ViFileTypeJsOfficial, ViFileTypeScss2, ViFileTypeTailwind, ViFileTypeVite, customGsapIcon, customCmsIcon);
-fontAnim();
 stickyCards();
-
-
-
-// Register GSAP plugins
-// gsap.registerPlugin(Flip, ScrollTrigger);
 
 
 
@@ -173,3 +171,87 @@ stickyCards();
 
 
 </script>
+<style>
+/*--------------------------------------------------
+	Slowed Pin
+---------------------------------------------------*/
+.big-title {
+    font-size: calc(1rem + 4vw);
+    line-height: calc(1rem + 4vw);
+}
+
+.slowed-pin {
+    position: relative;
+    overflow: hidden;
+}
+
+.slowed-pin>.pin-spacer {
+    pointer-events: none;
+}
+
+.slowed-text {
+    position: absolute;
+    height: auto;
+    min-height: 100vh;
+    width: 100%;
+    max-width: 980px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    padding: 8vw 20px;
+    z-index: 1;
+    pointer-events: none;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.slowed-text-wrapper {
+    position: relative;
+    display: block;
+}
+
+.slowed-images {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    overflow: hidden;
+    z-index: 0;
+    margin: auto;
+}
+
+.slowed-image {
+    position: relative;
+    width: 100%;
+    height: auto;
+    box-sizing: border-box;
+    padding: 0 0px;
+    margin: 150px 0;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+}
+
+.slowed-image:nth-of-type(2n+2) {
+    align-items: flex-end;
+}
+
+.slowed-image img {
+    width: auto;
+    max-width: 40% !important;
+    height: auto !important;
+    display: block;
+    cursor: pointer;
+    margin-bottom: 10px;
+    -webkit-transform: scale(0.95) translateY(30%);
+    transform: scale(0.95) translateY(30%);
+}
+
+.rounded-borders .slowed-image img {
+    border-radius: 8px;
+}
+</style>

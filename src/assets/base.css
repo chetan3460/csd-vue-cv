@@ -64,13 +64,28 @@ main {
   flex: none;
   border-radius: 20px;
   position: relative;
-  border: 1px solid #0f1b61;
+  /* border: 1px solid #0f1b61; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   backdrop-filter: blur(24.5px);
-  background-color: rgb(236 251 247);
+  /* box-shadow:
+    inset 1.2rem 1.2rem 2.4rem hsla(0, 0%, 100%, 0.1),
+    inset 0 1.2rem 2.4rem hsla(0, 0%, 100%, 0.05),
+    inset 1.6rem 2.8rem 4.8rem hsla(0, 0%, 100%, 0.65),
+    inset 0 -0.4rem 8.8rem hsla(0, 0%, 55%, 0.15),
+    inset -5.2rem -4.9rem 5.6rem hsla(0, 0%, 47%, 0.3); */
+  border: 1px solid rgba(154, 146, 217, 0.2);
+  /* background-color: #362669; */
+  background: linear-gradient(
+    180deg,
+    rgba(87, 75, 137, 0),
+    rgba(87, 75, 137, 0.5) 17.38%,
+    #574b89 40.11%,
+    rgba(87, 75, 137, 0.5) 67.65%,
+    rgba(87, 75, 137, 0)
+  );
   position: relative;
   z-index: 2;
   gap: 20px;
@@ -79,6 +94,12 @@ main {
     width: 45px;
     height: 45px;
   }
+  span {
+    font-weight: 700;
+    color: #e6e6e1;
+    font-size: 18px;
+    font-family: Phudu;
+  }
 }
 
 .caption {
@@ -86,6 +107,7 @@ main {
   line-height: 5.5rem; /* Fixed line height of 1.5rem */
 
   z-index: 101;
+  border-radius: 20px;
 }
 
 .gallery--row .caption {

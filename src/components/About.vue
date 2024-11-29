@@ -1,6 +1,6 @@
 <template>
 
-    <section class="about--block pl-dynamic pr-dynamic w-[67vw] font-bold  md:w-[83.33vw] sm:w-[100%]">
+    <section class="about--block pl-dynamic pr-dynamic w-100 font-bold  md:w-[83.33vw] sm:w-[100%]">
         <div class="p medium-heading caps font-bold prose-p:uppercase ">
             <p class=" font-Phudu font-bold ">I'm Chetan, an experienced frontend developer with a
                 passion
@@ -21,8 +21,7 @@ import { onMounted, ref } from "vue";
 import handSvg from "../assets/images/hand.webp";
 import imageSrc from '../assets/images/me.webp';
 
-import { fontAnim, revealLetter, Item } from "../js/utilits";
-fontAnim();
+import { revealLetter } from "../js/utilits";
 
 onMounted(() => {
     revealLetter();

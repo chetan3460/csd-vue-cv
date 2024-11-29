@@ -8,7 +8,7 @@
                         class="self-center text-3xl font-bold whitespace-nowrap dark:text-white font-Phudu ">CSD</span>
                 </a>
 
-                <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
+                <!-- <div class="hidden justify-between items-center w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2">
                     <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                         <li>
                             <a href="#"
@@ -24,7 +24,7 @@
 
 
                     </ul>
-                </div>
+                </div> -->
             </div>
         </nav>
     </header>

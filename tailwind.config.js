@@ -60,7 +60,7 @@ module.exports = {
     extend: {
       colors: {
         dark: "#0f1b61",
-        darkBlue: "#0f1b61",
+        darkBlue: "#0a0521",
         black: "rgba(0, 0, 0, 1)",
         grey: "rgba(51, 51, 51, 1)",
         white: "#F5F7F5",
@@ -88,11 +88,11 @@ module.exports = {
   },
   plugins: [
     require('@tailwindcss/typography'),
-    plugin(({ addBase, theme }) => {
+    plugin(({ addBase, theme, addUtilities }) => {
       addBase({
         body: {
           color: theme("colors.lightBrown"),
-          background: theme("colors.lightBlue"),
+          background: theme("colors.darkBlue"),
           fontFamily: theme("fontFamily.InstrumentSans"),
           fontSize: "20px",
           lineHeight: "30px",
@@ -105,6 +105,31 @@ module.exports = {
         },
 
       });
+      const newUtilities = {
+        '.text-clamp': {
+          '--has-md': '0',
+          '--clamp-screen-min': 'max(390px, calc(768px * var(--has-md)))',
+          '--clamp-screen-max': '1280px',
+          '--clamp-font-min': 'var(--clamp-font-md, var(--clamp-font-sm, 1))',
+          '--clamp-font-max': 'var(--clamp-font-xl, 2)',
+          '--clamp-font-min-rem': 'calc(var(--clamp-font-min) * 1rem)',
+          '--clamp-font-max-rem': 'calc(var(--clamp-font-max) * 1rem)',
+          '--clamp-offset': 'calc(100vw - var(--clamp-screen-min))',
+          '--clamp-screen-difference': 'calc(var(--clamp-screen-max) - var(--clamp-screen-min))',
+          '--clamp-percentage':
+            'calc(var(--clamp-offset) / var(--clamp-screen-difference))',
+          '--clamp-preferred':
+            'calc(var(--clamp-percentage) * (var(--clamp-font-max) - var(--clamp-font-min)) + var(--clamp-font-min-rem))',
+          fontSize: 'clamp(var(--clamp-font-min-rem), var(--clamp-preferred), var(--clamp-font-max-rem))',
+        },
+        '.clamp-max-96': {
+          '--clamp-font-xl': '6',
+        },
+        '.clamp-max-48': {
+          '--clamp-font-xl': '3',
+        },
+      };
+      addUtilities(newUtilities, ['responsive', 'hover']);
 
     }),
   ],

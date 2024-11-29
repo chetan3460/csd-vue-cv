@@ -10,8 +10,6 @@ import {
 import gsap from 'gsap/all'
 import SplitType from 'split-type'
 import ScrollTrigger from 'gsap/ScrollTrigger'
-import ScrollToPlugin from 'gsap/ScrollToPlugin'
-import { Power2, Quint } from 'gsap'
 import Lenis from 'lenis'
 import Flip from 'gsap/Flip';
 import imagesLoaded from 'imagesloaded'
@@ -92,126 +90,88 @@ export const preloadImages = (selector = 'img') => {
 };
 
 
-// Font 
-export const fontAnim = () => {
+export const MovingGallery = () => {
+  // Moving Gallery		
   onMounted(() => {
-    const elements = [...document.querySelectorAll("[data-scroll-var]")];
+    // Slowed Pin Section
+    gsap.utils.toArray('.slowed-pin').forEach((slowedPin) => {
 
-    elements.forEach((el) => {
-      const end = el.dataset.end || "bottom center";
-      const start = el.dataset.start || "top bottom";
-      const scrollOnce = el.dataset.scrollOnce === "true";
-      const markers = el.dataset.markers === "true";
-      const ease = el.dataset.ease || "power1.inOut";
+      const slowedText = slowedPin.querySelector('.slowed-text');
+      const slowedTextWrapper = slowedPin.querySelector('.slowed-text-wrapper');
+      const slowedImagesWrapper = slowedPin.querySelector('.slowed-images');
+      const slowedImages = slowedPin.querySelectorAll('.slowed-image img');
 
-      gsap.to(el, {
+      gsap.to(slowedText, {
         scrollTrigger: {
-          trigger: el,
-          start,
-          end: scrollOnce ? false : end,
-          scrub: !scrollOnce && 1,
-          once: scrollOnce,
-          markers,
+          trigger: slowedText,
+          scrub: true,
+          pin: true,
+          start: "top top",
+          end: function () {
+            const durationHeight = slowedImagesWrapper.offsetHeight - window.innerHeight;
+            return "+=" + durationHeight;
+          },
         },
-        "--i": 1,
-        duration: 1,
-        ease,
+        y: window.innerHeight - slowedText.offsetHeight
       });
+
+      gsap.from(slowedTextWrapper, {
+        scrollTrigger: {
+          trigger: slowedText,
+          scrub: true,
+          start: "top top",
+          end: function () {
+            const durationHeight = slowedImagesWrapper.offsetHeight - window.innerHeight;
+            return "+=" + durationHeight;
+          },
+        },
+        y: 100
+      });
+
+      slowedImages.forEach((sImage) => {
+        gsap.to(sImage, {
+          scrollTrigger: {
+            trigger: sImage,
+            scrub: true,
+            start: "top 100%",
+          },
+          scale: 1,
+          y: 0
+        });
+      });
+
     });
-  });
+  })
 }
-
-
-
-// Flip 
-// export const stickyCards = () => {
-//   const galleryEl = ref(null);
-
-//   const triggerFlipOnScroll = (galleryEl, options) => {
-//     let settings = {
-//       flip: {
-//         absoluteOnLeave: false,
-//         absolute: false,
-//         scale: true,
-//         simple: true,
-//       },
-//       scrollTrigger: {
-//         start: 'center center',
-//         end: '+=300%',
-//         marker: true
-//       },
-//       stagger: 0,
-//     };
-
-//     settings = Object.assign({}, settings, options);
-
-//     // Select gallery items and ensure they are valid DOM elements
-//     const galleryCaption = galleryEl.querySelector('.caption');
-//     const galleryItems = galleryEl.querySelectorAll('.gallery__item');
-
-//     // Ensure we are getting a proper array of elements
-//     const galleryItemsArray = Array.from(galleryItems);
-
-//     // Check if elements exist before proceeding
-//     if (galleryItemsArray.length === 0 || !galleryCaption) {
-//       console.error("Gallery items or caption not found.");
-//       return;
-//     }
-
-//     // Temporarily add a class to capture the final state of Flip
-//     galleryEl.classList.add('gallery--switch');
-
-//     // Manually convert NodeLists to arrays and pass to Flip.getState()
-//     const flipState = Flip.getState([...galleryItemsArray, galleryCaption], { props: 'filter, opacity' });
-
-//     galleryEl.classList.remove('gallery--switch');
-
-//     // Create the Flip animation
-//     const tl = Flip.to(flipState, {
-//       ease: 'none',
-//       absoluteOnLeave: settings.flip.absoluteOnLeave,
-//       absolute: settings.flip.absolute,
-//       scale: settings.flip.scale,
-//       simple: settings.flip.simple,
-//       scrollTrigger: {
-//         trigger: galleryEl,
-//         start: settings.scrollTrigger.start,
-//         end: settings.scrollTrigger.end,
-//         pin: galleryEl.parentNode,
-//         scrub: true,
-//       },
-//       stagger: settings.stagger,
-//     });
-
-
-//   };
-
-//   // Scroll-triggered animations setup
-//   const scroll = () => {
-//     const galleries = [
-
-//       { id: '#gallery-3', options: { flip: { absolute: true, scale: false }, scrollTrigger: { start: 'center center', end: '+=900%' }, stagger: 0.05 } },
-//       { id: '#gallery-4' },
-
-//     ];
-
-//     galleries.forEach(gallery => {
-//       const galleryElement = document.querySelector(gallery.id);
-//       if (galleryElement) {
-//         triggerFlipOnScroll(galleryElement, gallery.options);
-//       }
-//     });
-//   };
-//   // Preload images
+// Font 
+// export const fontAnim = () => {
 //   onMounted(() => {
-//     preloadImages('.gallery__item').then(() => {
-//       // Initialize scroll-triggered animations after images are loaded
-//       scroll();
+//     const elements = [...document.querySelectorAll("[data-scroll-var]")];
 
-//       document.body.classList.remove('loading');
+//     elements.forEach((el) => {
+//       const end = el.dataset.end || "bottom center";
+//       const start = el.dataset.start || "top bottom";
+//       const scrollOnce = el.dataset.scrollOnce === "true";
+//       const markers = el.dataset.markers === "true";
+//       const ease = el.dataset.ease || "power1.inOut";
+
+//       gsap.to(el, {
+//         scrollTrigger: {
+//           trigger: el,
+//           start,
+//           end: scrollOnce ? false : end,
+//           scrub: !scrollOnce && 1,
+//           once: scrollOnce,
+//           markers,
+//         },
+//         "--i": 1,
+//         duration: 1,
+//         ease,
+//       });
 //     });
 //   });
 // }
+
 
 
 
@@ -303,31 +263,7 @@ export const stickyCards = () => {
   };
 
 
-  const fontAnim = () => {
-    const elements = [...document.querySelectorAll("[data-scroll-var]")];
 
-    elements.forEach((el) => {
-      const end = el.dataset.end || "bottom center";
-      const start = el.dataset.start || "top bottom";
-      const scrollOnce = el.dataset.scrollOnce === "true";
-      const markers = el.dataset.markers === "true";
-      const ease = el.dataset.ease || "power1.inOut";
-
-      gsap.to(el, {
-        scrollTrigger: {
-          trigger: el,
-          start,
-          end: scrollOnce ? false : end,
-          scrub: !scrollOnce && 1,
-          once: scrollOnce,
-          markers,
-        },
-        "--i": 1,
-        duration: 1,
-        ease,
-      });
-    });
-  };
 
   // Scroll-triggered animations setup
   const scroll = () => {
@@ -363,33 +299,6 @@ export const stickyCards = () => {
 
 
 
-// Quote
-export const paralaxAnimation = () => {
-  const getParalaxElems = document.querySelectorAll('.paralax--effect');
-  let getParalaxElemsHeight;
-
-  if (window.innerWidth > 770) {
-    getParalaxElemsHeight = 200
-  } else {
-    getParalaxElemsHeight = 140
-  }
-
-  getParalaxElems.forEach(elem => {
-    gsap.from(elem, {
-      scrollTrigger: {
-        trigger: elem,
-        scrub: true,
-        start: "top bottom",
-        end: "+=100%"
-      },
-      height: getParalaxElemsHeight,
-      transformOrigin: "left top",
-      ease: "none",
-    });
-
-  });
-}
-
 
 
 
@@ -420,91 +329,6 @@ export const revealLetter = () => {
 
 
 }
-
-// export const Item = () => {
-//   // Initialize DOM and style related properties
-//   // Various elements within this item
-//   DOM = {
-//     // Main DOM element
-//     el: null,
-//     // .title-wrap element
-//     titleWrap: null,
-//     // .title--up
-//     titleUp: null,
-//     // .title--down
-//     titleDown: null,
-//     // .content elements
-//     content: null,
-//     // svg element
-//     svg: null,
-//     // This is the mask element, it can be either a circle or a path SVG element.
-//     // We will be animating the 'radius' attribute for circle or the 'd' attribute for path.
-//     mask: null,
-//     // image element
-//     image: null,
-//   };
-//   // flipstate saves the current state of title elements
-//   flipstate = null;
-
-//   /**
-//    * Sets up the necessary elements and data for an Item instance.
-//    * @param {HTMLElement} DOM_el - The DOM element that represents the item.
-//    */
-//   constructor(DOM_el) {
-//     // Assign DOM elements
-//     this.DOM.el = DOM_el;
-//     this.DOM.titleWrap = this.DOM.el.querySelector('.title-wrap');
-//     this.DOM.titleUp = this.DOM.titleWrap.querySelector('.title--up');
-//     this.DOM.titleDown = this.DOM.titleWrap.querySelector('.title--down');
-//     this.DOM.content = [...this.DOM.el.querySelectorAll('.content')];
-//     this.DOM.svg = this.DOM.el.querySelector('.content__img');
-//     this.DOM.mask = this.DOM.svg.querySelector('.mask');
-//     this.DOM.image = this.DOM.svg.querySelector('image');
-
-//     // Save current state
-//     this.flipstate = Flip.getState([this.DOM.titleUp, this.DOM.titleDown]);
-
-//     // Change layout
-//     this.DOM.content[1].prepend(this.DOM.titleUp, this.DOM.titleDown);
-
-//     // Check if the mask element is a circle or a path
-//     const isCircle = this.DOM.mask.tagName.toLowerCase() === 'circle';
-
-//     // Create the Flip.from that we'll pass into the ScrollTrigger animation property
-//     const flip = Flip.from(this.flipstate, {
-//       ease: 'none',
-//       simple: true
-//     })
-//       .fromTo(this.DOM.mask, {
-//         attr: isCircle ? { r: this.DOM.mask.getAttribute('r') } : { d: this.DOM.mask.getAttribute('d') },
-//       }, {
-//         ease: 'none',
-//         attr: isCircle ? { r: this.DOM.mask.dataset.valueFinal } : { d: this.DOM.mask.dataset.valueFinal },
-//       }, 0)
-//       // Also scale up the image element
-//       .fromTo(this.DOM.image, {
-//         transformOrigin: '50% 50%',
-//         filter: 'brightness(100%)'
-//       }, {
-//         ease: 'none',
-//         scale: isCircle ? 1.2 : 1,
-//         filter: 'brightness(150%)'
-//       }, 0);
-
-
-//     ScrollTrigger.create({
-//       trigger: this.DOM.titleWrap,
-//       ease: 'none',
-//       start: 'clamp(top bottom-=10%)',
-//       end: '+=40%',
-//       scrub: true,
-//       animation: flip,
-//     });
-
-
-
-//   }
-// }
 
 
 
@@ -701,59 +525,6 @@ export const scroll_ = () => {
 
 
 
-const windowOn = window;
-let larger = 1600;
-let xxl = 1400;
-let xl = 1200;
-let lg = 992;
-let md = 768;
-let sm = 576;
-let device_width = ref(window.innerWidth);
-
-
-
-
-
-
-
-// 
-export const listAnimation = () => {
-  onMounted(() => {
-
-
-    gsap.set(".skill-item", {
-      opacity: 0,
-      y: 24
-    });
-
-    ScrollTrigger.batch(".skill-item", {
-      onEnter: batch => gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.10
-      }),
-      onLeave: batch => gsap.to(batch, {
-        opacity: 0,
-        y: 24
-      }),
-      onEnterBack: batch => gsap.to(batch, {
-        opacity: 1,
-        y: 0,
-        stagger: 0.10
-      }),
-      onLeaveBack: batch => gsap.to(batch, {
-        opacity: 0,
-        y: 24
-      }),
-
-      start: "top 80%",
-      end: "bottom 20%",
-      // markers: true,
-    });
-
-
-  });
-}
 
 
 
@@ -767,31 +538,9 @@ export const listAnimation = () => {
 
 
 
-// export const listAnimation = () => {
-//   onMounted(() => {
-//     const items = document.querySelectorAll('.skill-item');
 
-//     items.forEach((item) => {
-//       const speed = parseFloat(item.getAttribute('data-speed')) || 1;
-//       const lag = parseFloat(item.getAttribute('data-lag')) || 0;
 
-//       const timeline = gsap.timeline({
-//         scrollTrigger: {
-//           trigger: item,
-//           start: 'top 80%',
-//           end: 'bottom 20%',
-//           scrub: true,
-//         },
-//       });
 
-//       timeline.to(item, {
-//         y: 0,
-//         duration: speed,
-//         delay: lag,
-//       });
-//     });
-//   });
-// };
 
 // ScrollTop 
 export const scrollTop = () => {

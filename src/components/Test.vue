@@ -2,11 +2,9 @@
     <div class="content-wrap pl-dynamic pr-dynamic md:py-14 py-11" ref="contentWrap">
         <div class="content">
             <div class="title-wrap font-Phudu font-bold">
-                <span
-                    class="title title--up md:text-8xl text-6xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]"
+                <span class="title title--up md:text-8xl text-6xl uppercase font-Phudu font-bold "
                     data-scroll-var>About</span>
-                <span
-                    class="title title--down md:text-8xl text-6xl uppercase font-Phudu font-bold text-shadow text-[#0f1b61]"
+                <span class="title title--down md:text-8xl text-6xl uppercase font-Phudu font-bold "
                     data-scroll-var>Me</span>
             </div>
         </div>
